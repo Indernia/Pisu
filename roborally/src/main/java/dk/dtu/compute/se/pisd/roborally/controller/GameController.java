@@ -209,16 +209,20 @@ public class GameController {
     public void moveForward(@NotNull Player player) {
         switch (player.getHeading()) {
             case NORTH:
-                player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 1));
+                if (board.getSpace(player.getSpace().x, player.getSpace().y - 1) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 1));
                 break;
             case EAST:
-                player.setSpace(board.getSpace(player.getSpace().x + 1, player.getSpace().y));
+                if (board.getSpace(player.getSpace().x + 1, player.getSpace().y) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x + 1, player.getSpace().y));
                 break;
             case SOUTH:
-                player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 1));
+                if (board.getSpace(player.getSpace().x, player.getSpace().y + 1) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 1));
                 break;
             case WEST:
-                player.setSpace(board.getSpace(player.getSpace().x - 1, player.getSpace().y));
+                if (board.getSpace(player.getSpace().x - 1, player.getSpace().y) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x - 1, player.getSpace().y));
                 break;
             default:
                 break;
@@ -230,16 +234,20 @@ public class GameController {
     public void fastForward(@NotNull Player player) {
         switch (player.getHeading()) {
             case NORTH:
-                player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 2));
+                if (board.getSpace(player.getSpace().x, player.getSpace().y - 2) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 2));
                 break;
             case EAST:
-                player.setSpace(board.getSpace(player.getSpace().x + 2, player.getSpace().y));
+                if (board.getSpace(player.getSpace().x + 2, player.getSpace().y) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x + 2, player.getSpace().y));
                 break;
             case SOUTH:
-                player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 2));
+                if (board.getSpace(player.getSpace().x, player.getSpace().y + 2) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 2));
                 break;
             case WEST:
-                player.setSpace(board.getSpace(player.getSpace().x - 2, player.getSpace().y));
+                if (board.getSpace(player.getSpace().x - 2, player.getSpace().y) != null)
+                    player.setSpace(board.getSpace(player.getSpace().x - 2, player.getSpace().y));
                 break;
             default:
                 break;
