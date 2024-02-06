@@ -1,0 +1,4 @@
+--patch-module
+roborally=_
+--add-reads
+roborally=ALL-UNNAMED
