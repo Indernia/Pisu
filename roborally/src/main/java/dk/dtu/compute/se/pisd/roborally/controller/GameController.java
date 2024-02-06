@@ -64,7 +64,10 @@ public class GameController {
 
     }
 
-    // XXX: V2
+    /**
+     * Is called at the start of the program
+     * Starts the programming phase
+     */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
         board.setCurrentPlayer(board.getPlayer(0));
@@ -87,14 +90,18 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+    /**
+     * Makes random command cards
+     * 
+     * @return the random command card
+     */
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
         return new CommandCard(commands[random]);
     }
 
-    // XXX: V2
+    /** Activated when everyone is done programming */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
@@ -103,7 +110,11 @@ public class GameController {
         board.setStep(0);
     }
 
-    // XXX: V2
+    /**
+     * Makes things visible
+     * 
+     * @param register
+     */
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -114,7 +125,7 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+    /** Makes things invisible */
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -125,26 +136,31 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+    /**
+     * Sets stepmode false, and continues to do the whole program
+     */
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
-    // XXX: V2
+    /** Sets the mode of stepmode to true, and continues the program */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    // XXX: V2
+    /** Continues the program */
     private void continuePrograms() {
         do {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
-    // XXX: V2
+    /**
+     * 
+     * Executes the next step, activated by the press of a button in the gui
+     */
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -178,7 +194,13 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+    /**
+     * is activated on press of a button in gui, and it carries out the programming
+     * cards actions
+     * 
+     * @param player
+     * @param command
+     */
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
@@ -206,6 +228,7 @@ public class GameController {
     }
 
     /**
+     * Moves the player forward
      * 
      * @param player
      */
@@ -220,20 +243,32 @@ public class GameController {
         }
     }
 
-    // TODO Assignment V2
+    /**
+     * Moves the player forward twice
+     * 
+     * @param player
+     */
     public void fastForward(@NotNull Player player) {
         moveForward(player);
         moveForward(player);
     }
 
-    // TODO Assignment V2
+    /**
+     * Turns the heading towards the right from the perspective of the robot
+     * 
+     * @param player
+     */
     public void turnRight(@NotNull Player player) {
         Heading heading = player.getHeading();
         Heading nextHeading = heading.next();
         player.setHeading(nextHeading);
     }
 
-    // TODO Assignment V2
+    /**
+     * Turns the heading towards the left from the perspective of the robot
+     * 
+     * @param player
+     */
     public void turnLeft(@NotNull Player player) {
         Heading heading = player.getHeading();
         Heading nextHeading = heading.prev();
