@@ -48,6 +48,13 @@ public class Player extends Subject {
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
+    /**
+     * constructor for player, needs board, color and name
+     * 
+     * @param board
+     * @param color
+     * @param name
+     */
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
         this.name = name;
@@ -66,10 +73,20 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Returns the name of the player
+     * 
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the player
+     * 
+     * @param name
+     */
     public void setName(String name) {
         if (name != null && !name.equals(this.name)) {
             this.name = name;
@@ -80,10 +97,21 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Returns the color of the player
+     * Re
+     * 
+     * @return
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * Sets the color of the player
+     * 
+     * @param color
+     */
     public void setColor(String color) {
         this.color = color;
         notifyChange();
@@ -92,10 +120,20 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Gets the space the player is standing on
+     * 
+     * @return
+     */
     public Space getSpace() {
         return space;
     }
 
+    /**
+     * Sets the space the player is on
+     * 
+     * @param space
+     */
     public void setSpace(Space space) {
         Space oldSpace = this.space;
         if (space != oldSpace &&
@@ -111,10 +149,20 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * Returns the heading of the player, so which way it is facing
+     * 
+     * @return
+     */
     public Heading getHeading() {
         return heading;
     }
 
+    /**
+     * Sets the heading of the player
+     * 
+     * @param heading
+     */
     public void setHeading(@NotNull Heading heading) {
         if (heading != this.heading) {
             this.heading = heading;
@@ -125,6 +173,11 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * 
+     * @param i
+     * @return
+     */
     public CommandCardField getProgramField(int i) {
         return program[i];
     }

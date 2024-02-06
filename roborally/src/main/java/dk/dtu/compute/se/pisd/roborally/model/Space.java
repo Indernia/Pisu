@@ -55,6 +55,11 @@ public class Space extends Subject {
         return player;
     }
 
+    /**
+     * Sets the player on the space
+     * 
+     * @param player
+     */
     public void setPlayer(Player player) {
         Player oldPlayer = this.player;
         if (player != oldPlayer &&

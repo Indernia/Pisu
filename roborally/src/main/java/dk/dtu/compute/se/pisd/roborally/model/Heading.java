@@ -32,6 +32,7 @@ public enum Heading {
     SOUTH, WEST, NORTH, EAST;
 
     /**
+     * returns the next heading
      * 
      * @return
      */
@@ -39,6 +40,11 @@ public enum Heading {
         return values()[(this.ordinal() + 1) % values().length];
     }
 
+    /**
+     * returns the previus heading
+     * 
+     * @return
+     */
     public Heading prev() {
         return values()[(this.ordinal() + values().length - 1) % values().length];
     }
