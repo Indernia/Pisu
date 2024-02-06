@@ -205,7 +205,10 @@ public class GameController {
         }
     }
 
-    // TODO Assignment V2
+    /**
+     * 
+     * @param player
+     */
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
         if (space != null) {
@@ -225,12 +228,16 @@ public class GameController {
 
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
-        player.setHeading(player.getHeading().next());
+        Heading heading = player.getHeading();
+        Heading nextHeading = heading.next();
+        player.setHeading(nextHeading);
     }
 
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
-        player.setHeading(player.getHeading().prev());
+        Heading heading = player.getHeading();
+        Heading nextHeading = heading.prev();
+        player.setHeading(nextHeading);
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
