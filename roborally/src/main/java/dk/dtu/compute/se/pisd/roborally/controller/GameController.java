@@ -205,63 +205,39 @@ public class GameController {
         }
     }
 
-    // TODO Assignment V2
+    /**
+     * 
+     * @param player
+     */
     public void moveForward(@NotNull Player player) {
-        switch (player.getHeading()) {
-            case NORTH:
-                if (board.getSpace(player.getSpace().x, player.getSpace().y - 1) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 1));
-                break;
-            case EAST:
-                if (board.getSpace(player.getSpace().x + 1, player.getSpace().y) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x + 1, player.getSpace().y));
-                break;
-            case SOUTH:
-                if (board.getSpace(player.getSpace().x, player.getSpace().y + 1) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 1));
-                break;
-            case WEST:
-                if (board.getSpace(player.getSpace().x - 1, player.getSpace().y) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x - 1, player.getSpace().y));
-                break;
-            default:
-                break;
+        Space space = player.getSpace();
+        if (space != null) {
+            Heading heading = player.getHeading();
+            Space newSpace = board.getNeighbour(space, heading);
+            if (newSpace != null && newSpace.getPlayer() == null) {
+                player.setSpace(newSpace);
+            }
         }
-
     }
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
-        switch (player.getHeading()) {
-            case NORTH:
-                if (board.getSpace(player.getSpace().x, player.getSpace().y - 2) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y - 2));
-                break;
-            case EAST:
-                if (board.getSpace(player.getSpace().x + 2, player.getSpace().y) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x + 2, player.getSpace().y));
-                break;
-            case SOUTH:
-                if (board.getSpace(player.getSpace().x, player.getSpace().y + 2) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x, player.getSpace().y + 2));
-                break;
-            case WEST:
-                if (board.getSpace(player.getSpace().x - 2, player.getSpace().y) != null)
-                    player.setSpace(board.getSpace(player.getSpace().x - 2, player.getSpace().y));
-                break;
-            default:
-                break;
-        }
+        moveForward(player);
+        moveForward(player);
     }
 
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
-        player.setHeading(player.getHeading().next());
+        Heading heading = player.getHeading();
+        Heading nextHeading = heading.next();
+        player.setHeading(nextHeading);
     }
 
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
-        player.setHeading(player.getHeading().prev());
+        Heading heading = player.getHeading();
+        Heading nextHeading = heading.prev();
+        player.setHeading(nextHeading);
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
