@@ -194,13 +194,6 @@ public class GameController {
         }
     }
 
-    /**
-     * is activated on press of a button in gui, and it carries out the programming
-     * cards actions
-     * 
-     * @param player
-     * @param command
-     */
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and

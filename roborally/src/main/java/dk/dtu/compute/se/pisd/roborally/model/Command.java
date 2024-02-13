@@ -39,18 +39,9 @@ public enum Command {
     RIGHT("Turn Right"),
     LEFT("Turn Left"),
     FAST_FORWARD("Fast Fwd"),
-
-    // XXX Assignment V3 (step 1)
     OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT);
 
     final public String displayName;
-
-    // XXX Assignment V3 (step 1)
-    // Command(String displayName) {
-    // this.displayName = displayName;
-    // }
-    //
-    // replaced by the code below:
 
     final private List<Command> options;
 
@@ -59,10 +50,21 @@ public enum Command {
         this.options = Collections.unmodifiableList(Arrays.asList(options));
     }
 
+    /**
+     * A function that returns a boolean telling if the command is interactive
+     * 
+     * @return a boolean
+     */
     public boolean isInteractive() {
         return !options.isEmpty();
     }
 
+    /**
+     * Returns a list of options/commands, to be used to figure out what move can be
+     * made.
+     * 
+     * @return a list of commands
+     */
     public List<Command> getOptions() {
         return options;
     }
