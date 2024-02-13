@@ -157,6 +157,12 @@ public class GameController {
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
+    /**
+     * A public method that can execute an interractive card command, and then
+     * continue the program.
+     * 
+     * @param option
+     */
     public void executeOptionAndContinue(@NotNull Command option) {
         assert board.getPhase() == Phase.PLAYER_INTERACTION;
         board.setPhase(Phase.ACTIVATION);
@@ -212,6 +218,10 @@ public class GameController {
         }
     }
 
+    /**
+     * @param player
+     * @param command
+     */
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and

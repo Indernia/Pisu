@@ -38,9 +38,11 @@ public class CommandCard extends Subject {
         this.command = command;
     }
 
+    /**
+     * @return String
+     */
     public String getName() {
         return command.displayName;
     }
-
 
 }

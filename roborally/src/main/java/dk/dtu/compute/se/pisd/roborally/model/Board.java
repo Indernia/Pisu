@@ -316,6 +316,9 @@ public class Board extends Subject {
         return getSpace(x, y);
     }
 
+    /**
+     * @return String
+     */
     public String getStatusMessage() {
         // this is actually a view aspect, but for making assignment V1 easy for
         // the students, this method gives a string representation of the current

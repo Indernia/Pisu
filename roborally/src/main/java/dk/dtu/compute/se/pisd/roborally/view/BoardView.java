@@ -82,6 +82,9 @@ public class BoardView extends VBox implements ViewObserver {
         update(board);
     }
 
+    /**
+     * @param subject
+     */
     @Override
     public void updateView(Subject subject) {
         if (subject == board) {
@@ -90,8 +93,10 @@ public class BoardView extends VBox implements ViewObserver {
         }
     }
 
-    // XXX this handler and its uses should eventually be deleted! This is just to help test the
-    //     behaviour of the game by being able to explicitly move the players on the board!
+    // XXX this handler and its uses should eventually be deleted! This is just to
+    // help test the
+    // behaviour of the game by being able to explicitly move the players on the
+    // board!
     private class SpaceEventHandler implements EventHandler<MouseEvent> {
 
         final public GameController gameController;

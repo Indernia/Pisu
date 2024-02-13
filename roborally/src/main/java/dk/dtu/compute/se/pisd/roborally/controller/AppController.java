@@ -147,6 +147,9 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isGameRunning() {
         return gameController != null;
     }

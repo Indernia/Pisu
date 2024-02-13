@@ -90,6 +90,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    /**
+     * @param subject
+     */
     @Override
     public void updateView(Subject subject) {
         if (subject == this.space) {

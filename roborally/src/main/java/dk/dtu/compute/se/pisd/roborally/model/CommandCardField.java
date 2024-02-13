@@ -52,6 +52,9 @@ public class CommandCardField extends Subject {
         return card;
     }
 
+    /**
+     * @param card
+     */
     public void setCard(CommandCard card) {
         if (card != this.card) {
             this.card = card;
