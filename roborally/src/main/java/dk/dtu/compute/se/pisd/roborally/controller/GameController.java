@@ -258,9 +258,20 @@ public class GameController {
         if (space != null) {
             Heading heading = player.getHeading();
             Space newSpace = board.getNeighbour(space, heading);
-            if (newSpace != null && newSpace.getPlayer() == null) {
-                player.setSpace(newSpace);
+            if (newSpace != null) {
+                if (newSpace.getPlayer() == null) {
+                    player.setSpace(newSpace);
+                } else {
+                    Space newnewSpace = board.getNeighbour(newSpace, heading);
+                    if (newnewSpace != null) {
+                        if (newnewSpace.getPlayer() == null) {
+                            player.setSpace(newSpace);
+                            newSpace.getPlayer().setSpace(newnewSpace);
+                        }
+                    }
+                }
             }
+
         }
     }
 
