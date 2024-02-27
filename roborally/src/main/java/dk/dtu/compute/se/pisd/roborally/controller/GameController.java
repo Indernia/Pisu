@@ -249,7 +249,8 @@ public class GameController {
     }
 
     /**
-     * Moves the player forward
+     * Moves the player forward, if another player is on the new space, that player
+     * is pushed in the direction that the original player is facing
      * 
      * @param player
      */
