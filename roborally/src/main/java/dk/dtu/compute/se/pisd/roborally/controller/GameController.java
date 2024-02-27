@@ -277,7 +277,9 @@ public class GameController {
     }
 
     /**
-     * Moves the player forward twice
+     * Moves the player forward twice. Implements moveforward.
+     * 
+     * @see moveForward
      * 
      * @param player
      */
