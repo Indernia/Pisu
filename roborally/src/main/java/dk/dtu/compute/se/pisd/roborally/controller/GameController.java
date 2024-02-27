@@ -262,18 +262,22 @@ public class GameController {
             if (newSpace != null) {
                 if (newSpace.getPlayer() == null) {
                     player.setSpace(newSpace);
-                } else {
-                    Space newnewSpace = board.getNeighbour(newSpace, heading);
-                    if (newnewSpace != null) {
-                        if (newnewSpace.getPlayer() == null) {
-                            player.setSpace(newSpace);
-                            newSpace.getPlayer().setSpace(newnewSpace);
-                        }
-                    }
-                }
+                } /*
+                   * else {
+                   * Space newnewSpace = board.getNeighbour(newSpace, heading);
+                   * if (newnewSpace != null) {
+                   * if (newnewSpace.getPlayer() == null) {
+                   * newSpace.getPlayer().setSpace(newnewSpace);
+                   * player.setSpace(newSpace);
+                   * }
+                   * }
+                   * }
+                   */
+
             }
 
         }
+
     }
 
     /**
