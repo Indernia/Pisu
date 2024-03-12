@@ -37,6 +37,7 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
+    private SpecialSpace specialSpace = null;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -54,6 +55,17 @@ public class Space extends Subject {
     public Player getPlayer() {
         return player;
     }
+    
+    public SpecialSpace getSpecialSpace(){
+        return specialSpace;
+    }
+
+    public void setSpecialSpace(SpecialSpace ss){
+        if (ss != null){
+            this.specialSpace = ss;
+        }
+    }
+
 
     /**
      * Sets the player on the space

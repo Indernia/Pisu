@@ -78,6 +78,10 @@ public class Board extends Subject {
             }
         }
         this.stepMode = false;
+
+
+        //TODO remove later
+        spaces[1][2].setSpecialSpace(new TurnGear());
     }
 
     /**

@@ -278,6 +278,10 @@ public class GameController {
 
         }
 
+        // triggers special spaces
+        if (player.getSpace().getSpecialSpace() != null){
+            player.getSpace().getSpecialSpace().triggerEffect(player);
+        }
     }
 
     /**
