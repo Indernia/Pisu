@@ -254,34 +254,36 @@ public class GameController {
      * 
      * @param player
      */
+
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
         if (space != null) {
             Heading heading = player.getHeading();
             Space newSpace = board.getNeighbour(space, heading);
             if (newSpace != null) {
-                if (newSpace.getPlayer() == null) {
+                try {
+                    moveToSpace(player, newSpace, heading);
                     player.setSpace(newSpace);
-                } /*
-                   * else {
-                   * Space newnewSpace = board.getNeighbour(newSpace, heading);
-                   * if (newnewSpace != null) {
-                   * if (newnewSpace.getPlayer() == null) {
-                   * newSpace.getPlayer().setSpace(newnewSpace);
-                   * player.setSpace(newSpace);
-                   * }
-                   * }
-                   * }
-                   */
+                } catch (ImpossibleMoveException e) {
+                }
 
             }
-
         }
+    }
 
-        // triggers special spaces
-        if (player.getSpace().getSpecialSpace() != null){
-            player.getSpace().getSpecialSpace().triggerEffect(player);
+    public void moveToSpace(
+            @NotNull Player player,
+            @NotNull Space space,
+            @NotNull Heading heading) throws ImpossibleMoveException {
+        Player other = space.getPlayer();
+        if (other != null) {
+            Space newspace = board.getNeighbour(space, heading);
+            if (newspace != null) {
+                moveToSpace(other, newspace, heading);
+            } else
+                throw new ImpossibleMoveException(player, newspace, heading);
         }
+        player.setSpace(space);
     }
 
     /**
