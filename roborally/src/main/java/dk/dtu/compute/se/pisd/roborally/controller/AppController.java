@@ -39,12 +39,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+            
 /**
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
+ * @author s235455,
  */
 public class AppController implements Observer {
 

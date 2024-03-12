@@ -249,7 +249,8 @@ public class GameController {
     }
 
     /**
-     * Moves the player forward
+     * Moves the player forward, if another player is on the new space, that player
+     * is pushed in the direction that the original player is facing
      * 
      * @param player
      */
@@ -258,10 +259,25 @@ public class GameController {
         if (space != null) {
             Heading heading = player.getHeading();
             Space newSpace = board.getNeighbour(space, heading);
-            if (newSpace != null && newSpace.getPlayer() == null) {
-                player.setSpace(newSpace);
+            if (newSpace != null) {
+                if (newSpace.getPlayer() == null) {
+                    player.setSpace(newSpace);
+                } /*
+                   * else {
+                   * Space newnewSpace = board.getNeighbour(newSpace, heading);
+                   * if (newnewSpace != null) {
+                   * if (newnewSpace.getPlayer() == null) {
+                   * newSpace.getPlayer().setSpace(newnewSpace);
+                   * player.setSpace(newSpace);
+                   * }
+                   * }
+                   * }
+                   */
+
             }
+
         }
+
         // triggers special spaces
         if (player.getSpace().getSpecialSpace() != null){
             player.getSpace().getSpecialSpace().triggerEffect(player);
@@ -269,7 +285,9 @@ public class GameController {
     }
 
     /**
-     * Moves the player forward twice
+     * Moves the player forward twice. Implements moveforward.
+     * 
+     * @see moveForward
      * 
      * @param player
      */
