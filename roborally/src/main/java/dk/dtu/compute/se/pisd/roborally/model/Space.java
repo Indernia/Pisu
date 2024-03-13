@@ -22,6 +22,11 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * ...
@@ -38,6 +43,13 @@ public class Space extends Subject {
 
     private Player player;
     private SpecialSpace specialSpace = null;
+
+    // XXX A3
+    private List<Heading> walls = new ArrayList<>();
+
+    // XXX A3
+    private List<FieldAction> actions = new ArrayList<>();
+
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -87,6 +99,34 @@ public class Space extends Subject {
             notifyChange();
         }
     }
+
+        /**
+     * Returns the walls (actually their direction) on this space.
+     * Note that clients may change this list; this should, however,
+     * be done only during the setup of the game (not while the game
+     * is running).
+     *
+     * @return the list of walls on this space
+     */
+    // XXX A3
+    public List<Heading> getWalls() {
+        return walls;
+    }
+
+    /**
+     * Returns the list of field actions on this space.
+     * Note that clients may change this list; this should, however,
+     * be done only during the setup of the game (not while the game
+     * is running).
+     *
+     * @return the list of field actions on this space
+     */
+    // XXX A3
+    public List<FieldAction> getActions() {
+        return actions;
+    }
+
+
 
     void playerChanged() {
         // This is a minor hack; since some views that are registered with the space
