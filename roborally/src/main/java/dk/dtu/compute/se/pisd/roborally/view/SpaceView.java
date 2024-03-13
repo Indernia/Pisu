@@ -65,12 +65,15 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
         
         //TODO remove
-        if (space.getSpecialSpace() != null){
-            this.setStyle("-fx-background-color: red;");
-        }
         if (space.getActions().size() != 0){
             this.setStyle("-fx-background-color: blue;");
-        }
+            if (space.getActions().get(0).getType() == "gear"){
+                this.setStyle("-fx-background-color: red;");
+
+            }
+        } 
+
+        //TODO End
 
         // updatePlayer();
 

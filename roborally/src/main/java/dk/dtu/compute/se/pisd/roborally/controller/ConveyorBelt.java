@@ -60,7 +60,7 @@ public class ConveyorBelt extends FieldAction {
      *  gets the special spce 
      *  @return type as String
      */
-    @override
+    @Override
     public String getType(){
         return "Belt";
     }
