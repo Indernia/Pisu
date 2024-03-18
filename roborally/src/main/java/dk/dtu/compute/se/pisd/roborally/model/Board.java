@@ -29,8 +29,10 @@ import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
-/**
- * ...
+import  dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import  dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+
+ /* ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
@@ -81,7 +83,13 @@ public class Board extends Subject {
 
 
         //TODO remove later
-        spaces[1][2].setSpecialSpace(new TurnGear());
+        ConveyorBelt action  = new ConveyorBelt();
+        action.setHeading(Heading.WEST);
+        spaces[2][2].getActions().add(action);
+        TurnGear gearLeft = new TurnGear("left");
+        spaces[3][3].getActions().add(gearLeft);
+
+        //TODO End
     }
 
     /**

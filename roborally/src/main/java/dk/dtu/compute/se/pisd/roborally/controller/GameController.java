@@ -270,7 +270,6 @@ public class GameController {
             }
         }
     }
-
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
@@ -284,6 +283,7 @@ public class GameController {
                 throw new ImpossibleMoveException(player, newspace, heading);
         }
         player.setSpace(space);
+
     }
 
     /**
