@@ -4,6 +4,12 @@ import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
+/**
+ * ...
+ *
+ * @author Julius Sondergaard, s234096
+ *
+ */
 public class Checkpoint extends FieldAction {
 
     private int checkpointNumber;

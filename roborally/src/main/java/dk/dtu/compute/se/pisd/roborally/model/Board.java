@@ -92,17 +92,27 @@ public class Board extends Subject {
 
         //TODO End
 
-        intializeCheckpoints(); //JULIUS
+        intializeCheckpoints();
     }
 
-     //JULIUS
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
     private void intializeCheckpoints() {
         addCheckpointToSpace(4, 1, 1);
         addCheckpointToSpace(5, 6, 2);
         addCheckpointToSpace(7, 1, 3);
     }
 
-     //JULIUS
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
      private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
          Space checkpointSpace = getSpace(x, y);
          if (checkpointSpace != null) {

@@ -133,7 +133,12 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
 
-    //JULIUS
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
     private void updateCheckpoint() {
         for (FieldAction action : space.getActions()) {
             if (action instanceof Checkpoint) {
@@ -147,7 +152,12 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
-    //JULIUS
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
     private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
         double circleDiameter = Math.min(SPACE_WIDTH, SPACE_HEIGHT) * 0.8;
         double circleX = (SPACE_WIDTH - circleDiameter) / 2;

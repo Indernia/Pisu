@@ -49,7 +49,12 @@ public class Player extends Subject {
     private CommandCardField[] cards;
 
 
-    //JULIUS
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
     private int currentCheckpoint = 0;
 
     public int getCurrentCheckpoint() {
