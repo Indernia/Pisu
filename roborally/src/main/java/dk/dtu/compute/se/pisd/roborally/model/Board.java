@@ -360,11 +360,21 @@ public class Board extends Subject {
     /**
      * @return String
      */
+
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
     public String getStatusMessage() {
-        // this is actually a view aspect, but for making assignment V1 easy for
-        // the students, this method gives a string representation of the current
-        // status of the game
-        return "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName() + ", moves = " + getCounter();
+        String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
+                + ", moves = " + getCounter();
+
+        String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
+
+        return baseMessage + checkpointMessage;
     }
 
-}
+
+ }
