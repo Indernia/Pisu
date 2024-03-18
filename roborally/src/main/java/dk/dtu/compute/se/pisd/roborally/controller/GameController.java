@@ -194,6 +194,9 @@ public class GameController {
                     } else {
                         executeCommand(currentPlayer, option);
                     }
+                    if (currentPlayer.getSpace().getActions().size() != 0) {
+                        currentPlayer.getSpace().getActions().get(0).doAction(this,currentPlayer.getSpace());
+                    }
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
