@@ -3,6 +3,7 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
+// @author Alex Lundberg
 public class TurnGear extends FieldAction {
 
 
@@ -41,6 +42,10 @@ public class TurnGear extends FieldAction {
             return false;
         }
 
+    }
+
+    public String getDirection(){
+        return this.direction;
     }
 
     @Override
