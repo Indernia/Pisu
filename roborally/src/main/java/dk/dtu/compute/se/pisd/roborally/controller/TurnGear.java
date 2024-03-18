@@ -1,6 +1,7 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
 
 public class TurnGear extends FieldAction {
 
@@ -21,7 +22,24 @@ public class TurnGear extends FieldAction {
 
     @Override
     public boolean doAction(GameController gameController, Space space){
-        return false;
+        Player player;
+        if (space.getPlayer() != null){
+            player = space.getPlayer();
+        } else{
+            player = gameController.board.getCurrentPlayer();
+        }
+
+        if (this.direction == "left"){
+            gameController.turnLeft(player);
+            return true;
+        }
+        else if (this.direction == "right"){
+            gameController.turnRight(player);
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
