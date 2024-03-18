@@ -42,7 +42,6 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
-    private SpecialSpace specialSpace = null;
 
     // XXX A3
     private List<Heading> walls = new ArrayList<>();
@@ -68,16 +67,6 @@ public class Space extends Subject {
         return player;
     }
     
-    public SpecialSpace getSpecialSpace(){
-        return specialSpace;
-    }
-
-    public void setSpecialSpace(SpecialSpace ss){
-        if (ss != null){
-            this.specialSpace = ss;
-        }
-    }
-
 
     /**
      * Sets the player on the space
