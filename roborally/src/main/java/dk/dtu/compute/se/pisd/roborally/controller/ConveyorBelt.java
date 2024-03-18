@@ -60,15 +60,15 @@ public class ConveyorBelt extends FieldAction {
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Board board = gameController.board;
         Space newspace = board.getNeighbour(space, this.heading);
-    if(newspace.getPlayer() == null) {
-        gameController.moveCurrentPlayerToSpace(newspace);
-        return true;
-    }
+        if(newspace.getPlayer() == null) {
+            gameController.moveCurrentPlayerToSpace(newspace);
+            return true;
+        }
         return false;
     }
 
     /**
-     *  gets the special spce 
+     *  gets the special space
      *  @return type as String
      */
     @Override
