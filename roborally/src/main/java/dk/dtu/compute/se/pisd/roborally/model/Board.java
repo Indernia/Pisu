@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -92,9 +93,37 @@ public class Board extends Subject {
         action2.setHeading(Heading.SOUTH);
         spaces[1][2].getActions().add(action2);
         //TODO End
+
+        intializeCheckpoints();
     }
 
-    /**
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
+    private void intializeCheckpoints() {
+        addCheckpointToSpace(4, 1, 1);
+        addCheckpointToSpace(5, 6, 2);
+        addCheckpointToSpace(7, 1, 3);
+    }
+
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
+     private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
+         Space checkpointSpace = getSpace(x, y);
+         if (checkpointSpace != null) {
+             checkpointSpace.getActions().add(new Checkpoint(checkpointNumber));
+         }
+     }
+
+
+     /**
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board
      * 
@@ -333,11 +362,21 @@ public class Board extends Subject {
     /**
      * @return String
      */
+
+     /**
+      * ...
+      *
+      * @author Julius Sondergaard, s234096
+      *
+      */
     public String getStatusMessage() {
-        // this is actually a view aspect, but for making assignment V1 easy for
-        // the students, this method gives a string representation of the current
-        // status of the game
-        return "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName() + ", moves = " + getCounter();
+        String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
+                + ", moves = " + getCounter();
+
+        String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
+
+        return baseMessage + checkpointMessage;
     }
 
-}
+
+ }

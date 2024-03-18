@@ -48,6 +48,22 @@ public class Player extends Subject {
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
+
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
+    private int currentCheckpoint = 0;
+
+    public int getCurrentCheckpoint() {
+        return currentCheckpoint;
+    }
+    public void setCurrentCheckpoint(int currentCheckpoint) {
+        this.currentCheckpoint = currentCheckpoint;
+    }
+
     /**
      * constructor for player, needs board, color and name
      * 

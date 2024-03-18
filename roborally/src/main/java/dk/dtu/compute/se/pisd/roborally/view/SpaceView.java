@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
@@ -36,6 +37,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -68,14 +71,14 @@ public class SpaceView extends StackPane implements ViewObserver {
         } else {
             this.setStyle("-fx-background-color: black;");
         }
-        
+
         //TODO remove
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType() == "gear"){
                 this.setStyle("-fx-background-color: red;");
             }
-        } 
+        }
 
 
         //TODO End
@@ -128,6 +131,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             updatePlayer();
+            updateCheckpoint();
         }
     }
 
@@ -144,4 +148,57 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     }
 
-}
+
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
+    private void updateCheckpoint() {
+        for (FieldAction action : space.getActions()) {
+            if (action instanceof Checkpoint) {
+                Checkpoint checkpoint = (Checkpoint) action;
+                Canvas canvas = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+                GraphicsContext gc = canvas.getGraphicsContext2D();
+                drawCheckpointCircleAndNumber(gc, checkpoint.getCheckpointNumber());
+                this.getChildren().add(canvas);
+                break;
+            }
+        }
+    }
+
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
+    private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
+        double circleDiameter = Math.min(SPACE_WIDTH, SPACE_HEIGHT) * 0.8;
+        double circleX = (SPACE_WIDTH - circleDiameter) / 2;
+        double circleY = (SPACE_HEIGHT - circleDiameter) / 2;
+
+        gc.setFill(Color.LIGHTGREEN);
+        gc.fillOval(circleX, circleY, circleDiameter, circleDiameter);
+
+        gc.setFill(Color.BLACK);
+
+        gc.setFont(new Font("Arial", 20));
+
+        String text = String.valueOf(checkpointNumber);
+
+        Text tempText = new Text(text);
+        tempText.setFont(gc.getFont());
+        double textWidth = tempText.getBoundsInLocal().getWidth();
+        double textHeight = tempText.getBoundsInLocal().getHeight();
+
+        double textX = circleX + (circleDiameter - textWidth) / 2;
+        double textY = circleY + (circleDiameter + textHeight) / 2;
+
+        gc.fillText(text, textX, textY);
+    }
+
+    }
+
+
