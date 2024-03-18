@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
@@ -67,10 +68,12 @@ public class SpaceView extends StackPane implements ViewObserver {
         
         //TODO remove
         if (space.getActions().size() != 0){
-            if (space.getActions().get(0).getType() == "gear"){
+            FieldAction action = space.getActions().get(0);
+            if (action.getType() == "gear"){
                 this.setStyle("-fx-background-color: red;");
             }
         } 
+
 
         //TODO End
 
@@ -83,6 +86,21 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     private void updatePlayer() {
         this.getChildren().clear();
+
+        if (space.getActions().size() != 0){
+            FieldAction action = space.getActions().get(0);
+            if (action.getType().equals("Belt")){
+                Polygon arrow = new Polygon(0.0, 0.0,
+                        15.0, 30.0,
+                        30.0, 0.0);
+
+                arrow.setFill(Color.DARKGREY);
+
+
+                arrow.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
+                this.getChildren().add(arrow);
+            }
+        }
 
         Player player = space.getPlayer();
         if (player != null) {
