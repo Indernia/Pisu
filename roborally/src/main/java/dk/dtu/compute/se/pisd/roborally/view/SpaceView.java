@@ -24,6 +24,7 @@ package dk.dtu.compute.se.pisd.roborally.view;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
@@ -36,7 +37,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
@@ -72,16 +75,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.setStyle("-fx-background-color: black;");
         }
 
-        //TODO remove
-        if (space.getActions().size() != 0){
-            FieldAction action = space.getActions().get(0);
-            if (action.getType() == "gear"){
-                this.setStyle("-fx-background-color: red;");
-            }
-        }
-
-
-        //TODO End
 
         // updatePlayer();
 
@@ -91,7 +84,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     private void updatePlayer() {
-        this.getChildren().clear();
 
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
@@ -106,6 +98,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                 arrow.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
                 this.getChildren().add(arrow);
             }
+
         }
 
         Player player = space.getPlayer();
@@ -122,6 +115,17 @@ public class SpaceView extends StackPane implements ViewObserver {
             arrow.setRotate((90 * player.getHeading().ordinal()) % 360);
             this.getChildren().add(arrow);
         }
+
+                     if (space.getActions().size() != 0){
+            FieldAction action = space.getActions().get(0);
+            if (action.getType() == "gear"){
+            // TODO Unsafe type cast, secure later
+                TurnGear gear = (TurnGear) action;
+                drawGear(gear);
+            }
+        }
+
+    
     }
 
     /**
@@ -129,25 +133,69 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     @Override
     public void updateView(Subject subject) {
+        this.getChildren().clear();
         if (subject == this.space) {
-            updatePlayer();
             updateCheckpoint();
         }
-    }
+        if (space.getWalls().size() != 0){
+            for(Heading wall: space.getWalls()){
+                drawWall(wall);
+            }
+        }
+        updatePlayer();
 
-    public void addWall(Enum DIRECTION, Space space) {
+    }
+    
+    // @author Alex Lundberg
+    public void drawWall(Heading heading) {
+    Canvas canvas = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+    GraphicsContext gc =
+    canvas.getGraphicsContext2D();
+    gc.setStroke(Color.RED);
+    gc.setLineWidth(5);
+    gc.setLineCap(StrokeLineCap.ROUND);
+
+    switch (heading) {
+        case SOUTH:
+            gc.strokeLine(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+            break;
+        case NORTH:
+            gc.strokeLine(2, 2, SPACE_WIDTH - 2, 2);
+            break;
+        case WEST:
+            gc.strokeLine(2, 2, 2, SPACE_HEIGHT - 2);
+            break;
+        case EAST:
+            gc.strokeLine(SPACE_WIDTH - 2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+            break;
+    }
+            
+    this.getChildren().add(canvas);
+
+    }
+    // @author Alex Lundberg
+    public void drawGear(TurnGear gear) {
+                // TODO redo as svg path, but this is placeholder
         Pane pane = new Pane();
         Rectangle rectangle = new Rectangle(0.0, 0.0, SPACE_WIDTH, SPACE_HEIGHT);
         rectangle.setFill(Color.TRANSPARENT);
         pane.getChildren().add(rectangle);
-        // South
-        Line line = new Line(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-        line.setStroke(Color.RED);
-        line.setStrokeWidth(5);
-        pane.getChildren().add(pane);
+        
+        SVGPath arrow = new SVGPath();
+        String path;
+        if (gear.getDirection() == "left"){
+            path = "M4.959,22.684c0.225,0.275,0.589,0.275,0.813,0.0l4.841-5.923c0.225-0.275,0.119-0.498-0.236-0.498h-2.571 c-0.355,0.0-0.596-0.284-0.52-0.631c1.322-6.02,6.694-10.539,13.104-10.539c7.4,0.0,13.419,6.02,13.419,13.419 c0.0,7.4-6.02,13.419-13.419,13.419c-0.887,0.0-1.607,0.719-1.607,1.606s0.719,1.606,1.607,1.606 c9.171,0.0,16.632-7.461,16.632-16.632c0.0-9.171-7.461-16.632-16.632-16.632 c-8.187,0.0-15.008,5.948-16.377,13.749c-0.061,0.35-0.386,0.635-0.741,0.635H0.354c-0.355,0.0-0.461,0.223-0.236,0.498 L4.959,22.684z";
+        } else{
+            path = "M36.670,16.263h-2.919c-0.355,0.000-0.680-0.285-0.741-0.635c-1.370-7.801-8.190-13.749-16.377-13.749 C7.461,1.880,0.000,9.341,0.000,18.512c0.000,9.171,7.461,16.632,16.632,16.632c0.887,0.000,1.607-0.719,1.607-1.606 s-0.719-1.606-1.607-1.606c-7.400,0.000-13.419-6.020-13.419-13.419c0.000-7.399,6.020-13.419,13.419-13.419 c6.411,0.000,11.783,4.520,13.105,10.539c0.076,0.347-0.165,0.631-0.520,0.631H26.646c-0.355,0.000-0.460,0.223-0.236,0.498 l4.841,5.923c0.225,0.275,0.589,0.275,0.813,0.000l4.841-5.923C37.131,16.486,37.025,16.263,36.670,16.263z";
+        }
+        arrow.setContent(path);
+        arrow.setFill(Color.GREEN);
+        pane.getChildren().add(arrow);
+    
 
+        // Add the pane to the children of the SpaceView (StackPane)
+        this.getChildren().add(pane); 
     }
-
 
     /**
      * ...

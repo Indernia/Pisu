@@ -89,9 +89,19 @@ public class Board extends Subject {
         spaces[2][2].getActions().add(action);
         TurnGear gearLeft = new TurnGear("left");
         spaces[3][3].getActions().add(gearLeft);
+        TurnGear gearRight = new TurnGear("right");
+        spaces[4][4].getActions().add(gearRight);
+
         ConveyorBelt action2  = new ConveyorBelt();
         action2.setHeading(Heading.SOUTH);
         spaces[1][2].getActions().add(action2);
+
+        spaces[6][6].getWalls().add(Heading.SOUTH);
+        spaces[6][6].getWalls().add(Heading.WEST);
+        spaces[5][5].getWalls().add(Heading.NORTH);
+        spaces[5][5].getWalls().add(Heading.EAST);
+
+
         //TODO End
 
         intializeCheckpoints();

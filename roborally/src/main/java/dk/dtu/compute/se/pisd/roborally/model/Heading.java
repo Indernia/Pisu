@@ -48,4 +48,24 @@ public enum Heading {
     public Heading prev() {
         return values()[(this.ordinal() + values().length - 1) % values().length];
     }
+
+    /**
+     *
+     * @return returns the opposite direction it is given: North => South
+     *@author Alex Lundberg
+     */
+    public Heading getOpposite() {
+        switch (this) {
+            case NORTH:
+                return SOUTH;
+            case SOUTH:
+                return NORTH;
+            case EAST:
+                return WEST;
+            case WEST:
+                return EAST;
+            default:
+                return SOUTH;
+        }
+    }
 }

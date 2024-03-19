@@ -195,7 +195,7 @@ public class GameController {
                         executeCommand(currentPlayer, option);
                     }
                     if (currentPlayer.getSpace().getActions().size() != 0) {
-                        currentPlayer.getSpace().getActions().get(0).doAction(this,currentPlayer.getSpace());
+                        currentPlayer.getSpace().getActions().get(0).doAction(this, currentPlayer.getSpace());
                     }
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
@@ -263,16 +263,31 @@ public class GameController {
         if (space != null) {
             Heading heading = player.getHeading();
             Space newSpace = board.getNeighbour(space, heading);
-            if (newSpace != null) {
-                try {
-                    moveToSpace(player, newSpace, heading);
-                    player.setSpace(newSpace);
-                } catch (ImpossibleMoveException e) {
-                }
+            if (!wallObstructs(player.getSpace(), player.getHeading())) {
+                if (newSpace != null) {
+                    try {
+                        moveToSpace(player, newSpace, heading);
+                        player.setSpace(newSpace);
+                    } catch (ImpossibleMoveException e) {
+                    }
 
+                }
             }
+
         }
+
     }
+
+    private boolean wallObstructs(Space start, Heading heading) {
+        if (start.getWalls().contains(heading)) {
+            return true;
+        }
+        if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
+            return true;
+        }
+        return false;
+    }
+
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
@@ -280,7 +295,8 @@ public class GameController {
         Player other = space.getPlayer();
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
-            if (newspace != null) {
+
+            if (newspace != null || !wallObstructs(other.getSpace(), player.getHeading())) {
                 moveToSpace(other, newspace, heading);
             } else
                 throw new ImpossibleMoveException(player, newspace, heading);
