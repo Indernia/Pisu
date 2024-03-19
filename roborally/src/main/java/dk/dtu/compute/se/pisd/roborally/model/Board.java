@@ -33,11 +33,11 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 
-/* ...
-*
-* @author Ekkart Kindler, ekki@dtu.dk
-* 
-*/
+/**
+ *
+ * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Andreas Jensen
+ */
 public class Board extends Subject {
 
     public final int width;
@@ -118,7 +118,7 @@ public class Board extends Subject {
     }
 
     /**
-     * ...
+     * 
      *
      * @author Julius Sondergaard, s234096
      *
