@@ -89,6 +89,9 @@ public class Board extends Subject {
         spaces[2][2].getActions().add(action);
         TurnGear gearLeft = new TurnGear("left");
         spaces[3][3].getActions().add(gearLeft);
+        TurnGear gearRight = new TurnGear("right");
+        spaces[4][4].getActions().add(gearRight);
+
         ConveyorBelt action2  = new ConveyorBelt();
         action2.setHeading(Heading.SOUTH);
         spaces[1][2].getActions().add(action2);

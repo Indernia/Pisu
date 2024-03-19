@@ -29,7 +29,6 @@ import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
-import dk.dtu.compute.se.pisd.roborally.model.Wall;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -76,16 +75,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.setStyle("-fx-background-color: black;");
         }
 
-        //TODO remove
-        if (space.getActions().size() != 0){
-            FieldAction action = space.getActions().get(0);
-            drawGear();
-            if (action.getType() == "gear"){
-                this.setStyle("-fx-background-color: blue;");
-            }
-        }
-
-        //TODO End
 
         // updatePlayer();
 
@@ -95,7 +84,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     private void updatePlayer() {
-        this.getChildren().clear();
 
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
@@ -131,7 +119,9 @@ public class SpaceView extends StackPane implements ViewObserver {
                      if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType() == "gear"){
-                drawGear();
+            // TODO Unsafe type cast, secure later
+                TurnGear gear = (TurnGear) action;
+                drawGear(gear);
             }
         }
 
@@ -143,8 +133,8 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     @Override
     public void updateView(Subject subject) {
+        this.getChildren().clear();
         if (subject == this.space) {
-            updatePlayer();
             updateCheckpoint();
         }
         if (space.getWalls().size() != 0){
@@ -152,6 +142,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                 drawWall(wall);
             }
         }
+        updatePlayer();
 
     }
 
@@ -182,7 +173,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     }
 
-    public void drawGear() {
+    public void drawGear(TurnGear gear) {
                 // TODO redo as svg path, but this is placeholder
         Pane pane = new Pane();
         Rectangle rectangle = new Rectangle(0.0, 0.0, SPACE_WIDTH, SPACE_HEIGHT);
@@ -190,12 +181,16 @@ public class SpaceView extends StackPane implements ViewObserver {
         pane.getChildren().add(rectangle);
         
         SVGPath arrow = new SVGPath();
-        String path = "M0.0,324.059c3.21,3.926,8.409,3.926,11.619,0l69.162-84.621c3.21-3.926,1.698-7.108-3.372-7.108h-36.723 c-5.07,0-8.516-4.061-7.427-9.012c18.883-85.995,95.625-150.564,187.207-150.564c105.708,0,191.706,85.999,191.706,191.706 c0,105.709-85.998,191.707-191.706,191.707c-12.674,0-22.95,10.275-22.95,22.949s10.276,22.949,22.95,22.949 c131.018,0,237.606-106.588,237.606-237.605c0-131.017-106.589-237.605-237.606-237.605 c-116.961,0-214.395,84.967-233.961,196.409c-0.878,4.994-5.52,9.067-10.59,9.067H5.057c-5.071,0-6.579,3.182-3.373,7.108 L70.846,324.059z";
+        String path;
+        if (gear.getDirection() == "left"){
+            path = "M4.959,22.684c0.225,0.275,0.589,0.275,0.813,0.0l4.841-5.923c0.225-0.275,0.119-0.498-0.236-0.498h-2.571 c-0.355,0.0-0.596-0.284-0.52-0.631c1.322-6.02,6.694-10.539,13.104-10.539c7.4,0.0,13.419,6.02,13.419,13.419 c0.0,7.4-6.02,13.419-13.419,13.419c-0.887,0.0-1.607,0.719-1.607,1.606s0.719,1.606,1.607,1.606 c9.171,0.0,16.632-7.461,16.632-16.632c0.0-9.171-7.461-16.632-16.632-16.632 c-8.187,0.0-15.008,5.948-16.377,13.749c-0.061,0.35-0.386,0.635-0.741,0.635H0.354c-0.355,0.0-0.461,0.223-0.236,0.498 L4.959,22.684z";
+        } else{
+            path = "M36.670,16.263h-2.919c-0.355,0.000-0.680-0.285-0.741-0.635c-1.370-7.801-8.190-13.749-16.377-13.749 C7.461,1.880,0.000,9.341,0.000,18.512c0.000,9.171,7.461,16.632,16.632,16.632c0.887,0.000,1.607-0.719,1.607-1.606 s-0.719-1.606-1.607-1.606c-7.400,0.000-13.419-6.020-13.419-13.419c0.000-7.399,6.020-13.419,13.419-13.419 c6.411,0.000,11.783,4.520,13.105,10.539c0.076,0.347-0.165,0.631-0.520,0.631H26.646c-0.355,0.000-0.460,0.223-0.236,0.498 l4.841,5.923c0.225,0.275,0.589,0.275,0.813,0.000l4.841-5.923C37.131,16.486,37.025,16.263,36.670,16.263z";
+        }
         arrow.setContent(path);
         arrow.setFill(Color.GREEN);
-        arrow.setScaleY(0.05);
-        arrow.setScaleX(0.05);
         pane.getChildren().add(arrow);
+    
 
         // Add the pane to the children of the SpaceView (StackPane)
         this.getChildren().add(pane); 
