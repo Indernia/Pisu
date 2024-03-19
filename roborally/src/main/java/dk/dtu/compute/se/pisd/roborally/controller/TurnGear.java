@@ -6,15 +6,18 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 // @author Alex Lundberg
 public class TurnGear extends FieldAction {
 
-
     private String direction;
 
-    public TurnGear(String direction){
+    public TurnGear() {
+
+    }
+
+    public TurnGear(String direction) {
         setDirection(direction);
     }
 
-    public void setDirection(String direction){
-        if (direction.toLowerCase() == "left" || direction.toLowerCase() == "right"){
+    public void setDirection(String direction) {
+        if (direction.toLowerCase() == "left" || direction.toLowerCase() == "right") {
             this.direction = direction.toLowerCase();
         } else {
             this.direction = "left";
@@ -22,37 +25,33 @@ public class TurnGear extends FieldAction {
     }
 
     @Override
-    public boolean doAction(GameController gameController, Space space){
+    public boolean doAction(GameController gameController, Space space) {
         Player player;
-        if (space.getPlayer() != null){
+        if (space.getPlayer() != null) {
             player = space.getPlayer();
-        } else{
+        } else {
             player = gameController.board.getCurrentPlayer();
         }
 
-        if (this.direction == "left"){
+        if (this.direction == "left") {
             gameController.turnLeft(player);
             return true;
-        }
-        else if (this.direction == "right"){
+        } else if (this.direction == "right") {
             gameController.turnRight(player);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
 
     }
 
-    public String getDirection(){
+    public String getDirection() {
         return this.direction;
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return "gear";
     }
 
 }
-
-

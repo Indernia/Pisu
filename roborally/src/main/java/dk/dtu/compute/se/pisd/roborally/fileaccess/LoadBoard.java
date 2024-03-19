@@ -29,6 +29,7 @@ import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -62,38 +63,40 @@ public class LoadBoard {
             return BoardFactory.getInstance().createBoard(boardname);
         }
 
-		// In simple cases, we can create a Gson object with new Gson():
-        GsonBuilder simpleBuilder = new GsonBuilder().
-                registerTypeAdapter(ActionTemplate.class, new Adapter<ActionTemplate>());
+        // In simple cases, we can create a Gson object with new Gson():
+        GsonBuilder simpleBuilder = new GsonBuilder().registerTypeAdapter(ActionTemplate.class,
+                new Adapter<ActionTemplate>());
         Gson gson = simpleBuilder.create();
 
-		Board result;
+        Board result;
         JsonReader reader = null;
-		try {
-			reader = gson.newJsonReader(new InputStreamReader(inputStream));
-			BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
-			result = convert(template, boardname);
-			reader.close();
-			return result;
-		} catch (IOException e1) {
+        try {
+            reader = gson.newJsonReader(new InputStreamReader(inputStream));
+            BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
+            result = convert(template, boardname);
+            reader.close();
+            return result;
+        } catch (IOException e1) {
             if (reader != null) {
                 try {
                     reader.close();
                     inputStream = null;
-                } catch (IOException e2) {}
+                } catch (IOException e2) {
+                }
             }
             if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (IOException e2) {}
-			}
-		}
-		return null;
+                try {
+                    inputStream.close();
+                } catch (IOException e2) {
+                }
+            }
+        }
+        return null;
     }
 
     private static Board convert(BoardTemplate template, String boardname) {
         Board result = new Board(template.width, template.height, boardname);
-        for (SpaceTemplate spaceTemplate: template.spaces) {
+        for (SpaceTemplate spaceTemplate : template.spaces) {
             Space space = result.getSpace(spaceTemplate.x, spaceTemplate.y);
             if (space != null) {
                 space.getActions().addAll(convert(spaceTemplate.actions));
@@ -106,7 +109,7 @@ public class LoadBoard {
     private static List<FieldAction> convert(List<ActionTemplate> actionTemplates) {
         List<FieldAction> result = new ArrayList<>();
 
-        for (ActionTemplate template: actionTemplates) {
+        for (ActionTemplate template : actionTemplates) {
             FieldAction fieldAction = convert(template);
             if (fieldAction != null) {
                 result.add(fieldAction);
@@ -122,11 +125,17 @@ public class LoadBoard {
             ConveyorBelt conveyorBelt = new ConveyorBelt();
             conveyorBelt.setHeading(template.heading);
             return conveyorBelt;
-        } // else if ...
+        } else if (actionTemplate instanceof TurnGearTemplate) {
+            TurnGearTemplate template = (TurnGearTemplate) actionTemplate;
+            TurnGear turnGear = new TurnGear();
+            turnGear.setDirection(template.direction);
+            return turnGear;
+        }
+        // else if ...
         // XXX if new field actions are added, the corresponding templates
-        //     need to be added to the model subpackage of fileaccess and
-        //     the else statement must be extended for converting the
-        //     action template to the corresponding field action.
+        // need to be added to the model subpackage of fileaccess and
+        // the else statement must be extended for converting the
+        // action template to the corresponding field action.
 
         return null;
     }
@@ -143,21 +152,19 @@ public class LoadBoard {
 
         ClassLoader classLoader = AppController.class.getClassLoader();
         // FIXME: this is not very defensive and will result in a NullPointerException
-        //         when the folder BOARDSFOLDER does not exist! But, the file does not
-        //         need to exist at this point!
-        String filename =
-                classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+        // when the folder BOARDSFOLDER does not exist! But, the file does not
+        // need to exist at this point!
+        String filename = classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
 
         // In simple cases, we can create a Gson object with new:
         //
-        //   Gson gson = new Gson();
+        // Gson gson = new Gson();
         //
         // But, if you need to configure it, it is better to create it from
         // a builder (here, we want to configure the JSON serialisation with
         // a pretty printer):
-        GsonBuilder simpleBuilder = new GsonBuilder().
-                registerTypeAdapter(ActionTemplate.class, new Adapter<ActionTemplate>()).
-                setPrettyPrinting();
+        GsonBuilder simpleBuilder = new GsonBuilder()
+                .registerTypeAdapter(ActionTemplate.class, new Adapter<ActionTemplate>()).setPrettyPrinting();
         Gson gson = simpleBuilder.create();
 
         FileWriter fileWriter = null;
@@ -172,12 +179,14 @@ public class LoadBoard {
                 try {
                     writer.close();
                     fileWriter = null;
-                } catch (IOException e2) {}
+                } catch (IOException e2) {
+                }
             }
             if (fileWriter != null) {
                 try {
                     fileWriter.close();
-                } catch (IOException e2) {}
+                } catch (IOException e2) {
+                }
             }
         }
     }
@@ -188,9 +197,9 @@ public class LoadBoard {
         result.height = board.height;
 
         for (int x = 0; x < board.width; x++) {
-            for (int y= 0; y < board.height; y++) {
-                Space space = board.getSpace(x,y);
-                if (space != null && ( !space.getActions().isEmpty() || !space.getWalls().isEmpty()) ) {
+            for (int y = 0; y < board.height; y++) {
+                Space space = board.getSpace(x, y);
+                if (space != null && (!space.getActions().isEmpty() || !space.getWalls().isEmpty())) {
                     SpaceTemplate spaceTemplate = new SpaceTemplate();
                     spaceTemplate.x = x;
                     spaceTemplate.y = y;
@@ -205,7 +214,7 @@ public class LoadBoard {
     private static List<ActionTemplate> convertToTemplate(List<FieldAction> actions) {
         List<ActionTemplate> result = new ArrayList<>();
 
-        for (FieldAction action: actions) {
+        for (FieldAction action : actions) {
             ActionTemplate template = convertToTemplate(action);
             if (template != null) {
                 result.add(template);
@@ -221,11 +230,18 @@ public class LoadBoard {
             ConveyorBeltTemplate conveyorBeltTemplate = new ConveyorBeltTemplate();
             conveyorBeltTemplate.heading = conveyorBelt.getHeading();
             return conveyorBeltTemplate;
-        } // else if ...
+        } else if (action instanceof TurnGear) {
+            TurnGear turnGear = (TurnGear) action;
+            TurnGearTemplate turnGearTemplate = new TurnGearTemplate();
+            turnGearTemplate.direction = turnGear.getDirection();
+            return turnGearTemplate;
+
+        }
+        // else if ...
         // XXX if new field actions are added, the corresponding templates
-        //     need to be added to the model subpackage of fileaccess and
-        //     the else statement must be extended for converting the
-        //    field action to the corresponding action template.
+        // need to be added to the model subpackage of fileaccess and
+        // the else statement must be extended for converting the
+        // field action to the corresponding action template.
 
         return null;
     }
