@@ -83,6 +83,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         update(space);
     }
 
+
     private void drawBelt(){
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
@@ -90,10 +91,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                 Polygon arrow = new Polygon(0.0, 0.0,
                         15.0, 30.0,
                         30.0, 0.0);
-
                 arrow.setFill(Color.DARKGREY);
-
-
                 arrow.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
                 this.getChildren().add(arrow);
             }
