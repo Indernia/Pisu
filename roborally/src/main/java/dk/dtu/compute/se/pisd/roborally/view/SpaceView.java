@@ -83,8 +83,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         update(space);
     }
 
-    private void updatePlayer() {
-
+    private void drawBelt(){
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Belt")){
@@ -100,6 +99,9 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
 
         }
+    }
+
+    private void updatePlayer() {
 
         Player player = space.getPlayer();
         if (player != null) {
@@ -134,6 +136,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
+        drawBelt();
         if (subject == this.space) {
             updateCheckpoint();
         }
