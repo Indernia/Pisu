@@ -263,14 +263,15 @@ public class GameController {
         if (space != null) {
             Heading heading = player.getHeading();
             Space newSpace = board.getNeighbour(space, heading);
+            if (!wallObstructs(player.getSpace(), player.getHeading())) {
+                if (newSpace != null) {
+                    try {
+                        moveToSpace(player, newSpace, heading);
+                        player.setSpace(newSpace);
+                    } catch (ImpossibleMoveException e) {
+                    }
 
-            if (newSpace != null) {
-                try {
-                    moveToSpace(player, newSpace, heading);
-                    player.setSpace(newSpace);
-                } catch (ImpossibleMoveException e) {
                 }
-
             }
 
         }
@@ -294,12 +295,11 @@ public class GameController {
         Player other = space.getPlayer();
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
-            if (!wallObstructs(player.getSpace(), player.getHeading())) {
-                if (newspace != null) {
-                    moveToSpace(other, newspace, heading);
-                } else
-                    throw new ImpossibleMoveException(player, newspace, heading);
-            }
+
+            if (newspace != null || !wallObstructs(player.getSpace(), player.getHeading())) {
+                moveToSpace(other, newspace, heading);
+            } else
+                throw new ImpossibleMoveException(player, newspace, heading);
         }
         player.setSpace(space);
 
