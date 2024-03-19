@@ -28,7 +28,10 @@ import org.jetbrains.annotations.NotNull;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
+ * @author Andreas Jensen
+ * @author Noah Nissen
+ * @author Alex Lundberg
+ * 
  */
 public class GameController {
 
@@ -288,6 +291,15 @@ public class GameController {
         return false;
     }
 
+    /**
+     * This function moves a player to a space, given to it, but will recursively
+     * call itself if there is a playing blocking the way.
+     * 
+     * @param player  The player being moved
+     * @param space   The spaced its being moved to
+     * @param heading The way its facing
+     * @throws ImpossibleMoveException
+     */
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
@@ -339,6 +351,14 @@ public class GameController {
         player.setHeading(nextHeading);
     }
 
+    /**
+     * This function is used in cardfieldview, to move cards and lock them into a
+     * new position
+     * 
+     * @param source Where the card originates from
+     * @param target Where the card is being draged too
+     * @return It its possible or not.
+     */
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
