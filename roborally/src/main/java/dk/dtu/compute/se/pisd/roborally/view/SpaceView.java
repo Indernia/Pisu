@@ -145,7 +145,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         updatePlayer();
 
     }
-
+    
+    // @author Alex Lundberg
     public void drawWall(Heading heading) {
     Canvas canvas = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
     GraphicsContext gc =
@@ -172,7 +173,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     this.getChildren().add(canvas);
 
     }
-
+    // @author Alex Lundberg
     public void drawGear(TurnGear gear) {
                 // TODO redo as svg path, but this is placeholder
         Pane pane = new Pane();
