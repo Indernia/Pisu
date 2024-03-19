@@ -260,7 +260,6 @@ public class GameController {
      * 
      * @param player
      */
-
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
         if (space != null) {

@@ -44,7 +44,7 @@ import java.util.Optional;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- * @author s235455,
+ * @author Andreas Jensen
  */
 public class AppController implements Observer {
 
@@ -59,6 +59,9 @@ public class AppController implements Observer {
         this.roboRally = roboRally;
     }
 
+    /**
+     * A method to create a new game. Does not take any inputs.
+     */
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
@@ -128,6 +131,10 @@ public class AppController implements Observer {
         return false;
     }
 
+    /**
+     * This function is called when a person tries to exit the program, and sends
+     * the pop up message, "Do you want to exit RoboRally?"
+     */
     public void exit() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -148,7 +155,9 @@ public class AppController implements Observer {
     }
 
     /**
-     * @return boolean
+     * This function checks if the game is still active
+     * 
+     * @return Wether or not its active (True/False)
      */
     public boolean isGameRunning() {
         return gameController != null;
