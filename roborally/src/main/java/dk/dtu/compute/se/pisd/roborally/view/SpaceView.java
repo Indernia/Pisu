@@ -83,7 +83,11 @@ public class SpaceView extends StackPane implements ViewObserver {
         update(space);
     }
 
-
+    /**
+     * Draws the belt polygon on any action field that is a belt
+     *
+     * @author Noah Nissen
+     */
     private void drawBelt(){
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);

@@ -54,7 +54,11 @@ public class ConveyorBelt extends FieldAction {
 
     }
     /**
-     * Implementation of the action of a conveyor belt. Needs to be implemented for A3.
+     * Implementation of the action of a conveyor belt.
+     * takes a player and moves them to the space in the direction of the heading of the belt
+     *  @param gameController the given controller for the current instance
+     * @param space a given space that will have the belt action on it
+     * @author Noah Nissen
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
