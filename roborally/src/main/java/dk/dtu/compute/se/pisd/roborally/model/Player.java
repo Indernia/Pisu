@@ -55,7 +55,7 @@ public class Player extends Subject {
      * @author Julius Sondergaard, s234096
      *
      */
-    private int currentCheckpoint = 0;
+    private int currentCheckpoint;
 
     public int getCurrentCheckpoint() {
         return currentCheckpoint;
@@ -77,6 +77,7 @@ public class Player extends Subject {
         this.color = color;
 
         this.space = null;
+        this.currentCheckpoint = 0;
 
         program = new CommandCardField[NO_REGISTERS];
         for (int i = 0; i < program.length; i++) {
