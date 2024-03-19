@@ -174,7 +174,7 @@ public class GameController {
 
     /**
      * 
-     * Executes the next step, activated by the press of a button in the gui
+     * Executes the next step, activated by the press of a button in the gui and checks for special actions on current players space
      */
     private void executeNextStep(Command option) {
         Player currentPlayer = board.getCurrentPlayer();
