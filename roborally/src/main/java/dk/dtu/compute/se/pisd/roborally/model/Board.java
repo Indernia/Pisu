@@ -105,7 +105,7 @@ public class Board extends Subject {
          * 
          * //TODO End
          */
-        intializeCheckpoints();
+        // intializeCheckpoints();
     }
 
     /**

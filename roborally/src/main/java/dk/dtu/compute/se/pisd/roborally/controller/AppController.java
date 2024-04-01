@@ -82,6 +82,7 @@ public class AppController implements Observer {
             // Board board = new Board(8, 8);
             BoardFactory boardFactory = BoardFactory.getInstance();
             Board board = boardFactory.createBoard(null);
+            // XXX Here something should be done to load with different name
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
