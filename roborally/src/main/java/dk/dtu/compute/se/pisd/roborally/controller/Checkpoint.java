@@ -12,10 +12,14 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  */
 public class Checkpoint extends FieldAction {
 
-    private int checkpointNumber;
+    public int checkpointNumber;
 
     public Checkpoint(int checkpointNumber) {
         this.checkpointNumber = checkpointNumber;
+    }
+
+    public Checkpoint() {
+
     }
 
     public int getCheckpointNumber() {
@@ -37,5 +41,9 @@ public class Checkpoint extends FieldAction {
     @Override
     public String getType() {
         return "Checkpoint";
+    }
+
+    public void setCheckpointNumber(int number) {
+        this.checkpointNumber = number;
     }
 }
