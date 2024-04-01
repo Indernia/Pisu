@@ -42,6 +42,7 @@ public class IOUtil {
      * @param inputStream the input stream
      * @return the string of the input stream
      */
+    @SuppressWarnings("null")
     public static String readString(InputStream inputStream) {
 
         ByteSource byteSource = new ByteSource() {

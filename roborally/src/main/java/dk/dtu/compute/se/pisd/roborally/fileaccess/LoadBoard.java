@@ -27,6 +27,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
@@ -130,6 +131,11 @@ public class LoadBoard {
             TurnGear turnGear = new TurnGear();
             turnGear.setDirection(template.direction);
             return turnGear;
+        } else if (actionTemplate instanceof CheckPointTemplate) {
+            CheckPointTemplate template = (CheckPointTemplate) actionTemplate;
+            Checkpoint checkpoint = new Checkpoint();
+            checkpoint.setCheckpointNumber(template.number);
+            return checkpoint;
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
@@ -236,6 +242,11 @@ public class LoadBoard {
             turnGearTemplate.direction = turnGear.getDirection();
             return turnGearTemplate;
 
+        } else if (action instanceof Checkpoint) {
+            Checkpoint checkpoint = (Checkpoint) action;
+            CheckPointTemplate checkpointTemplate = new CheckPointTemplate();
+            checkpoint.checkpointNumber = checkpoint.getCheckpointNumber();
+            return checkpointTemplate;
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
