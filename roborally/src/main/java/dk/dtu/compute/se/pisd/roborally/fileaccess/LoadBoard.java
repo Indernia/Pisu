@@ -131,8 +131,8 @@ public class LoadBoard {
             TurnGear turnGear = new TurnGear();
             turnGear.setDirection(template.direction);
             return turnGear;
-        } else if (actionTemplate instanceof CheckpointTemplate) {
-            CheckpointTemplate template = (CheckpointTemplate) actionTemplate;
+        } else if (actionTemplate instanceof CheckPointTemplate) {
+            CheckPointTemplate template = (CheckPointTemplate) actionTemplate;
             Checkpoint checkpoint = new Checkpoint();
             checkpoint.setCheckpointNumber(template.number);
             return checkpoint;
@@ -244,7 +244,7 @@ public class LoadBoard {
 
         } else if (action instanceof Checkpoint) {
             Checkpoint checkpoint = (Checkpoint) action;
-            CheckpointTemplate checkpointTemplate = new CheckpointTemplate();
+            CheckPointTemplate checkpointTemplate = new CheckPointTemplate();
             checkpoint.checkpointNumber = checkpoint.getCheckpointNumber();
             return checkpointTemplate;
         }
