@@ -30,14 +30,14 @@ import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
-import  dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
-import  dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 
- /* ...
- *
- * @author Ekkart Kindler, ekki@dtu.dk
- *
- */
+/* ...
+*
+* @author Ekkart Kindler, ekki@dtu.dk
+*
+*/
 public class Board extends Subject {
 
     public final int width;
@@ -82,58 +82,58 @@ public class Board extends Subject {
         }
         this.stepMode = false;
 
-
-        //TODO remove later
-        ConveyorBelt action  = new ConveyorBelt();
-        action.setHeading(Heading.WEST);
-        spaces[2][2].getActions().add(action);
-        TurnGear gearLeft = new TurnGear("left");
-        spaces[3][3].getActions().add(gearLeft);
-        TurnGear gearRight = new TurnGear("right");
-        spaces[4][4].getActions().add(gearRight);
-
-        ConveyorBelt action2  = new ConveyorBelt();
-        action2.setHeading(Heading.SOUTH);
-        spaces[1][2].getActions().add(action2);
-
-        spaces[6][6].getWalls().add(Heading.SOUTH);
-        spaces[6][6].getWalls().add(Heading.WEST);
-        spaces[5][5].getWalls().add(Heading.NORTH);
-        spaces[5][5].getWalls().add(Heading.EAST);
-
-
-        //TODO End
-
+        /*
+         * /
+         * //TODO remove later
+         * ConveyorBelt action = new ConveyorBelt();
+         * action.setHeading(Heading.WEST);
+         * spaces[2][2].getActions().add(action);
+         * TurnGear gearLeft = new TurnGear("left");
+         * spaces[3][3].getActions().add(gearLeft);
+         * TurnGear gearRight = new TurnGear("right");
+         * spaces[4][4].getActions().add(gearRight);
+         * 
+         * ConveyorBelt action2 = new ConveyorBelt();
+         * action2.setHeading(Heading.SOUTH);
+         * spaces[1][2].getActions().add(action2);
+         * 
+         * spaces[6][6].getWalls().add(Heading.SOUTH);
+         * spaces[6][6].getWalls().add(Heading.WEST);
+         * spaces[5][5].getWalls().add(Heading.NORTH);
+         * spaces[5][5].getWalls().add(Heading.EAST);
+         * 
+         * 
+         * //TODO End
+         */
         intializeCheckpoints();
     }
 
-     /**
-      * ...
-      *
-      * @author Julius Sondergaard, s234096
-      *
-      */
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
     private void intializeCheckpoints() {
         addCheckpointToSpace(4, 1, 1);
         addCheckpointToSpace(5, 6, 2);
         addCheckpointToSpace(7, 1, 3);
     }
 
-     /**
-      * ...
-      *
-      * @author Julius Sondergaard, s234096
-      *
-      */
-     private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
-         Space checkpointSpace = getSpace(x, y);
-         if (checkpointSpace != null) {
-             checkpointSpace.getActions().add(new Checkpoint(checkpointNumber));
-         }
-     }
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
+    private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
+        Space checkpointSpace = getSpace(x, y);
+        if (checkpointSpace != null) {
+            checkpointSpace.getActions().add(new Checkpoint(checkpointNumber));
+        }
+    }
 
-
-     /**
+    /**
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board
      * 
@@ -373,12 +373,12 @@ public class Board extends Subject {
      * @return String
      */
 
-     /**
-      * ...
-      *
-      * @author Julius Sondergaard, s234096
-      *
-      */
+    /**
+     * ...
+     *
+     * @author Julius Sondergaard, s234096
+     *
+     */
     public String getStatusMessage() {
         String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();
@@ -388,5 +388,4 @@ public class Board extends Subject {
         return baseMessage + checkpointMessage;
     }
 
-
- }
+}

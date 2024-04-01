@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
@@ -77,7 +78,10 @@ public class AppController implements Observer {
             // XXX the board should eventually be created programmatically or loaded from a
             // file
             // here we just create an empty board with the required number of players.
-            Board board = new Board(8, 8);
+
+            // Board board = new Board(8, 8);
+            BoardFactory boardFactory = BoardFactory.getInstance();
+            Board board = boardFactory.createBoard(null);
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
