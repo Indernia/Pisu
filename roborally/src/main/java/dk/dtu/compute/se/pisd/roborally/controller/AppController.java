@@ -49,6 +49,8 @@ import java.util.Optional;
  */
 public class AppController implements Observer {
 
+    final private List<String> BOARD_CHOICES = Arrays.asList("defaultboard", "longboard"); // Currently add more boards
+                                                                                           // here
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
@@ -61,6 +63,10 @@ public class AppController implements Observer {
     }
 
     public void newGame() {
+        ChoiceDialog<String> boardDialog = new ChoiceDialog<>(BOARD_CHOICES.get(0), BOARD_CHOICES);
+        boardDialog.setTitle("Board selection");
+        boardDialog.setHeaderText("Select the board the game should be played on");
+        Optional<String> boardChoice = boardDialog.showAndWait();
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
         dialog.setHeaderText("Select number of players");
@@ -81,7 +87,7 @@ public class AppController implements Observer {
 
             // Board board = new Board(8, 8);
             BoardFactory boardFactory = BoardFactory.getInstance();
-            Board board = boardFactory.createBoard(null);
+            Board board = boardFactory.createBoard(boardChoice.get());
             // XXX Here something should be done to load with different name
             gameController = new GameController(board);
             int no = result.get();
