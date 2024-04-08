@@ -120,16 +120,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().add(arrow);
         }
 
-                     if (space.getActions().size() != 0){
-            FieldAction action = space.getActions().get(0);
-            if (action.getType() == "gear"){
-            // TODO Unsafe type cast, secure later
-                TurnGear gear = (TurnGear) action;
-                drawGear(gear);
-            }
-        }
-
-    
     }
 
     /**
@@ -138,20 +128,39 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
-        drawBelt();
+        /*
         if (subject == this.space) {
             updateCheckpoint();
         }
+        */
         if (space.getWalls().size() != 0){
             for(Heading wall: space.getWalls()){
                 drawWall(wall);
             }
         }
+        if (space.getActions().size() != 0){
+            switch (space.getActions().get(0).getType()){
+                case "gear":
+                    drawGear();
+                    break;
+                case "Belt":
+                    drawBelt();
+                    break;
+                case "Checkpoint":
+                    updateCheckpoint();
+                    break;
+            }
+        }
         updatePlayer();
-
     }
     
-    // @author Alex Lundberg
+    /**
+     * draws a wall on the space
+     *
+     * @param heading the direction of the wall
+     * @return void
+     * @author Alex Lundberg
+     */
     public void drawWall(Heading heading) {
     Canvas canvas = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
     GraphicsContext gc =
@@ -178,9 +187,14 @@ public class SpaceView extends StackPane implements ViewObserver {
     this.getChildren().add(canvas);
 
     }
-    // @author Alex Lundberg
-    public void drawGear(TurnGear gear) {
-                // TODO redo as svg path, but this is placeholder
+    /**
+     * draws a gear on the space
+     *
+     * @return void
+     * @author Alex Lundberg
+     */
+    public void drawGear() {
+        TurnGear gear = (TurnGear) space.getActions().get(0);
         Pane pane = new Pane();
         Rectangle rectangle = new Rectangle(0.0, 0.0, SPACE_WIDTH, SPACE_HEIGHT);
         rectangle.setFill(Color.TRANSPARENT);
