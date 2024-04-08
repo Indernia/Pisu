@@ -29,6 +29,7 @@ import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.dal.GameInDB;
 import dk.dtu.compute.se.pisd.roborally.dal.IRepository;
 import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 
@@ -40,6 +41,7 @@ import javafx.scene.control.ChoiceDialog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,8 +122,21 @@ public class AppController implements Observer {
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
-        if (gameController == null) {
-            newGame();
+
+        List<GameInDB> gameIds = RepositoryAccess.getRepository().getGames();
+        ArrayList<Integer> games = new ArrayList<Integer>();
+        for(GameInDB game : gameIds){
+            games.add(game.id);
+        }
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<Integer>(gameIds.get(0).id, games) ;
+        dialog.setTitle("Game Number");
+        dialog.setHeaderText("Select game ID to load");
+        Optional<Integer> result = dialog.showAndWait();
+
+        Board board = RepositoryAccess.getRepository().loadGameFromDB(result.get());
+        if (board != null) {
+            gameController = new GameController(board);
+            roboRally.createBoardView(gameController);
         }
     }
 
