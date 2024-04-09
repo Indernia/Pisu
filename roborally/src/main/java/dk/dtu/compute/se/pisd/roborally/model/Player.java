@@ -199,6 +199,10 @@ public class Player extends Subject {
         return program[i];
     }
 
+    public void setProgramField(int i,CommandCard card) {
+        program[i].setCard(card);
+    }
+
     /**
      * @param i
      * @return CommandCardField
