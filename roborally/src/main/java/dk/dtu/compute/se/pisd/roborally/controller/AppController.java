@@ -89,8 +89,7 @@ public class AppController implements Observer {
             // file
             // here we just create an empty board with the required number of players.
             //Board board = new Board(8, 8);
-
-            Board board = BoardFactory.getInstance().createBoard(null);
+            Board board = BoardFactory.getInstance().createBoard(boardChoice.get());
 
             gameController = new GameController(board);
             int no = result.get();
