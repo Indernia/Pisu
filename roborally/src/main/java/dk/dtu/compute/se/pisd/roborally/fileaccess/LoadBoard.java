@@ -30,7 +30,9 @@ import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.Pit;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+import dk.dtu.compute.se.pisd.roborally.controller.Reboot;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.*;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -136,6 +138,10 @@ public class LoadBoard {
             Checkpoint checkpoint = new Checkpoint();
             checkpoint.setCheckpointNumber(template.number);
             return checkpoint;
+        } else if (actionTemplate instanceof PitTemplate) {
+        return new Pit();
+        } else if (actionTemplate instanceof RebootTemplate) {
+            return new Reboot();
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
@@ -247,6 +253,10 @@ public class LoadBoard {
             CheckPointTemplate checkpointTemplate = new CheckPointTemplate();
             checkpoint.checkpointNumber = checkpoint.getCheckpointNumber();
             return checkpointTemplate;
+        } else if (action instanceof Pit) {
+            return new PitTemplate();
+        } else if (action instanceof Reboot) {
+            return new RebootTemplate();
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates

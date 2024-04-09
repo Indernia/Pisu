@@ -114,24 +114,6 @@ public class Board extends Subject {
      * @author Julius Sondergaard, s234096
      *
      */
-    private void intializeCheckpoints() {
-        addCheckpointToSpace(4, 1, 1);
-        addCheckpointToSpace(5, 6, 2);
-        addCheckpointToSpace(7, 1, 3);
-    }
-
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
-    private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
-        Space checkpointSpace = getSpace(x, y);
-        if (checkpointSpace != null) {
-            checkpointSpace.getActions().add(new Checkpoint(checkpointNumber));
-        }
-    }
 
     /**
      * Constructor for board, to change its width and height, its an overflow

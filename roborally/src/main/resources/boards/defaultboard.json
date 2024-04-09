@@ -229,6 +229,30 @@
       ],
       "x": 6,
       "y": 2
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+          "INSTANCE": {
+          }
+        }
+      ],
+      "x": 7,
+      "y": 0
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.RebootTemplate",
+          "INSTANCE": {
+          }
+        }
+      ],
+      "x": 0,
+      "y": 7
     }
   ]
 }

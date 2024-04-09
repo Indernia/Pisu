@@ -208,6 +208,12 @@ public class GameController {
                         board.setStep(step);
                         board.setCurrentPlayer(board.getPlayer(0));
                     } else {
+                        for(int i = 0; i < board.getPlayersNumber(); i++){
+                            Player player = board.getPlayer(i);
+                            if(player.getSpace() == null){
+                                reboot(player);
+                            }
+                        }
                         startProgrammingPhase();
                     }
                 }
@@ -360,6 +366,19 @@ public class GameController {
     public void notImplemented() {
         // XXX just for now to indicate that the actual method is not yet implemented
         assert false;
+    }
+
+    public void die(Player player, Space space){
+        for(int i = 0; i < Player.NO_REGISTERS; i++){
+            player.setProgramField(i, null);
+        }
+        player.setSpace(null);
+    }
+
+    // TODO rebootspace should be found using an array of actions spaces instead of being harcoded
+    public void reboot(Player player){
+        Space rebootspace = board.getSpace(0, 7);
+        player.setSpace(rebootspace);
     }
 
 }
