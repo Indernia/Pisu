@@ -114,6 +114,17 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         }
     }
+    private void drawReboot(){
+        if (space.getActions().size() != 0){
+            FieldAction action = space.getActions().get(0);
+            if (action.getType().equals("Reboot")){
+                Circle circle = new Circle(20);
+                circle.setFill(Color.LIGHTGREEN);
+                this.getChildren().add(circle);
+            }
+
+        }
+    }
 
     private void updatePlayer() {
 
@@ -163,6 +174,9 @@ public class SpaceView extends StackPane implements ViewObserver {
                     break;
                 case "Pit":
                     drawPit();
+                    break;
+                case "Reboot":
+                    drawReboot();
                     break;
             }
         }
