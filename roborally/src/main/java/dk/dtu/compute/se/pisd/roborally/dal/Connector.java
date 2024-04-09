@@ -29,6 +29,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import dk.dtu.compute.se.pisd.roborally.dal.DBAcces;
+
 /**
  * ...
  *
@@ -37,11 +39,11 @@ import java.sql.Statement;
  */
 class Connector {
 	
-    private static final String HOST     = "localhost";
-    private static final int    PORT     = 3306;
-    private static final String DATABASE = "PISU";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "mypassword";
+    private static final String HOST     = DBAcces.Host;
+    private static final int    PORT     = DBAcces.Port;
+    private static final String DATABASE = DBAcces.dbName;
+    private static final String USERNAME = DBAcces.USER;
+    private static final String PASSWORD = DBAcces.PASSWORD;
 
     private static final String DELIMITER = ";;";
     
