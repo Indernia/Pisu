@@ -229,6 +229,18 @@
       ],
       "x": 6,
       "y": 2
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+          "INSTANCE": {
+          }
+        }
+      ],
+      "x": 8,
+      "y": 8
     }
   ]
 }
