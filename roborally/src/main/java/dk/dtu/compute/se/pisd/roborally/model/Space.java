@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class Space extends Subject {
         this.y = y;
         player = null;
     }
+
 
     /**
      * Returns the player on this space. If there is no player on the space, null is

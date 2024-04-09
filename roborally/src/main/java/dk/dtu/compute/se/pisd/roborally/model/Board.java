@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+
 
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
@@ -62,6 +64,9 @@ public class Board extends Subject {
 
     private int counter = 0;
 
+    private int requiredCheckpoints;
+
+
     /**
      * Constructor for board, requires all 3 inputs
      * 
@@ -81,7 +86,7 @@ public class Board extends Subject {
             }
         }
         this.stepMode = false;
-
+        this.requiredCheckpoints = calculateRequiredCheckpoints();
         /*
          * /
          * //TODO remove later
@@ -108,29 +113,23 @@ public class Board extends Subject {
         // intializeCheckpoints();
     }
 
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
-    private void intializeCheckpoints() {
-        addCheckpointToSpace(4, 1, 1);
-        addCheckpointToSpace(5, 6, 2);
-        addCheckpointToSpace(7, 1, 3);
+    private int calculateRequiredCheckpoints() {
+        int count = 0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Space space = getSpace(x, y);
+                for (FieldAction action : space.getActions()) {
+                    if (action instanceof Checkpoint) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
-    private void addCheckpointToSpace(int x, int y, int checkpointNumber) {
-        Space checkpointSpace = getSpace(x, y);
-        if (checkpointSpace != null) {
-            checkpointSpace.getActions().add(new Checkpoint(checkpointNumber));
-        }
+    public int getRequiredCheckpoints() {
+        return this.requiredCheckpoints;
     }
 
     /**
@@ -151,6 +150,10 @@ public class Board extends Subject {
      */
     public Integer getGameId() {
         return gameId;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 
     /**

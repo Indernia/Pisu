@@ -23,6 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
+
 /**
  * This is an abstract class for actions on spaces; since it implements some game logic,
  * it is located in the controller package. But, it is a model class at the same time,

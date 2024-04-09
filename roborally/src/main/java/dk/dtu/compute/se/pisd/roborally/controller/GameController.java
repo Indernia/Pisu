@@ -23,6 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.ls.LSOutput;
 
 /**
  * ...
@@ -37,6 +38,15 @@ public class GameController {
     public GameController(@NotNull Board board) {
         this.board = board;
     }
+
+    public void checkForWinner() {
+        for (Player player : board.getPlayers()) {
+            if (player.getCurrentCheckpoint() >= board.getRequiredCheckpoints()) {
+                board.setPhase(Phase.FINISHED);
+                System.out.println("The game is over and " + player.getName() + " won!");
+                break;
+            }
+        }
 
     /**
      * This is just some dummy controller operation to make a simple move to see
@@ -361,5 +371,6 @@ public class GameController {
         // XXX just for now to indicate that the actual method is not yet implemented
         assert false;
     }
+
 
 }
