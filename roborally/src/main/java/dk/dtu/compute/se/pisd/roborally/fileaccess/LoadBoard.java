@@ -250,6 +250,8 @@ public class LoadBoard {
             CheckPointTemplate checkpointTemplate = new CheckPointTemplate();
             checkpoint.checkpointNumber = checkpoint.getCheckpointNumber();
             return checkpointTemplate;
+        } else if (action instanceof Pit) {
+            return new PitTemplate();
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
