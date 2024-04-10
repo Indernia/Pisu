@@ -366,11 +366,16 @@ public class Board extends Subject {
         String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();
 
-        String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
+        String checkpoint = "Players at checkpoints: \n";
+
+        for(int i = 0; i <players.size(); i++){
+            checkpoint += players.get(i).getName() + ": " + players.get(i).getCurrentCheckpoint() + " ";
+        }
+        checkpoint += "\n";
 
         String debug = "Number of conveyor belts = " + filterActionsBySubclass(Checkpoint.class).size();
 
-        return baseMessage + checkpointMessage + debug + "\n this is a new line" ;
+        return baseMessage + "\n" + checkpoint + debug;
     }
 
 
