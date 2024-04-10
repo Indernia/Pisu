@@ -25,12 +25,15 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import org.jetbrains.annotations.NotNull;
 
+import apple.laf.JRSUIConstants.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 
 /* ...
@@ -367,7 +370,26 @@ public class Board extends Subject {
 
         String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
 
+        String debug = "Number of conveyor belts = " + filterActionsBySubclass(ConveyorBelt.class).size();
+
         return baseMessage + checkpointMessage;
+    }
+
+    //TODO rewrite to make sure this is not really bad code!!!
+    public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
+        ArrayList<T> output = new ArrayList<>();
+        for(Space[] spaceList : spaces){
+            for(Space space : spaceList){
+                if (space.getActions().size() != 0){
+                    // should be implemented for a list of actions not just one
+                    if (filter.isInstance(space.getActions().get(0)) == true){
+                        T action = filter.cast(space.getActions().get(0));
+                        output.add(action);
+                    }
+                }
+            }
+        }
+        return output;
     }
 
 }
