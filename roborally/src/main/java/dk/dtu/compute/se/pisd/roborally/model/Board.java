@@ -25,8 +25,6 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import org.jetbrains.annotations.NotNull;
 
-import apple.laf.JRSUIConstants.Size;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -370,23 +368,36 @@ public class Board extends Subject {
 
         String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
 
-        String debug = "Number of conveyor belts = " + filterActionsBySubclass(ConveyorBelt.class).size();
+        String debug = "Number of conveyor belts = " + filterActionsBySubclass(Checkpoint.class).size();
 
-        return baseMessage + checkpointMessage;
+        return baseMessage + checkpointMessage + debug + "\n this is a new line" ;
     }
 
-    //TODO rewrite to make sure this is not really bad code!!!
+
+    /**
+    * Filters the actions in the board spaces by the specified subclass of {@link FieldAction}.
+    *
+    * @param <T> the type of {@link FieldAction} subclass to filter for
+    * @param filter the class object of the {@link FieldAction} subclass to filter for
+    * @return a list of {@link FieldAction} objects that are instances of the specified subclass
+    * @see FieldAction
+    *
+    * @Author Alex Lundberg, s235442
+    */
     public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
         ArrayList<T> output = new ArrayList<>();
         for(Space[] spaceList : spaces){
             for(Space space : spaceList){
-                if (space.getActions().size() != 0){
-                    // should be implemented for a list of actions not just one
-                    if (filter.isInstance(space.getActions().get(0)) == true){
+                if (space.getActions().size() == 0){
+                    continue;
+                }
+                for(FieldAction fieldaction : space.getActions()){ 
+                    if (filter.isInstance(fieldaction) == true){
                         T action = filter.cast(space.getActions().get(0));
                         output.add(action);
                     }
                 }
+                
             }
         }
         return output;
