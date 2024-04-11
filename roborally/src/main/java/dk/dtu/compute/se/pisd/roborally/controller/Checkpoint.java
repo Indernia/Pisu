@@ -5,10 +5,11 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
 /**
- * ...
+ * Represents checkpoint action on the board.
+ * When a player lands on a checkpoint space, their current checkpoint is updated if this checkpoint
+ * is the next in sequence.
  *
  * @author Julius Sondergaard, s234096
- *
  */
 public class Checkpoint extends FieldAction {
 

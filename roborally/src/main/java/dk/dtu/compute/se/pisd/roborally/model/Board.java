@@ -88,13 +88,6 @@ public class Board extends Subject {
     }
 
     /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
-
-    /**
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board
      * 
@@ -103,6 +96,40 @@ public class Board extends Subject {
      */
     public Board(int width, int height) {
         this(width, height, "defaultboard");
+    }
+
+    /**
+     * Returns the highest checkpoint number that exists on the particular board.
+     * It goes through all spaces and their actions to find the maximum checkpoint number.
+     *
+     * @return Highest checkpoint number.
+     * @author Julius Sondergaard, s234096
+     */
+    public int getMaxCheckpointNumber() {
+        int maxCheckpoint = 0;
+        for (Space[] row : spaces) {
+            for (Space space : row) {
+                for (FieldAction action : space.getActions()) {
+                    if (action instanceof Checkpoint) {
+                        Checkpoint checkpoint = (Checkpoint) action;
+                        if (checkpoint.getCheckpointNumber() > maxCheckpoint) {
+                            maxCheckpoint = checkpoint.getCheckpointNumber();
+                        }
+                    }
+                }
+            }
+        }
+        return maxCheckpoint;
+    }
+
+    /**
+     * Get the list of players on the board.
+     *
+     * @return A list of players.
+     * @author Julius Sondergaard, s234096
+     */
+    public List<Player> getPlayers() {
+        return players;
     }
 
     /**
@@ -348,12 +375,6 @@ public class Board extends Subject {
      * @return String
      */
 
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
     public String getStatusMessage() {
         String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();

@@ -246,10 +246,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     /**
-     * ...
+     *The visuals of a checkpoint on a space.
+     * Draws a circle with the checkpoint number.
      *
      * @author Julius Sondergaard, s234096
-     *
      */
     private void updateCheckpoint() {
         for (FieldAction action : space.getActions()) {
@@ -265,10 +265,11 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     /**
-     * ...
+     * Draws circle with the checkpoint number.
      *
+     * @param gc GraphicsContext for drawing on the canvas.
+     * @param checkpointNumber The checkpoint number to draw.
      * @author Julius Sondergaard, s234096
-     *
      */
     private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
         double circleDiameter = Math.min(SPACE_WIDTH, SPACE_HEIGHT) * 0.8;
