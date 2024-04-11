@@ -373,7 +373,7 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        String debug = "Number of conveyor belts = " + filterActionsBySubclass(Checkpoint.class).size();
+        String debug = "Number of checkpoints = " + getSpaceByActionSubClass(Checkpoint.class).size();
 
         return baseMessage + "\n" + checkpoint + debug;
     }
@@ -389,6 +389,7 @@ public class Board extends Subject {
     *
     * @Author Alex Lundberg, s235442
     */
+    //TODO remove if not used by the time of submission
     public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
         ArrayList<T> output = new ArrayList<>();
         for(Space[] spaceList : spaces){
@@ -407,5 +408,34 @@ public class Board extends Subject {
         }
         return output;
     }
+
+    /**
+     * Gets the spaces of a specific action subclass
+    *
+    * @param <T> the type of {@link FieldAction} subclass to filter for
+    * @param filter the class object of the {@link FieldAction} subclass to filter for
+    * @return a list of {@link Space} objects that have an action that is an instance of the specified subclass
+    * @see FieldAction
+    *
+    * @Author Alex Lundberg, s235442
+    */
+    public <T extends FieldAction> ArrayList<Space> getSpaceByActionSubClass(Class<T> filter){
+        ArrayList<Space> output = new ArrayList<>();
+        for(Space[] spaceList : spaces){
+            for(Space space : spaceList){
+                if (space.getActions().size() == 0){
+                    continue;
+                }
+                for(FieldAction fieldaction : space.getActions()){ 
+                    if (filter.isInstance(fieldaction) == true){
+                        output.add(space);
+                    }
+                }
+                
+            }
+        }
+        return output;
+    }
+
 
 }
