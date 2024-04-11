@@ -79,8 +79,8 @@ public class LoadBoard {
             result = convert(template, boardname);
             reader.close();
 
-            //updating the checkpoint counter due to heavy check for frequent updates and no need for updates
-            result.setCheckpointCounter();
+            //updating the checkpoint counter due to heavy check for frequent updates
+            result.setCheckpointAmount();
 
             return result;
         } catch (IOException e1) {

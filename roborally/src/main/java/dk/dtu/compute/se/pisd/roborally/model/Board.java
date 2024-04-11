@@ -63,7 +63,7 @@ public class Board extends Subject {
 
     private int counter = 0;
 
-    private int checkpointCounter = 0;
+    private int checkpointAmount = 0;
 
     /**
      * Constructor for board, requires all 3 inputs
@@ -127,7 +127,7 @@ public class Board extends Subject {
                 throw new IllegalStateException("A game with a set id may not be assigned a new id!");
             }
         }
-    }
+   }
 
     /**
      * Returns the space from two coordinates
@@ -266,9 +266,16 @@ public class Board extends Subject {
     /**
      * Sets the checkpoint counter from the board, not from the caller.
      */
-    public void setCheckpointCounter() {
-        this.checkpointCounter = getSpaceByActionSubClass(Checkpoint.class).size();
+    public void setCheckpointAmount() {
+        this.checkpointAmount = getSpaceByActionSubClass(Checkpoint.class).size();
     }
+
+    public int getCheckpointAmount() {
+        return checkpointAmount;
+    }
+
+
+
     /**
      * Returns the current stepmode, if that value is true or false
      * 
@@ -358,7 +365,7 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        String debug = "Number of checkpoints = " + checkpointCounter;
+        String debug = "Number of checkpoints = " + checkpointAmount;
 
         return baseMessage + "\n" + checkpoint + debug;
     }
