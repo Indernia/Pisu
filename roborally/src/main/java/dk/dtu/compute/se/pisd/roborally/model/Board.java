@@ -31,6 +31,7 @@ import java.util.List;
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 
 /* ...
@@ -365,9 +366,76 @@ public class Board extends Subject {
         String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();
 
-        String checkpointMessage = ", Checkpoint = " + getCurrentPlayer().getCurrentCheckpoint();
+        String checkpoint = "Players at checkpoints: \n";
 
-        return baseMessage + checkpointMessage;
+        for(int i = 0; i <players.size(); i++){
+            checkpoint += players.get(i).getName() + ": " + players.get(i).getCurrentCheckpoint() + " ";
+        }
+        checkpoint += "\n";
+
+        String debug = "Number of checkpoints = " + getSpaceByActionSubClass(Checkpoint.class).size();
+
+        return baseMessage + "\n" + checkpoint + debug;
     }
+
+
+    /**
+    * Filters the actions in the board spaces by the specified subclass of {@link FieldAction}.
+    *
+    * @param <T> the type of {@link FieldAction} subclass to filter for
+    * @param filter the class object of the {@link FieldAction} subclass to filter for
+    * @return a list of {@link FieldAction} objects that are instances of the specified subclass
+    * @see FieldAction
+    *
+    * @Author Alex Lundberg, s235442
+    */
+    //TODO remove if not used by the time of submission
+    public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
+        ArrayList<T> output = new ArrayList<>();
+        for(Space[] spaceList : spaces){
+            for(Space space : spaceList){
+                if (space.getActions().size() == 0){
+                    continue;
+                }
+                for(FieldAction fieldaction : space.getActions()){ 
+                    if (filter.isInstance(fieldaction) == true){
+                        T action = filter.cast(space.getActions().get(0));
+                        output.add(action);
+                    }
+                }
+                
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Gets the spaces of a specific action subclass
+    *
+    * @param <T> the type of {@link FieldAction} subclass to filter for
+    * @param filter the class object of the {@link FieldAction} subclass to filter for
+    * @return a list of {@link Space} objects that have an action that is an instance of the specified subclass
+    * @see FieldAction
+    *
+    * @Author Alex Lundberg, s235442
+    */
+    public <T extends FieldAction> ArrayList<Space> getSpaceByActionSubClass(Class<T> filter){
+        ArrayList<Space> output = new ArrayList<>();
+        for(Space[] spaceList : spaces){
+            for(Space space : spaceList){
+                if (space.getActions().size() == 0){
+                    continue;
+                }
+                for(FieldAction fieldaction : space.getActions()){ 
+                    if (filter.isInstance(fieldaction) == true){
+                        output.add(space);
+                    }
+                }
+                
+            }
+        }
+        return output;
+    }
+
 
 }
