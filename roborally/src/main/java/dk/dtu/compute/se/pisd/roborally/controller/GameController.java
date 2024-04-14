@@ -22,6 +22,9 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
+
+import java.util.ArrayList;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -194,9 +197,7 @@ public class GameController {
                     } else {
                         executeCommand(currentPlayer, option);
                     }
-                    if (currentPlayer.getSpace().getActions().size() != 0) {
-                        currentPlayer.getSpace().getActions().get(0).doAction(this, currentPlayer.getSpace());
-                    }
+                    ActivateFieldActions();
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
@@ -381,4 +382,31 @@ public class GameController {
         player.setSpace(rebootspace);
     }
 
+
+    /**
+     * Method activates all fields with players on them, in the order given in the roborally rules.
+     *
+     * @return void
+     */
+    public void ActivateFieldActions(){
+        ArrayList<FieldAction> actions = new ArrayList<FieldAction> ();
+        //Adding all fieldactions in the order of activation.
+        actions.add(new ConveyorBelt());
+        actions.add(new TurnGear());
+        actions.add(new Checkpoint());
+        actions.add(new Pit());
+
+        Player player;
+        for (FieldAction action : actions){
+            for (int j = 0; j< board.getPlayersNumber(); j++){
+                player = board.getPlayer(j);
+                for (FieldAction PAction : player.getSpace().getActions()){
+                    if (action.getClass().isInstance(PAction)){
+                        PAction.doAction(this, player.getSpace());
+                    }
+                }
+            }
+
+        }
+    }
 }
