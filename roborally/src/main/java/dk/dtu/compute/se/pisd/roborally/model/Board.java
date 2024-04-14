@@ -436,6 +436,4 @@ public class Board extends Subject {
         }
         return output;
     }
-
-
 }
