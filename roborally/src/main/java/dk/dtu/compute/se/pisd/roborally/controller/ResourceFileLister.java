@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author s235455
+ * 
+ * 
+ */
 public class ResourceFileLister {
     public List<String> getFiles() {
         List<String> fileList = new ArrayList<>();
