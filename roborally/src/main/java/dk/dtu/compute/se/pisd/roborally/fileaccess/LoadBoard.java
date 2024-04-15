@@ -139,7 +139,7 @@ public class LoadBoard {
             checkpoint.setCheckpointNumber(template.number);
             return checkpoint;
         } else if (actionTemplate instanceof PitTemplate) {
-        return new Pit();
+            return new Pit();
         } else if (actionTemplate instanceof RebootTemplate) {
             return new Reboot();
         }

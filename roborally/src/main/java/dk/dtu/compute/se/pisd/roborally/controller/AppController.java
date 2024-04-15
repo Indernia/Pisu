@@ -36,11 +36,13 @@ import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +55,11 @@ import java.util.Optional;
  */
 public class AppController implements Observer {
 
-    final private List<String> BOARD_CHOICES = Arrays.asList("defaultboard", "longboard"); // Currently add more boards
-                                                                                           // here
+    private ResourceFileLister lister = new ResourceFileLister();
+
+    private List<String> boardList = lister.getFiles();
+
+    final private List<String> BOARD_CHOICES = boardList;
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
@@ -88,7 +93,7 @@ public class AppController implements Observer {
             // XXX the board should eventually be created programmatically or loaded from a
             // file
             // here we just create an empty board with the required number of players.
-            //Board board = new Board(8, 8);
+            // Board board = new Board(8, 8);
             Board board = BoardFactory.getInstance().createBoard(boardChoice.get());
 
             gameController = new GameController(board);
@@ -102,7 +107,7 @@ public class AppController implements Observer {
             // XXX: V2
             board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
-            
+
             RepositoryAccess.getRepository().createGameInDB(board);
 
             roboRally.createBoardView(gameController);
@@ -111,10 +116,9 @@ public class AppController implements Observer {
 
     public void saveGame() {
 
-        if (gameController != null  && gameController.board.getGameId() != null) {
+        if (gameController != null && gameController.board.getGameId() != null) {
             RepositoryAccess.getRepository().updateGameInDB(gameController.board);
         }
-
 
     }
 
@@ -124,10 +128,10 @@ public class AppController implements Observer {
 
         List<GameInDB> gameIds = RepositoryAccess.getRepository().getGames();
         ArrayList<Integer> games = new ArrayList<Integer>();
-        for(GameInDB game : gameIds){
+        for (GameInDB game : gameIds) {
             games.add(game.id);
         }
-        ChoiceDialog<Integer> dialog = new ChoiceDialog<Integer>(gameIds.get(0).id, games) ;
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<Integer>(gameIds.get(0).id, games);
         dialog.setTitle("Game Number");
         dialog.setHeaderText("Select game ID to load");
         Optional<Integer> result = dialog.showAndWait();
