@@ -57,6 +57,7 @@ public class Space extends Subject {
         player = null;
     }
 
+    
     /**
      * Returns the player on this space. If there is no player on the space, null is
      * returned.
@@ -124,4 +125,11 @@ public class Space extends Subject {
         notifyChange();
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
 }
