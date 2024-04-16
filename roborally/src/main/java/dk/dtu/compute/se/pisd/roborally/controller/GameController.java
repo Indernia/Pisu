@@ -305,6 +305,14 @@ public class GameController {
 
     }
 
+
+    /**
+     * Checks if there is a wall obstructing the player
+     * 
+     * @param start
+     * @param heading
+     * @return true if there is a wall obstructing the player
+     */
     private boolean wallObstructs(Space start, Heading heading) {
         if (start.getWalls().contains(heading)) {
             return true;
@@ -323,7 +331,7 @@ public class GameController {
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
 
-            if (newspace != null || !wallObstructs(other.getSpace(), player.getHeading())) {
+            if (newspace != null && wallObstructs(other.getSpace(), player.getHeading())) {
                 moveToSpace(other, newspace, heading);
             } else
                 throw new ImpossibleMoveException(player, newspace, heading);
