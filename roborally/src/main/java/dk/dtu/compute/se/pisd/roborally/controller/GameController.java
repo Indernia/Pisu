@@ -226,7 +226,27 @@ public class GameController {
             // this should not happen
             assert false;
         }
+        checkForGameEnd();
     }
+
+    /**
+     * Checks if the game should end if a player reaches the last checkpoint.
+     * Sets the game phase to FINISHED if it's meets the above criteria.
+     * This method is called after executeNextStep
+     *
+     * @author Julius Sondergaard, s234096
+     */
+    public void checkForGameEnd() {
+        int lastCheckpoint = board.getMaxCheckpointNumber();
+
+        for (Player player : board.getPlayers()) {
+            if (player.getCurrentCheckpoint() == lastCheckpoint) {
+                board.setPhase(Phase.FINISHED);
+                break;
+            }
+        }
+    }
+
 
     /**
      * @param player

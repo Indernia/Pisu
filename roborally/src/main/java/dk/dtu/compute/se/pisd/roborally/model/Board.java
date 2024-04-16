@@ -63,6 +63,8 @@ public class Board extends Subject {
 
     private int counter = 0;
 
+    private int checkpointAmount = 0;
+
     /**
      * Constructor for board, requires all 3 inputs
      * 
@@ -83,38 +85,7 @@ public class Board extends Subject {
         }
         this.stepMode = false;
 
-        /*
-         * /
-         * //TODO remove later
-         * ConveyorBelt action = new ConveyorBelt();
-         * action.setHeading(Heading.WEST);
-         * spaces[2][2].getActions().add(action);
-         * TurnGear gearLeft = new TurnGear("left");
-         * spaces[3][3].getActions().add(gearLeft);
-         * TurnGear gearRight = new TurnGear("right");
-         * spaces[4][4].getActions().add(gearRight);
-         * 
-         * ConveyorBelt action2 = new ConveyorBelt();
-         * action2.setHeading(Heading.SOUTH);
-         * spaces[1][2].getActions().add(action2);
-         * 
-         * spaces[6][6].getWalls().add(Heading.SOUTH);
-         * spaces[6][6].getWalls().add(Heading.WEST);
-         * spaces[5][5].getWalls().add(Heading.NORTH);
-         * spaces[5][5].getWalls().add(Heading.EAST);
-         * 
-         * 
-         * //TODO End
-         */
-        // intializeCheckpoints();
     }
-
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
 
     /**
      * Constructor for board, to change its width and height, its an overflow
@@ -125,6 +96,40 @@ public class Board extends Subject {
      */
     public Board(int width, int height) {
         this(width, height, "defaultboard");
+    }
+
+    /**
+     * Returns the highest checkpoint number that exists on the particular board.
+     * It goes through all spaces and their actions to find the maximum checkpoint number.
+     *
+     * @return Highest checkpoint number.
+     * @author Julius Sondergaard, s234096
+     */
+    public int getMaxCheckpointNumber() {
+        int maxCheckpoint = 0;
+        for (Space[] row : spaces) {
+            for (Space space : row) {
+                for (FieldAction action : space.getActions()) {
+                    if (action instanceof Checkpoint) {
+                        Checkpoint checkpoint = (Checkpoint) action;
+                        if (checkpoint.getCheckpointNumber() > maxCheckpoint) {
+                            maxCheckpoint = checkpoint.getCheckpointNumber();
+                        }
+                    }
+                }
+            }
+        }
+        return maxCheckpoint;
+    }
+
+    /**
+     * Get the list of players on the board.
+     *
+     * @return A list of players.
+     * @author Julius Sondergaard, s234096
+     */
+    public List<Player> getPlayers() {
+        return players;
     }
 
     /**
@@ -149,7 +154,7 @@ public class Board extends Subject {
                 throw new IllegalStateException("A game with a set id may not be assigned a new id!");
             }
         }
-    }
+   }
 
     /**
      * Returns the space from two coordinates
@@ -284,6 +289,20 @@ public class Board extends Subject {
         }
     }
 
+
+    /**
+     * Sets the checkpoint counter from the board, not from the caller.
+     */
+    public void setCheckpointAmount() {
+        this.checkpointAmount = getSpaceByActionSubClass(Checkpoint.class).size();
+    }
+
+    public int getCheckpointAmount() {
+        return checkpointAmount;
+    }
+
+
+
     /**
      * Returns the current stepmode, if that value is true or false
      * 
@@ -356,12 +375,6 @@ public class Board extends Subject {
      * @return String
      */
 
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
     public String getStatusMessage() {
         String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();
@@ -373,7 +386,7 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        String debug = "Number of checkpoints = " + getSpaceByActionSubClass(Checkpoint.class).size();
+        String debug = "Number of checkpoints = " + checkpointAmount;
 
         return baseMessage + "\n" + checkpoint + debug;
     }

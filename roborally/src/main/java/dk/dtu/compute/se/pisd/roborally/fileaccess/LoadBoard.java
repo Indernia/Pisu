@@ -78,6 +78,10 @@ public class LoadBoard {
             BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
             result = convert(template, boardname);
             reader.close();
+
+            //updating the checkpoint counter due to heavy check for frequent updates
+            result.setCheckpointAmount();
+
             return result;
         } catch (IOException e1) {
             if (reader != null) {
