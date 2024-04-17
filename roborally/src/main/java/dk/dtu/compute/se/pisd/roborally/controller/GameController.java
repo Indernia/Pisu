@@ -201,7 +201,15 @@ public class GameController {
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
+                  //  if(board.getPlayer(nextPlayerNumber).getSpace() != null){
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+                  //  } else for(int i = nextPlayerNumber+1; i < board.getPlayersNumber(); i++){
+                  //      Player iPlayer = board.getPlayer(i);
+                  //      if(iPlayer.getSpace() != null){
+                  //          board.setCurrentPlayer(iPlayer);
+                  //          break;
+                  //      }
+                  //  }
                 } else {
                     step++;
                     if (step < Player.NO_REGISTERS) {
