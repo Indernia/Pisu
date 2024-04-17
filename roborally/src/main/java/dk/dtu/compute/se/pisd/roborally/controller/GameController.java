@@ -23,6 +23,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
+
 import java.util.ArrayList;
 
 import org.jetbrains.annotations.NotNull;
@@ -409,17 +411,15 @@ public class GameController {
         for(int i = 0; i < Player.NO_REGISTERS; i++){
             player.setProgramField(i, null);
         }
+        player.setDeathSpace(space);
         player.setSpace(null);
     }
 
     public void reboot(Player player){
-        Space playerspace = player.getSpace();
+        Space playerspace = player.getDeathSpace();
         ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
-        Space rebootSpace = null;
+        Space rebootSpace = actionSpaces.get(0);
         Double prevdistance = 99999.99999;
-        if(actionSpaces.size() == 1){
-            rebootSpace = actionSpaces.get(0);
-        } else if(actionSpaces.size() > 1){
             for(Space actionSpace : actionSpaces){
                 Double py = (double) playerspace.getY();
                 Double px = (double) playerspace.getX();
@@ -434,11 +434,12 @@ public class GameController {
                 }
 
             }
-        } else{
-            rebootSpace = board.getSpace(1, 1);
+        player.setHeading(NORTH);
+        try {
+            moveToSpace(player, rebootSpace, player.getHeading());
+        } catch (ImpossibleMoveException e) {
+            e.printStackTrace();
         }
-
-        player.setSpace(rebootSpace);
     }
 
 
