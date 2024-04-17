@@ -339,7 +339,7 @@ public class GameController {
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
 
-            if (newspace != null && wallObstructs(other.getSpace(), player.getHeading())) {
+            if (newspace != null && !wallObstructs(other.getSpace(), player.getHeading())) {
                 moveToSpace(other, newspace, heading);
             } else
                 throw new ImpossibleMoveException(player, newspace, heading);
