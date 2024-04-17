@@ -33,6 +33,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 
 /* ...
 *
@@ -387,8 +388,8 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        // print the name of the cards in the player deck using a stream to map the name
-        String debug = "Debug: \n" + getCurrentPlayer().getDeck().stream().map(CommandCard::getName).reduce("", (a, b) -> a + b + " ");
+        DeckTranscoder dt = new DeckTranscoder();
+        String debug = "Debug: \n" + dt.encode(getCurrentPlayer().getDeck());
 
         return baseMessage + "\n" + checkpoint + debug;
     }
