@@ -25,6 +25,9 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
+import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+
+import java.util.List;
 
 /**
  * ...
@@ -48,6 +51,8 @@ public class Player extends Subject {
 
     private CommandCardField[] program;
     private CommandCardField[] cards;
+
+    private List<CommandCard> deck;
 
 
     /**
@@ -212,6 +217,7 @@ public class Player extends Subject {
         return cards[i];
     }
 
+<<<<<<< HEAD
     public void setDeathSpace(Space deathSpace){
         this.deathSpace = deathSpace;
     }
@@ -220,4 +226,23 @@ public class Player extends Subject {
         return deathSpace;
     }
 
+=======
+
+    /**
+     * sets the deck for the player to the given {@link com.sun.tools.javac.util.List}
+     *
+     * @param deck a {@link com.sun.tools.javac.util.List} of {@link CommandCard}s to use as the player deck
+     */
+    public void setDeck (List<CommandCard> deck){
+        this.deck = deck;
+    }
+
+
+    /**
+     * @return the deck of the player
+     */
+    public List<CommandCard> getDeck(){
+        return deck;
+    }
+>>>>>>> 36b3b06 (added simple player decks)
 }

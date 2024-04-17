@@ -387,7 +387,8 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        String debug = "Number of checkpoints = " + checkpointAmount;
+        // print the name of the cards in the player deck using a stream to map the name
+        String debug = "Debug: \n" + getCurrentPlayer().getDeck().stream().map(CommandCard::getName).reduce("", (a, b) -> a + b + " ");
 
         return baseMessage + "\n" + checkpoint + debug;
     }
@@ -450,4 +451,5 @@ public class Board extends Subject {
         }
         return output;
     }
+
 }
