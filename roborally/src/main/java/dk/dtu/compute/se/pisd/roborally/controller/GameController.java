@@ -435,12 +435,10 @@ public class GameController {
 
             }
         player.setHeading(NORTH);
-        if(rebootSpace.getPlayer() == null){
-            player.setSpace(rebootSpace);
-        } else{
-            Player rebootPlayer = rebootSpace.getPlayer();
-            moveForward(rebootPlayer);
-            player.setSpace(rebootSpace);
+        try {
+            moveToSpace(player, rebootSpace, player.getHeading());
+        } catch (ImpossibleMoveException e) {
+            e.printStackTrace();
         }
     }
 
