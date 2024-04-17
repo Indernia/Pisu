@@ -1,10 +1,7 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 import org.jetbrains.annotations.NotNull;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-
 
 
 public class Pit extends FieldAction {
@@ -21,8 +18,7 @@ public class Pit extends FieldAction {
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
-        Board board = gameController.board;
-        Player player = board.getCurrentPlayer();
+        Player player = space.getPlayer();
         gameController.die(player, space);
         return true;
     }
