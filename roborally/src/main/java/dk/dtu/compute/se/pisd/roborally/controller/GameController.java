@@ -429,15 +429,15 @@ public class GameController {
         Space rebootSpace = actionSpaces.get(0);
         Double prevdistance = 99999.99999;
             for(Space actionSpace : actionSpaces){
-                Double py = (double) playerspace.getY();
-                Double px = (double) playerspace.getX();
-                Double ay = (double) actionSpace.getY();
-                Double ax = (double) actionSpace.getX();
+                Double py = (double) playerspace.y;
+                Double px = (double) playerspace.x;
+                Double ay = (double) actionSpace.y;
+                Double ax = (double) actionSpace.x;
                 Double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
 
 
                 if(distance < prevdistance){
-                rebootSpace = board.getSpace(actionSpace.getX(), actionSpace.getY());
+                rebootSpace = board.getSpace(actionSpace.x, actionSpace.y);
                 prevdistance = distance;
                 }
 
