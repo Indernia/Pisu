@@ -43,6 +43,7 @@ public class Player extends Subject {
     private String color;
 
     private Space space;
+    private Space deathSpace;
     private Heading heading = SOUTH;
 
     private CommandCardField[] program;
@@ -209,6 +210,14 @@ public class Player extends Subject {
      */
     public CommandCardField getCardField(int i) {
         return cards[i];
+    }
+
+    public void setDeathSpace(Space deathSpace){
+        this.deathSpace = deathSpace;
+    }
+
+    public Space getDeathSpace(){
+        return deathSpace;
     }
 
 }
