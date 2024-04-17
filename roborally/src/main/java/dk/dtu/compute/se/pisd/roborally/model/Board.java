@@ -87,6 +87,7 @@ public class Board extends Subject {
 
     }
 
+    
     /**
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board

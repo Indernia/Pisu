@@ -201,7 +201,15 @@ public class GameController {
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
+                  //  if(board.getPlayer(nextPlayerNumber).getSpace() != null){
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+                  //  } else for(int i = nextPlayerNumber+1; i < board.getPlayersNumber(); i++){
+                  //      Player iPlayer = board.getPlayer(i);
+                  //      if(iPlayer.getSpace() != null){
+                  //          board.setCurrentPlayer(iPlayer);
+                  //          break;
+                  //      }
+                  //  }
                 } else {
                     step++;
                     if (step < Player.NO_REGISTERS) {
@@ -404,10 +412,33 @@ public class GameController {
         player.setSpace(null);
     }
 
-    // TODO rebootspace should be found using an array of actions spaces instead of being harcoded
     public void reboot(Player player){
-        Space rebootspace = board.getSpace(0, 7);
-        player.setSpace(rebootspace);
+        Space playerspace = player.getSpace();
+        ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
+        Space rebootSpace = null;
+        Double prevdistance = 99999.99999;
+        if(actionSpaces.size() == 1){
+            rebootSpace = actionSpaces.get(0);
+        } else if(actionSpaces.size() > 1){
+            for(Space actionSpace : actionSpaces){
+                Double py = (double) playerspace.getY();
+                Double px = (double) playerspace.getX();
+                Double ay = (double) actionSpace.getY();
+                Double ax = (double) actionSpace.getX();
+                Double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
+
+
+                if(distance < prevdistance){
+                rebootSpace = board.getSpace(actionSpace.getX(), actionSpace.getY());
+                prevdistance = distance;
+                }
+
+            }
+        } else{
+            rebootSpace = board.getSpace(1, 1);
+        }
+
+        player.setSpace(rebootSpace);
     }
 
 
@@ -428,9 +459,11 @@ public class GameController {
         for (FieldAction action : actions){
             for (int j = 0; j< board.getPlayersNumber(); j++){
                 player = board.getPlayer(j);
-                for (FieldAction PAction : player.getSpace().getActions()){
-                    if (action.getClass().isInstance(PAction)){
-                        PAction.doAction(this, player.getSpace());
+                if(player.getSpace() != null){
+                    for (FieldAction PAction : player.getSpace().getActions()){
+                        if (action.getClass().isInstance(PAction)){
+                            PAction.doAction(this, player.getSpace());
+                        }
                     }
                 }
             }
