@@ -443,9 +443,11 @@ public class GameController {
         for (FieldAction action : actions){
             for (int j = 0; j< board.getPlayersNumber(); j++){
                 player = board.getPlayer(j);
-                for (FieldAction PAction : player.getSpace().getActions()){
-                    if (action.getClass().isInstance(PAction)){
-                        PAction.doAction(this, player.getSpace());
+                if(player.getSpace() != null){
+                    for (FieldAction PAction : player.getSpace().getActions()){
+                        if (action.getClass().isInstance(PAction)){
+                            PAction.doAction(this, player.getSpace());
+                        }
                     }
                 }
             }
