@@ -440,6 +440,7 @@ public class GameController {
         } catch (ImpossibleMoveException e) {
             e.printStackTrace();
         }
+        player.setDeathSpace(null);
     }
 
 
