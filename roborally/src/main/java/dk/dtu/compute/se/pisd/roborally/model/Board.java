@@ -389,7 +389,7 @@ public class Board extends Subject {
         checkpoint += "\n";
 
         DeckTranscoder dt = new DeckTranscoder();
-        String debug = "Debug: \n" + dt.encode(getCurrentPlayer().getDeck());
+        String debug = "Debug: \n " + dt.encode(getCurrentPlayer().getDeck()) + "\n " + dt.encode(getCurrentPlayer().getDiscardDeck());
 
         return baseMessage + "\n" + checkpoint + debug;
     }

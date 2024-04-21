@@ -28,6 +28,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * ...
@@ -52,7 +53,7 @@ public class Player extends Subject {
     private CommandCardField[] cards;
 
     private List<CommandCard> deck;
-
+    private List<CommandCard> discardDeck;
 
     /**
      * ...
@@ -93,6 +94,9 @@ public class Player extends Subject {
         for (int i = 0; i < cards.length; i++) {
             cards[i] = new CommandCardField(this);
         }
+
+
+        this.discardDeck = new ArrayList<CommandCard>();
     }
 
     /**
@@ -233,4 +237,39 @@ public class Player extends Subject {
     public List<CommandCard> getDeck(){
         return deck;
     }
+
+    /**
+     * puts a card into a players discardDeck 
+     *
+     * @param card a {@link CommandCard} to be discarded.
+     *
+     */
+    public void discardCard(CommandCard card){
+        this.discardDeck.add(card);
+    }
+
+
+    /**
+     * gets the discardDeck Array.
+     *
+     * @return a list of {@link CommandCard}
+     */
+    public List<CommandCard> getDiscardDeck(){
+            return this.discardDeck;
+    }
+
+    /**
+     *Returns the top card of the player deck and removes it
+     *
+     * return {@link CommandCard} 
+     */
+    //deck should be implented as a stack instead of a list 🤷‍♂️
+    public CommandCard drawCard(){
+        CommandCard output = this.deck.get(this.deck.size()-1);
+        this.deck.remove(this.deck.size()-1);
+        return output;
+        
+    }
+
 }
+
