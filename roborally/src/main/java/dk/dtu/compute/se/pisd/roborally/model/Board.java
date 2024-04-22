@@ -388,8 +388,10 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        DeckTranscoder dt = new DeckTranscoder();
-        String debug = "Debug: \n " + dt.encode(getCurrentPlayer().getDeck()) + "\n " + dt.encode(getCurrentPlayer().getDiscardDeck());
+        DeckTranscoder deckTranscoder = new DeckTranscoder();
+        String debug = "Debug: \n " 
+            + deckTranscoder.encode(getCurrentPlayer().getDeck()) + " " + getCurrentPlayer().getDeck().size() +"\n " 
+            + deckTranscoder.encode(getCurrentPlayer().getDiscardDeck()) + " " + getCurrentPlayer().getDiscardDeck().size();
 
         return baseMessage + "\n" + checkpoint + debug;
     }

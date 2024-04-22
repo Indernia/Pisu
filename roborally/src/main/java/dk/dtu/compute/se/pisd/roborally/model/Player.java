@@ -24,11 +24,14 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * ...
@@ -265,11 +268,23 @@ public class Player extends Subject {
      */
     //deck should be implented as a stack instead of a list 🤷‍♂️
     public CommandCard drawCard(){
+        if(deck.size() == 0){
+            shuffleDiscardAndDeck();
+        }
         CommandCard output = this.deck.get(this.deck.size()-1);
         this.deck.remove(this.deck.size()-1);
         return output;
         
     }
+
+    public void shuffleDiscardAndDeck(){
+        for(CommandCard card : discardDeck){
+            deck.add(card);
+        }
+        Collections.shuffle(deck);
+        discardDeck.clear();
+    }
+
 
 }
 
