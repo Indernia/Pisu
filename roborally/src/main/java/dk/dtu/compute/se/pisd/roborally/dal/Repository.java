@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 /**
  * ...
  *
@@ -64,7 +65,14 @@ class Repository implements IRepository {
 
 	private static final String PLAYER_HEADING = "heading";
 
+    private static final String PLAYER_DECK = "deck";
+
+    private static final String PLAYER_DISCARD_DECK = "discardDeck";
+
 	private Connector connector;
+    
+
+    private DeckTranscoder dt = new DeckTranscoder();
 	
 	Repository(Connector connector){
 		this.connector = connector;
@@ -274,7 +282,7 @@ class Repository implements IRepository {
 		// TODO code should be more defensive
 		PreparedStatement ps = getSelectPlayersStatementU();
 		ps.setInt(1, game.getGameId());
-		
+
 		ResultSet rs = ps.executeQuery();
 		for (int i = 0; i < game.getPlayersNumber(); i++) {
 			Player player = game.getPlayer(i);
@@ -286,6 +294,8 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_POSITION_X, player.getSpace().x);
 			rs.updateInt(PLAYER_POSITION_Y, player.getSpace().y);
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
+            rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
+            rs.updateString(PLAYER_DISCARD_DECK, dt.encode(player.getDiscardDeck()));
 			rs.insertRow();
 		}
 
@@ -333,6 +343,8 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_POSITION_X, player.getSpace().x);
 			rs.updateInt(PLAYER_POSITION_Y, player.getSpace().y);
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
+            rs.updateString(PLAYER_DISCARD_DECK, dt.encode(player.getDiscardDeck()));
+            rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();
