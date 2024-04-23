@@ -88,8 +88,13 @@ public class GameController {
                 }
                 for (int j = 0; j < Player.NO_CARDS; j++) {
                     CommandCardField field = player.getCardField(j);
-                    field.setCard(generateRandomCommandCard());
-                    field.setVisible(true);
+                    //TODO change here to use the player deck.
+                    if(field.getCard() == null){
+                        field.setCard(player.drawCard());
+                        field.setVisible(true);
+
+                    }
+
                 }
             }
         }
@@ -190,14 +195,17 @@ public class GameController {
                 if (card != null) {
                     Command command = card.command;
                     if (option == null) {
-                        if (!command.isInteractive())
+                        if (!command.isInteractive()) {
                             executeCommand(currentPlayer, command);
+                            currentPlayer.discardCard(card);
+                        }
                         else {
                             board.setPhase(Phase.PLAYER_INTERACTION);
                             return;
                         }
                     } else {
                         executeCommand(currentPlayer, option);
+                        currentPlayer.discardCard(card);
                     }
                     ActivateFieldActions();
                 }
@@ -480,4 +488,19 @@ public class GameController {
 
         }
     }
+
+
+
+    public void setPlayerDeck(Player player, int size){
+        ArrayList<CommandCard> deck = new ArrayList<>();
+        for (int i = 0; i < size; i++){
+            deck.add(generateRandomCommandCard());
+        }
+        player.setDeck(deck);
+
+    }
+        
+
+
+
 }

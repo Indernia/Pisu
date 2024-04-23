@@ -33,6 +33,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 
 /* ...
 *
@@ -387,7 +388,10 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-        String debug = "Number of checkpoints = " + checkpointAmount;
+        DeckTranscoder deckTranscoder = new DeckTranscoder();
+        String debug = "Debug: \n " 
+            + deckTranscoder.encode(getCurrentPlayer().getDeck()) + " " + getCurrentPlayer().getDeck().size() +"\n " 
+            + deckTranscoder.encode(getCurrentPlayer().getDiscardDeck()) + " " + getCurrentPlayer().getDiscardDeck().size();
 
         return baseMessage + "\n" + checkpoint + debug;
     }
@@ -450,4 +454,5 @@ public class Board extends Subject {
         }
         return output;
     }
+
 }

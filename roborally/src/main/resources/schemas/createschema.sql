@@ -24,6 +24,10 @@ CREATE TABLE IF NOT EXISTS Player (
   positionX int,
   positionY int,
   heading tinyint,
+  deck varchar(255),
+  discardDeck varchar(255),
+  playerHand varchar(255),
+  playerProgram varchar(255),
   
   PRIMARY KEY (gameID, playerID),
   FOREIGN KEY (gameID) REFERENCES Game(gameID)

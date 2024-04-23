@@ -41,6 +41,7 @@ public interface ViewObserver extends Observer {
         // are doing the update only in the FX application thread. The update of the view is instead
         // done in the updateView() method;
         if (Platform.isFxApplicationThread()) {
+        // TODO this below line is the issue!!! for loading from database
             updateView(subject);
         } else {
             Platform.runLater(() -> updateView(subject));
