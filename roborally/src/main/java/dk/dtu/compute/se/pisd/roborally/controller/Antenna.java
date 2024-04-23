@@ -12,7 +12,7 @@ public class Antenna extends FieldAction {
 
 
 
-    public Antenna (){
+    public Antenna(){
 
     }
     /**
@@ -26,12 +26,7 @@ public class Antenna extends FieldAction {
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
        Board board = gameController.board;
        int totPlayers = board.getPlayersNumber();
-      // if(board.playerTurnOrder.size() > 2){
-        //    for(int i = 0; i < totPlayers; i++){
-      //          board.setPlayerTurnOrder(i, board.getPlayer(i));
-    //        }
-  //     }
-        if(board.getStep() == Player.NO_REGISTERS-1){
+        if(board.getStep() == Player.NO_REGISTERS){
             Player isLastPlayer = null;
             for(int i = 0; i < totPlayers; i++){
                 if(board.getPlayerTurn(i).getSpace() != null){
@@ -68,7 +63,7 @@ public class Antenna extends FieldAction {
 
 
         }
-        return false;
+        return true;
     }
 
     /**

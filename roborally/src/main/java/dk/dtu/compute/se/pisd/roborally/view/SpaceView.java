@@ -129,7 +129,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     private void drawAntenna(){
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
-            if (action.getType().equals("Reboot")){
+            if (action.getType().equals("Antenna")){
                 Circle circle = new Circle(20);
                 circle.setFill(Color.LIGHTGREEN);
                 this.getChildren().add(circle);
@@ -163,11 +163,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
-        /*
-        if (subject == this.space) {
-            updateCheckpoint();
-        }
-        */
         if (space.getWalls().size() != 0){
             for(Heading wall: space.getWalls()){
                 drawWall(wall);
