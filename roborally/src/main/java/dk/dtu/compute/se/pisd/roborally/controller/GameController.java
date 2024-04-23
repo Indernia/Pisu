@@ -279,16 +279,19 @@ public class GameController {
 
             switch (command) {
                 case FORWARD:
-                    this.moveForward(player);
+                    moveForward(player);
                     break;
                 case RIGHT:
-                    this.turnRight(player);
+                    turnRight(player);
                     break;
                 case LEFT:
-                    this.turnLeft(player);
+                    turnLeft(player);
                     break;
                 case FAST_FORWARD:
-                    this.fastForward(player);
+                    fastForward(player);
+                    break;
+                case SPAM:
+                    spamDamage(player);
                     break;
                 default:
                     // DO NOTHING (for now)
@@ -390,6 +393,13 @@ public class GameController {
         Heading heading = player.getHeading();
         Heading nextHeading = heading.prev();
         player.setHeading(nextHeading);
+    }
+
+    public void spamDamage(@NotNull Player player){
+        int currentReg = board.getStep();
+        CommandCard topCard = player.drawCard();
+        player.setProgramField(currentReg, topCard);
+        executeCommand(player, topCard);
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
