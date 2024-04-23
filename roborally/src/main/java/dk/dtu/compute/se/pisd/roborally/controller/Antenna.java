@@ -4,8 +4,6 @@ import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
-import java.util.ArrayList;
-
 import org.jetbrains.annotations.NotNull;
 
 public class Antenna extends FieldAction {
