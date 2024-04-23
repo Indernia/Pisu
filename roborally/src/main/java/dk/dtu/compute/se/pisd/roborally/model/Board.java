@@ -211,6 +211,7 @@ public class Board extends Subject {
     public void addPlayer(@NotNull Player player) {
         if (player.board == this && !players.contains(player)) {
             players.add(player);
+            playerTurnOrder.add(player);
             notifyChange();
         }
     }
@@ -336,7 +337,7 @@ public class Board extends Subject {
      */
     public int getPlayerNumber(@NotNull Player player) {
         if (player.board == this) {
-            return players.indexOf(player);
+            return playerTurnOrder.indexOf(player);
         } else {
             return -1;
         }
@@ -455,5 +456,17 @@ public class Board extends Subject {
 
     public void setPlayerTurnOrder(int i, Player player){
         playerTurnOrder.set(i, player);
+    }
+
+    public Player getPlayerTurn(int i) {
+        if (i >= 0 && i < playerTurnOrder.size()) {
+            return playerTurnOrder.get(i);
+        } else {
+            return null;
+        }
+    }
+    
+    public List<Player> getPlayerTurnList(){
+        return playerTurnOrder;
     }
 }
