@@ -23,6 +23,8 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
+
 import java.util.ArrayList;
 
 import org.jetbrains.annotations.NotNull;
@@ -208,31 +210,22 @@ public class GameController {
                     ActivateFieldActions();
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
-                if (nextPlayerNumber < board.getPlayersNumber()) {
-                  //  if(board.getPlayer(nextPlayerNumber).getSpace() != null){
+                int numberOfPlayers = board.getPlayersNumber();
+                if (nextPlayerNumber < numberOfPlayers) {
+                    if(board.getPlayer(nextPlayerNumber).getSpace() != null){
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
-                  //  } else for(int i = nextPlayerNumber+1; i < board.getPlayersNumber(); i++){
-                  //      Player iPlayer = board.getPlayer(i);
-                  //      if(iPlayer.getSpace() != null){
-                  //          board.setCurrentPlayer(iPlayer);
-                  //          break;
-                  //      }
-                  //  }
-                } else {
-                    step++;
-                    if (step < Player.NO_REGISTERS) {
-                        makeProgramFieldsVisible(step);
-                        board.setStep(step);
-                        board.setCurrentPlayer(board.getPlayer(0));
-                    } else {
-                        for(int i = 0; i < board.getPlayersNumber(); i++){
-                            Player player = board.getPlayer(i);
-                            if(player.getSpace() == null){
-                                reboot(player);
-                            }
+                    } else for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
+                        Player iPlayer = board.getPlayer(i);
+                        int iPlayerNumber = board.getPlayerNumber(iPlayer);
+                        if(iPlayer.getSpace() != null){
+                            board.setCurrentPlayer(iPlayer);
+                            break;
+                        } else if(iPlayerNumber == numberOfPlayers-1){
+                            nextStep();
                         }
-                        startProgrammingPhase();
                     }
+                } else {
+                    nextStep();
                 }
             } else {
                 // this should not happen
@@ -245,6 +238,23 @@ public class GameController {
         checkForGameEnd();
     }
 
+    public void nextStep(){
+        int step = board.getStep();
+        step++;
+        if (step < Player.NO_REGISTERS) {
+            makeProgramFieldsVisible(step);
+            board.setStep(step);
+            board.setCurrentPlayer(board.getPlayer(0));
+        } else {
+            for(int i = 0; i < board.getPlayersNumber(); i++){
+                Player player = board.getPlayer(i);
+                if(player.getSpace() == null){
+                    reboot(player);
+                }
+            }
+            startProgrammingPhase();
+        }
+    }
     /**
      * Checks if the game should end if a player reaches the last checkpoint.
      * Sets the game phase to FINISHED if it's meets the above criteria.
@@ -347,7 +357,7 @@ public class GameController {
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
 
-            if (newspace != null && wallObstructs(other.getSpace(), player.getHeading())) {
+            if (newspace != null && !wallObstructs(other.getSpace(), player.getHeading())) {
                 moveToSpace(other, newspace, heading);
             } else
                 throw new ImpossibleMoveException(player, newspace, heading);
@@ -417,36 +427,36 @@ public class GameController {
         for(int i = 0; i < Player.NO_REGISTERS; i++){
             player.setProgramField(i, null);
         }
+        player.setDeathSpace(space);
         player.setSpace(null);
     }
 
     public void reboot(Player player){
-        Space playerspace = player.getSpace();
+        Space playerspace = player.getDeathSpace();
         ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
-        Space rebootSpace = null;
+        Space rebootSpace = actionSpaces.get(0);
         Double prevdistance = 99999.99999;
-        if(actionSpaces.size() == 1){
-            rebootSpace = actionSpaces.get(0);
-        } else if(actionSpaces.size() > 1){
             for(Space actionSpace : actionSpaces){
-                Double py = (double) playerspace.getY();
-                Double px = (double) playerspace.getX();
-                Double ay = (double) actionSpace.getY();
-                Double ax = (double) actionSpace.getX();
+                Double py = (double) playerspace.y;
+                Double px = (double) playerspace.x;
+                Double ay = (double) actionSpace.y;
+                Double ax = (double) actionSpace.x;
                 Double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
 
 
                 if(distance < prevdistance){
-                rebootSpace = board.getSpace(actionSpace.getX(), actionSpace.getY());
+                rebootSpace = board.getSpace(actionSpace.x, actionSpace.y);
                 prevdistance = distance;
                 }
 
             }
-        } else{
-            rebootSpace = board.getSpace(1, 1);
+        player.setHeading(NORTH);
+        try {
+            moveToSpace(player, rebootSpace, player.getHeading());
+        } catch (ImpossibleMoveException e) {
+            e.printStackTrace();
         }
-
-        player.setSpace(rebootSpace);
+        player.setDeathSpace(null);
     }
 
 

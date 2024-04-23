@@ -50,6 +50,7 @@ public class Player extends Subject {
     private String color;
 
     private Space space;
+    private Space deathSpace;
     private Heading heading = SOUTH;
 
     private CommandCardField[] program;
@@ -223,7 +224,6 @@ public class Player extends Subject {
         return cards[i];
     }
 
-
     /**
      * sets the deck for the player to the given {@link com.sun.tools.javac.util.List}
      *
@@ -354,6 +354,14 @@ public class Player extends Subject {
             }
         }
         cards = list.toArray(new CommandCardField[NO_CARDS]);
+
+    public void setDeathSpace(Space deathSpace){
+        this.deathSpace = deathSpace;
+    }
+
+    public Space getDeathSpace(){
+        return deathSpace;
+
     }
 
 }
