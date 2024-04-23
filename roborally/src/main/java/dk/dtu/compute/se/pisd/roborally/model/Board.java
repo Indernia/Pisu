@@ -53,6 +53,8 @@ public class Board extends Subject {
 
     private final List<Player> players = new ArrayList<>();
 
+    public List<Player> playerTurnOrder = new ArrayList<>();
+
     private Player current;
 
     private Phase phase = INITIALISATION;
@@ -449,5 +451,9 @@ public class Board extends Subject {
             }
         }
         return output;
+    }
+
+    public void setPlayerTurnOrder(int i, Player player){
+        playerTurnOrder.set(i, player);
     }
 }
