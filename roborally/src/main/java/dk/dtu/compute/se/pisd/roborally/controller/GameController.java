@@ -230,7 +230,7 @@ public class GameController {
         checkForGameEnd();
     }
 
-    public void nextStep(){
+    private void nextStep(){
         int step = board.getStep();
         step++;
         if (step < Player.NO_REGISTERS) {
