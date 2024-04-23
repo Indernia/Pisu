@@ -178,6 +178,9 @@ public class SpaceView extends StackPane implements ViewObserver {
                 case "Reboot":
                     drawReboot();
                     break;
+                case "Antenna":
+                    drawReboot();
+                    break;
             }
         }
         updatePlayer();

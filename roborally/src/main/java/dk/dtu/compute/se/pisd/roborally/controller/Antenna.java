@@ -18,8 +18,8 @@ public class Antenna extends FieldAction {
 
     }
     /**
-     * Implementation of the action of a conveyor belt.
-     * takes a player and moves them to the space in the direction of the heading of the belt
+     * Implementation of the antenna
+     * determines the order in which the players play based on distance to the antenna at the start of the programming phase
      *  @param gameController the given controller for the current instance
      * @param space a given space that will have the belt action on it
      * @author Noah Nissen

@@ -30,9 +30,9 @@ import java.util.List;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
-import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
-import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
+
 
 /* ...
 *
