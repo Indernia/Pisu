@@ -43,6 +43,13 @@ public class CommandCardField extends Subject {
         this.visible = true;
     }
 
+    public CommandCardField(Player player, CommandCard card) {
+        this.player = player;
+        this.card = card;
+        this.visible = true;
+    }
+    
+
     /**
      * Gives the current card that is in process
      * 

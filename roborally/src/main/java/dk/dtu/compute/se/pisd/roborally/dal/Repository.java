@@ -23,9 +23,12 @@ package dk.dtu.compute.se.pisd.roborally.dal;
 
 import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Command;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Phase;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,6 +71,10 @@ class Repository implements IRepository {
     private static final String PLAYER_DECK = "deck";
 
     private static final String PLAYER_DISCARD_DECK = "discardDeck";
+
+    private static final String PLAYER_HAND = "playerHand";
+
+    private static final String PLAYER_PROGRAM = "PlayerProgram";
 
 	private Connector connector;
     
@@ -296,6 +303,8 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
             rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
             rs.updateString(PLAYER_DISCARD_DECK, dt.encode(player.getDiscardDeck()));
+            rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
+            rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
 			rs.insertRow();
 		}
 
@@ -311,6 +320,7 @@ class Repository implements IRepository {
 		while (rs.next()) {
 			int playerId = rs.getInt(PLAYER_PLAYERID);
 			if (i++ == playerId) {
+                System.out.println("Player ID: " + playerId);
 				// TODO this should be more defensive
 				String name = rs.getString(PLAYER_NAME);
 				String colour = rs.getString(PLAYER_COLOUR);
@@ -322,6 +332,12 @@ class Repository implements IRepository {
 				player.setSpace(game.getSpace(x,y));
 				int heading = rs.getInt(PLAYER_HEADING);
 				player.setHeading(Heading.values()[heading]);
+                System.out.println("Before new setters");
+                player.setDeck(new ArrayList<CommandCard>(dt.decode(rs.getString(PLAYER_DECK))));
+                player.setDiscardDeck(new ArrayList<CommandCard> (dt.decode(rs.getString(PLAYER_DISCARD_DECK))));
+                player.setProgram(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_PROGRAM), player)));
+                player.setHand(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_HAND), player)));
+                System.out.println("After new setters");
 			} else {
 				// TODO error handling
 				System.err.println("Game in DB does not have a player with id " + i +"!");
@@ -345,6 +361,8 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
             rs.updateString(PLAYER_DISCARD_DECK, dt.encode(player.getDiscardDeck()));
             rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
+            rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
+            rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();

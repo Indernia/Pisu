@@ -115,11 +115,14 @@ public class PlayerView extends Tab implements ViewObserver {
         cardsPane.setHgap(2.0);
         cardViews = new CardFieldView[Player.NO_CARDS];
         for (int i = 0; i < Player.NO_CARDS; i++) {
+            System.out.println("beginning llop");
+            System.out.println(i);
             CommandCardField cardField = player.getCardField(i);
             if (cardField != null) {
                 cardViews[i] = new CardFieldView(gameController, cardField);
                 cardsPane.add(cardViews[i], i, 0);
             }
+            System.out.println("end of loop");
         }
 
         top.getChildren().add(programLabel);

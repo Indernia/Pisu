@@ -277,6 +277,10 @@ public class Player extends Subject {
         
     }
 
+    /**
+     * shuffles the deck and discard deck into one
+     *
+     */
     public void shuffleDiscardAndDeck(){
         for(CommandCard card : discardDeck){
             deck.add(card);
@@ -285,6 +289,71 @@ public class Player extends Subject {
         discardDeck.clear();
     }
 
+    /**
+     * setter for discard deck
+     *
+     */
+    public void setDiscardDeck(List<CommandCard> deck){
+        this.discardDeck = deck;
+    }
+
+    /**
+     * a method to get the program as {@link CommandCard}
+     *
+     * @return List of commandCards of ArrayList
+     */
+    public List<CommandCard> getProgramAsCommandCards(){
+        ArrayList<CommandCard> output = new ArrayList<>();
+        for(CommandCardField field : program){
+            if(field.getCard() != null){
+                output.add(field.getCard());
+            }
+        }
+        return output;
+    }
+    /**
+     * a method to get the hand as {@link CommandCard}
+     *
+     * @return List of commandCards of ArrayList
+     */
+    public List<CommandCard> getHandAsCommandCards(){
+        ArrayList<CommandCard> output = new ArrayList<>();
+        for(CommandCardField field : cards){
+            output.add(field.getCard());
+        }
+        return output;
+    }
+
+
+
+    /**
+     * sets the program of the player to the given array
+     *
+     * @param array an array of {@link CommandCardField} to be used as the program
+     */
+    public void setProgram(List<CommandCardField> list){
+
+        if (list.size() != NO_REGISTERS){
+            while (NO_REGISTERS - list.size() > 0){
+                list.add(new CommandCardField(this));
+            }
+        }
+        program = list.toArray(new CommandCardField[NO_REGISTERS]);         
+        
+    }
+
+    /**
+     * sets the hand of the player to the given array
+     *
+     * @param array an array of {@link CommandCardField} to be used as the hand
+     */
+    public void setHand(List<CommandCardField> list){
+        if (list.size() != NO_CARDS){
+            while (NO_CARDS - list.size() > 0){
+                list.add(new CommandCardField(this));
+            }
+        }
+        cards = list.toArray(new CommandCardField[NO_CARDS]);
+    }
 
 }
-
