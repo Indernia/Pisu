@@ -408,7 +408,7 @@ public class GameController {
         int currentReg = board.getStep();
         CommandCard topCard = player.drawCard();
         player.setProgramField(currentReg, topCard);
-        executeCommand(player, topCard);
+        executeCommand(player, topCard.command);
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
@@ -435,8 +435,9 @@ public class GameController {
     }
 
     public void die(Player player, Space space){
-        for(int i = 0; i < Player.NO_REGISTERS; i++){
-            player.setProgramField(i, null);
+        for(int i = 0; i < Player.NO_CARDS; i++){
+            player.discardCard(player.getCardField(i).getCard());
+            player.getCardField(i).setCard(null);
         }
         player.setDeathSpace(space);
         player.setSpace(null);
@@ -462,6 +463,8 @@ public class GameController {
 
             }
         player.setHeading(NORTH);
+        player.getCardField(0).setCard(new CommandCard(Command.SPAM));
+        player.getCardField(1).setCard(new CommandCard(Command.SPAM));
         try {
             moveToSpace(player, rebootSpace, player.getHeading());
         } catch (ImpossibleMoveException e) {
@@ -504,8 +507,12 @@ public class GameController {
 
     public void setPlayerDeck(Player player, int size){
         ArrayList<CommandCard> deck = new ArrayList<>();
-        for (int i = 0; i < size; i++){
-            deck.add(generateRandomCommandCard());
+        for (int i = 0; i < size;){
+            CommandCard randomCard = generateRandomCommandCard();
+            if(randomCard.command != Command.SPAM){
+            deck.add(randomCard);
+            i++;
+            } 
         }
         player.setDeck(deck);
 

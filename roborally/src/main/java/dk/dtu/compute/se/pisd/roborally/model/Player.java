@@ -39,7 +39,7 @@ import java.util.Collections;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-public class Player extends Subject {
+public class Player extends Subject{
 
     final public static int NO_REGISTERS = 5;
     final public static int NO_CARDS = 8;
@@ -59,7 +59,7 @@ public class Player extends Subject {
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
 
-
+    
     /**
      * ...
      *
@@ -357,7 +357,7 @@ public class Player extends Subject {
             }
         }
         cards = list.toArray(new CommandCardField[NO_CARDS]);
-
+    }
     public void setDeathSpace(Space deathSpace){
         this.deathSpace = deathSpace;
     }
