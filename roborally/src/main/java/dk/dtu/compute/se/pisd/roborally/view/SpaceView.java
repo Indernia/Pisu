@@ -131,8 +131,11 @@ public class SpaceView extends StackPane implements ViewObserver {
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Antenna")){
                 Circle circle = new Circle(20);
-                circle.setFill(Color.LIGHTGREEN);
+                circle.setFill(Color.DARKGREEN);
                 this.getChildren().add(circle);
+                Circle circle2 = new Circle(5);
+                circle2.setFill(Color.BLACK);
+                this.getChildren().add(circle2);
             }
 
         }

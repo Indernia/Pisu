@@ -22,7 +22,8 @@ int totPlayers = board.getPlayersNumber();
             double px = (double) playerspace.x;
             double ay = (double) space.y;
             double ax = (double) space.x;
-            double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
+            double distance = Math.abs(py-ay) + Math.abs(px-ax);
+            distance+=(Math.atan2(py-ay,px-ax))/(Math.PI*2)+0.5;
 
             board.getPlayerTurn(i).setDistanceToAntenna(distance);
         }
@@ -32,12 +33,13 @@ int totPlayers = board.getPlayersNumber();
                 Player iPlayer = board.getPlayerTurn(i);
                 Player nextPlayer = board.getPlayerTurn(i+1);
                 if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
-                    board.setPlayerTurnOrder(i, nextPlayer);
-                    board.setPlayerTurnOrder(i+1, iPlayer);
+                    if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){                 
+                        board.setPlayerTurnOrder(i, nextPlayer);
+                        board.setPlayerTurnOrder(i+1, iPlayer);
+                    }
                 }
             }
         }
-        board.getPlayerTurnList();
     }
 
     public Antenna(){

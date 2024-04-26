@@ -347,7 +347,7 @@ public class GameController {
      * @return true if there is a wall obstructing the player
      */
     private boolean wallObstructs(Space start, Heading heading) {
-        if (start.getWalls().contains(heading)) {
+        if (start.getWalls().contains(heading) || board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna) {
             return true;
         }
         if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
