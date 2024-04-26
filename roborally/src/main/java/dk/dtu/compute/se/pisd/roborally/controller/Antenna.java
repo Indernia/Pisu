@@ -24,6 +24,7 @@ public class Antenna extends FieldAction {
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
+        System.out.println("DOIes ir get called");
        Board board = gameController.board;
        int totPlayers = board.getPlayersNumber();
         if(board.getStep() == Player.NO_REGISTERS){
@@ -56,6 +57,7 @@ public class Antenna extends FieldAction {
                         if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
                             board.setPlayerTurnOrder(i, nextPlayer);
                             board.setPlayerTurnOrder(i+1, iPlayer);
+                            System.out.println("ERROR IN RR");
                         }
                     }
                 }
