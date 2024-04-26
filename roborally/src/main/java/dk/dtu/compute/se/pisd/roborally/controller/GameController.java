@@ -238,7 +238,8 @@ public class GameController {
         checkForGameEnd();
     }
 
-    public void nextStep(){
+
+    private void nextStep(){
         int step = board.getStep();
         step++;
         if (step < Player.NO_REGISTERS) {
@@ -287,16 +288,19 @@ public class GameController {
 
             switch (command) {
                 case FORWARD:
-                    this.moveForward(player);
+                    moveForward(player);
                     break;
                 case RIGHT:
-                    this.turnRight(player);
+                    turnRight(player);
                     break;
                 case LEFT:
-                    this.turnLeft(player);
+                    turnLeft(player);
                     break;
                 case FAST_FORWARD:
-                    this.fastForward(player);
+                    fastForward(player);
+                    break;
+                case SPAM:
+                    spamDamage(player);
                     break;
                 default:
                     // DO NOTHING (for now)
@@ -400,6 +404,22 @@ public class GameController {
         player.setHeading(nextHeading);
     }
 
+    public void spamDamage(@NotNull Player player){
+        int currentReg = board.getStep();
+        CommandCard topCard = player.drawCard();
+        player.setProgramField(currentReg, topCard);
+        if(topCard.command != Command.OPTION_LEFT_RIGHT){
+        executeCommand(player, topCard.command);
+        } else {
+            double random = Math.random();
+            if(random < 0.5){
+                executeCommand(player,Command.RIGHT);
+            } else {
+                executeCommand(player, Command.LEFT);
+            }
+        }
+    }
+
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
@@ -424,8 +444,9 @@ public class GameController {
     }
 
     public void die(Player player, Space space){
-        for(int i = 0; i < Player.NO_REGISTERS; i++){
-            player.setProgramField(i, null);
+        for(int i = 0; i < Player.NO_CARDS; i++){
+            player.discardCard(player.getCardField(i).getCard());
+            player.getCardField(i).setCard(null);
         }
         player.setDeathSpace(space);
         player.setSpace(null);
@@ -451,6 +472,8 @@ public class GameController {
 
             }
         player.setHeading(NORTH);
+        player.getCardField(0).setCard(new CommandCard(Command.SPAM));
+        player.getCardField(1).setCard(new CommandCard(Command.SPAM));
         try {
             moveToSpace(player, rebootSpace, player.getHeading());
         } catch (ImpossibleMoveException e) {
@@ -493,8 +516,12 @@ public class GameController {
 
     public void setPlayerDeck(Player player, int size){
         ArrayList<CommandCard> deck = new ArrayList<>();
-        for (int i = 0; i < size; i++){
-            deck.add(generateRandomCommandCard());
+        for (int i = 0; i < size;){
+            CommandCard randomCard = generateRandomCommandCard();
+            if(randomCard.command != Command.SPAM){
+            deck.add(randomCard);
+            i++;
+            } 
         }
         player.setDeck(deck);
 

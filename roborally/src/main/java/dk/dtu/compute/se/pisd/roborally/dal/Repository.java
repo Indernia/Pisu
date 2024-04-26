@@ -72,10 +72,10 @@ class Repository implements IRepository {
 
     private static final String PLAYER_DISCARD_DECK = "discardDeck";
 
+
     private static final String PLAYER_HAND = "playerHand";
 
     private static final String PLAYER_PROGRAM = "PlayerProgram";
-
 	private Connector connector;
     
 
@@ -363,6 +363,7 @@ class Repository implements IRepository {
             rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
             rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
             rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
+
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();
