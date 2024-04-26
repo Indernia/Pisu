@@ -23,9 +23,11 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
+
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +58,7 @@ public class GameController {
             current.setSpace(space);
         }
         board.setCounter(board.getCounter() + 1);
-        board.setCurrentPlayer(board.getPlayer((board.getPlayerNumber(current) + 1) % board.getPlayersNumber()));
+        board.setCurrentPlayer(board.getPlayerTurn((board.getPlayerNumber(current) + 1) % board.getPlayersNumber()));
 
         // TODO Assignment V1: method should be implemented by the students:
         // - the current player should be moved to the given space
@@ -75,11 +77,11 @@ public class GameController {
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
-        board.setCurrentPlayer(board.getPlayer(0));
+        board.setCurrentPlayer(board.getPlayerTurn(0));
         board.setStep(0);
 
         for (int i = 0; i < board.getPlayersNumber(); i++) {
-            Player player = board.getPlayer(i);
+            Player player = board.getPlayerTurn(i);
             if (player != null) {
                 for (int j = 0; j < Player.NO_REGISTERS; j++) {
                     CommandCardField field = player.getProgramField(j);
@@ -116,7 +118,7 @@ public class GameController {
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
         board.setPhase(Phase.ACTIVATION);
-        board.setCurrentPlayer(board.getPlayer(0));
+        board.setCurrentPlayer(board.getPlayerTurn(0));
         board.setStep(0);
     }
 
@@ -128,7 +130,7 @@ public class GameController {
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
-                Player player = board.getPlayer(i);
+                Player player = board.getPlayerTurn(i);
                 CommandCardField field = player.getProgramField(register);
                 field.setVisible(true);
             }
@@ -138,7 +140,7 @@ public class GameController {
     /** Makes things invisible */
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
-            Player player = board.getPlayer(i);
+            Player player = board.getPlayerTurn(i);
             for (int j = 0; j < Player.NO_REGISTERS; j++) {
                 CommandCardField field = player.getProgramField(j);
                 field.setVisible(false);
@@ -212,10 +214,10 @@ public class GameController {
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 int numberOfPlayers = board.getPlayersNumber();
                 if (nextPlayerNumber < numberOfPlayers) {
-                    if(board.getPlayer(nextPlayerNumber).getSpace() != null){
-                    board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+                    if(board.getPlayerTurn(nextPlayerNumber).getSpace() != null){
+                    board.setCurrentPlayer(board.getPlayerTurn(nextPlayerNumber));
                     } else for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
-                        Player iPlayer = board.getPlayer(i);
+                        Player iPlayer = board.getPlayerTurn(i);
                         int iPlayerNumber = board.getPlayerNumber(iPlayer);
                         if(iPlayer.getSpace() != null){
                             board.setCurrentPlayer(iPlayer);
@@ -245,15 +247,16 @@ public class GameController {
         if (step < Player.NO_REGISTERS) {
             makeProgramFieldsVisible(step);
             board.setStep(step);
-            board.setCurrentPlayer(board.getPlayer(0));
+            board.setCurrentPlayer(board.getPlayerTurn(0));
         } else {
             for(int i = 0; i < board.getPlayersNumber(); i++){
-                Player player = board.getPlayer(i);
+                Player player = board.getPlayerTurn(i);
                 if(player.getSpace() == null){
                     reboot(player);
                 }
             }
-            startProgrammingPhase();
+            Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            startProgrammingPhase();   
         }
     }
     /**
@@ -344,7 +347,7 @@ public class GameController {
      * @return true if there is a wall obstructing the player
      */
     private boolean wallObstructs(Space start, Heading heading) {
-        if (start.getWalls().contains(heading)) {
+        if (start.getWalls().contains(heading) || board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna) {
             return true;
         }
         if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
@@ -456,13 +459,13 @@ public class GameController {
         Space playerspace = player.getDeathSpace();
         ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
         Space rebootSpace = actionSpaces.get(0);
-        Double prevdistance = 99999.99999;
+        double prevdistance = 99999.99999;
             for(Space actionSpace : actionSpaces){
-                Double py = (double) playerspace.y;
-                Double px = (double) playerspace.x;
-                Double ay = (double) actionSpace.y;
-                Double ax = (double) actionSpace.x;
-                Double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
+                double py = (double) playerspace.y;
+                double px = (double) playerspace.x;
+                double ay = (double) actionSpace.y;
+                double ax = (double) actionSpace.x;
+                double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
 
 
                 if(distance < prevdistance){
@@ -499,7 +502,7 @@ public class GameController {
         Player player;
         for (FieldAction action : actions){
             for (int j = 0; j< board.getPlayersNumber(); j++){
-                player = board.getPlayer(j);
+                player = board.getPlayerTurn(j);
                 if(player.getSpace() != null){
                     for (FieldAction PAction : player.getSpace().getActions()){
                         if (action.getClass().isInstance(PAction)){
@@ -511,6 +514,7 @@ public class GameController {
 
         }
     }
+
 
 
 
@@ -528,6 +532,15 @@ public class GameController {
     }
         
 
-
+    public boolean isSorted(List<Player> list){
+        for(int i = 0; i+1 < list.size(); i++){
+            Player iPlayer = list.get(i);
+            Player nextPlayer = list.get(i+1);
+            if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

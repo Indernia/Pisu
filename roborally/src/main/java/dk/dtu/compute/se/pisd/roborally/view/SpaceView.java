@@ -126,6 +126,21 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    private void drawAntenna(){
+        if (space.getActions().size() != 0){
+            FieldAction action = space.getActions().get(0);
+            if (action.getType().equals("Antenna")){
+                Circle circle = new Circle(20);
+                circle.setFill(Color.DARKGREEN);
+                this.getChildren().add(circle);
+                Circle circle2 = new Circle(5);
+                circle2.setFill(Color.BLACK);
+                this.getChildren().add(circle2);
+            }
+
+        }
+    }
+
     private void updatePlayer() {
 
         Player player = space.getPlayer();
@@ -151,11 +166,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
-        /*
-        if (subject == this.space) {
-            updateCheckpoint();
-        }
-        */
         if (space.getWalls().size() != 0){
             for(Heading wall: space.getWalls()){
                 drawWall(wall);
@@ -177,6 +187,9 @@ public class SpaceView extends StackPane implements ViewObserver {
                     break;
                 case "Reboot":
                     drawReboot();
+                    break;
+                case "Antenna":
+                    drawAntenna();
                     break;
             }
         }

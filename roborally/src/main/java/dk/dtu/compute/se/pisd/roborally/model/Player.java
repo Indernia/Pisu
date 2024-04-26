@@ -58,6 +58,8 @@ public class Player extends Subject{
 
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
+  
+    public double distanceToAntenna = 0;
 
     
     /**
@@ -367,5 +369,12 @@ public class Player extends Subject{
 
     }
 
+    public void setDistanceToAntenna(double distanceToAntenna){
+        this.distanceToAntenna = distanceToAntenna;
+    }
 
+    public double getDistanceToAntenna(){
+        return distanceToAntenna;
+    }
 }
+

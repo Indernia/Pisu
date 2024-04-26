@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import dk.dtu.compute.se.pisd.roborally.controller.*;
 import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
@@ -146,6 +147,8 @@ public class LoadBoard {
             return new Pit();
         } else if (actionTemplate instanceof RebootTemplate) {
             return new Reboot();
+        } else if (actionTemplate instanceof AntennaTemplate) {
+            return new Antenna();
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
@@ -261,6 +264,8 @@ public class LoadBoard {
             return new PitTemplate();
         } else if (action instanceof Reboot) {
             return new RebootTemplate();
+        } else if (action instanceof Antenna) {
+            return new AntennaTemplate();
         }
         // else if ...
         // XXX if new field actions are added, the corresponding templates
