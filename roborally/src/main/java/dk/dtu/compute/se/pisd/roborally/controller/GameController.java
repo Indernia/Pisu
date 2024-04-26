@@ -408,7 +408,16 @@ public class GameController {
         int currentReg = board.getStep();
         CommandCard topCard = player.drawCard();
         player.setProgramField(currentReg, topCard);
+        if(topCard.command != Command.OPTION_LEFT_RIGHT){
         executeCommand(player, topCard.command);
+        } else {
+            double random = Math.random();
+            if(random < 0.5){
+                executeCommand(player,Command.RIGHT);
+            } else {
+                executeCommand(player, Command.LEFT);
+            }
+        }
     }
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
