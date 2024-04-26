@@ -388,15 +388,11 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
-<<<<<<< HEAD
-        DeckTranscoder dt = new DeckTranscoder();
-        String debug = "Debug: \n" + dt.encode(getCurrentPlayer().getDeck());
-=======
+
         DeckTranscoder deckTranscoder = new DeckTranscoder();
         String debug = "Debug: \n " 
             + deckTranscoder.encode(getCurrentPlayer().getDeck()) + " " + getCurrentPlayer().getDeck().size() +"\n " 
             + deckTranscoder.encode(getCurrentPlayer().getDiscardDeck()) + " " + getCurrentPlayer().getDiscardDeck().size();
->>>>>>> b1405ad (Added database saving for deck and discardDeck)
 
         return baseMessage + "\n" + checkpoint + debug;
     }

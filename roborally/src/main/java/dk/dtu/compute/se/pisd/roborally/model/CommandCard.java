@@ -42,7 +42,11 @@ public class CommandCard extends Subject {
      * @return String
      */
     public String getName() {
-        return command.displayName;
+        if (command != null){
+            return command.displayName;
+        } else {
+            return "error";
+        }
     }
 
 }
