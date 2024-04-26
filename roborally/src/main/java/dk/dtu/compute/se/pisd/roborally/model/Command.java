@@ -39,7 +39,8 @@ public enum Command {
     RIGHT("Turn Right"),
     LEFT("Turn Left"),
     FAST_FORWARD("Fast Fwd"),
-    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT);
+    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
+    SPAM("SPAM");
 
     final public String displayName;
 

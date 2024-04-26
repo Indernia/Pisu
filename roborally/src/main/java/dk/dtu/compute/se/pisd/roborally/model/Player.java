@@ -59,6 +59,7 @@ public class Player extends Subject {
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
 
+
     /**
      * ...
      *
@@ -241,6 +242,7 @@ public class Player extends Subject {
         return deck;
     }
 
+
     /**
      * puts a card into a players discardDeck 
      *
@@ -276,6 +278,7 @@ public class Player extends Subject {
         return output;
         
     }
+
 
     /**
      * shuffles the deck and discard deck into one
@@ -363,5 +366,6 @@ public class Player extends Subject {
         return deathSpace;
 
     }
+
 
 }
