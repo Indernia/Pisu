@@ -1,16 +1,44 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import java.util.Arrays;
+
+import org.jetbrains.annotations.NotNull;
+
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Antenna extends FieldAction {
 
+public static void makeTurnOrder(@NotNull GameController gameController,@NotNull Space space){
+Board board = gameController.board;
+int totPlayers = board.getPlayersNumber();
+        for(int i = 0; i < totPlayers; i++){
+            Space playerspace = board.getPlayerTurn(i).getSpace();
+            if(playerspace == null){
+                playerspace = board.getPlayerTurn(i).getDeathSpace();
+            }
+            double py = (double) playerspace.y;
+            double px = (double) playerspace.x;
+            double ay = (double) space.y;
+            double ax = (double) space.x;
+            double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
 
+            board.getPlayerTurn(i).setDistanceToAntenna(distance);
+        }
 
-
+        while(!gameController.isSorted(board.getPlayerTurnList())){
+            for(int i = 0; i+1 < totPlayers; i++){
+                Player iPlayer = board.getPlayerTurn(i);
+                Player nextPlayer = board.getPlayerTurn(i+1);
+                if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
+                    board.setPlayerTurnOrder(i, nextPlayer);
+                    board.setPlayerTurnOrder(i+1, iPlayer);
+                }
+            }
+        }
+        board.getPlayerTurnList();
+    }
 
     public Antenna(){
 
@@ -24,47 +52,6 @@ public class Antenna extends FieldAction {
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
-        System.out.println("DOIes ir get called");
-       Board board = gameController.board;
-       int totPlayers = board.getPlayersNumber();
-        if(board.getStep() == Player.NO_REGISTERS){
-            Player isLastPlayer = null;
-            for(int i = 0; i < totPlayers; i++){
-                if(board.getPlayerTurn(i).getSpace() != null){
-                    isLastPlayer = board.getPlayerTurn(i);
-                }
-            }
-
-            if(board.getCurrentPlayer() == isLastPlayer){
-                for(int i = 0; i < totPlayers; i++){
-                    Space playerspace = board.getPlayerTurn(i).getSpace();
-                    if(playerspace == null){
-                        playerspace = board.getPlayerTurn(i).getDeathSpace();
-                    }
-                    double py = (double) playerspace.y;
-                    double px = (double) playerspace.x;
-                    double ay = (double) space.y;
-                    double ax = (double) space.x;
-                    double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
-
-                    board.getPlayerTurn(i).setDistanceToAntenna(distance);
-                }
-
-                while(!gameController.isSorted(board.getPlayerTurnList())){
-                    for(int i = 0; i+1 < totPlayers; i++){
-                        Player iPlayer = board.getPlayerTurn(i);
-                        Player nextPlayer = board.getPlayerTurn(i+1);
-                        if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
-                            board.setPlayerTurnOrder(i, nextPlayer);
-                            board.setPlayerTurnOrder(i+1, iPlayer);
-                            System.out.println("ERROR IN RR");
-                        }
-                    }
-                }
-            }
-
-
-        }
         return true;
     }
 

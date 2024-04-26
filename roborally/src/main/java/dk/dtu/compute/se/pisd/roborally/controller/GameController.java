@@ -255,7 +255,8 @@ public class GameController {
                     reboot(player);
                 }
             }
-            startProgrammingPhase();
+            Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            startProgrammingPhase();   
         }
     }
     /**
