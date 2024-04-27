@@ -50,7 +50,8 @@ public class DeckTranscoder {
         }
         String string = deck.stream()
             .filter((CommandCard card) -> card != null)
-            .map((CommandCard card) -> this.getCardMap().getOrDefault(card.getName().toString(), "F"))
+            .filter((CommandCard card) -> card.getName() != null)
+            .map((CommandCard card) -> this.getCardMap().getOrDefault(card.getName().toString(), "n"))
             .collect(Collectors.joining());
 
         return string;
@@ -58,7 +59,7 @@ public class DeckTranscoder {
 
 
    public List<CommandCardField> decodeAsField(String string, Player player){
-       if (string == ""){
+       if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCardField>();
        }
        List<String> list = new ArrayList<>(Arrays.asList(string.toUpperCase().split("")));
@@ -70,7 +71,7 @@ public class DeckTranscoder {
    }
 
    public List<CommandCard> decode(String string){
-       if (string == ""){
+       if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCard>();
        }
        List<String> list = new ArrayList<>(Arrays.asList(string.split("")));
