@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.dal;
 
+import dk.dtu.compute.se.pisd.roborally.controller.Antenna;
 import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Command;
@@ -72,10 +73,12 @@ class Repository implements IRepository {
 
     private static final String PLAYER_DISCARD_DECK = "discardDeck";
 
+    private static final String PLAYER_PRIORITY = "priority";	
+
+
     private static final String PLAYER_HAND = "playerHand";
 
     private static final String PLAYER_PROGRAM = "PlayerProgram";
-
 	private Connector connector;
     
 
@@ -305,6 +308,7 @@ class Repository implements IRepository {
             rs.updateString(PLAYER_DISCARD_DECK, dt.encode(player.getDiscardDeck()));
             rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
             rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
+            rs.updateInt(PLAYER_PRIORITY, game.getPlayerNumber(player));
 			rs.insertRow();
 		}
 
@@ -359,6 +363,7 @@ class Repository implements IRepository {
             rs.updateString(PLAYER_DECK, dt.encode(player.getDeck()));
             rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
             rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
+            rs.updateInt(PLAYER_PRIORITY, game.getPlayerNumber(player));
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();

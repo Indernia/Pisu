@@ -1,11 +1,13 @@
 package dk.dtu.compute.se.pisd.roborally.dal;
 
+
 import dk.dtu.compute.se.pisd.roborally.model.Command;
 import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
@@ -80,4 +82,5 @@ public class DeckTranscoder {
            .map((String encodedCard) -> new CommandCard(decodingMap.get(encodedCard)))
            .toList();
    }
+
 }

@@ -39,7 +39,7 @@ import java.util.Collections;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-public class Player extends Subject {
+public class Player extends Subject{
 
     final public static int NO_REGISTERS = 5;
     final public static int NO_CARDS = 8;
@@ -58,7 +58,10 @@ public class Player extends Subject {
 
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
+  
+    public double distanceToAntenna = 0;
 
+    
     /**
      * ...
      *
@@ -241,6 +244,7 @@ public class Player extends Subject {
         return deck;
     }
 
+
     /**
      * puts a card into a players discardDeck 
      *
@@ -276,6 +280,7 @@ public class Player extends Subject {
         return output;
         
     }
+
 
     /**
      * shuffles the deck and discard deck into one
@@ -365,4 +370,12 @@ public class Player extends Subject {
 
     }
 
+    public void setDistanceToAntenna(double distanceToAntenna){
+        this.distanceToAntenna = distanceToAntenna;
+    }
+
+    public double getDistanceToAntenna(){
+        return distanceToAntenna;
+    }
 }
+

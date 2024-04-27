@@ -75,6 +75,9 @@ public class AppController implements Observer {
         boardDialog.setTitle("Board selection");
         boardDialog.setHeaderText("Select the board the game should be played on");
         Optional<String> boardChoice = boardDialog.showAndWait();
+        if(!boardChoice.isPresent()){
+            return;
+        }
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
         dialog.setHeaderText("Select number of players");
@@ -141,6 +144,7 @@ public class AppController implements Observer {
         if (board != null) {
             gameController = new GameController(board);
             roboRally.createBoardView(gameController);
+            Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
         }
     }
 

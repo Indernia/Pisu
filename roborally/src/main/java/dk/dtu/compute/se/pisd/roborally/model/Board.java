@@ -21,18 +21,16 @@
  */
 package dk.dtu.compute.se.pisd.roborally.model;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
-import org.jetbrains.annotations.NotNull;
+import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
+import org.jetbrains.annotations.NotNull;
 
-import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
-import dk.dtu.compute.se.pisd.roborally.controller.TurnGear;
 import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 
 /* ...
@@ -53,6 +51,8 @@ public class Board extends Subject {
     private final Space[][] spaces;
 
     private final List<Player> players = new ArrayList<>();
+
+    public List<Player> playerTurnOrder = new ArrayList<>();
 
     private Player current;
 
@@ -210,6 +210,7 @@ public class Board extends Subject {
     public void addPlayer(@NotNull Player player) {
         if (player.board == this && !players.contains(player)) {
             players.add(player);
+            playerTurnOrder.add(player);
             notifyChange();
         }
     }
@@ -335,6 +336,14 @@ public class Board extends Subject {
      */
     public int getPlayerNumber(@NotNull Player player) {
         if (player.board == this) {
+            return playerTurnOrder.indexOf(player);
+        } else {
+            return -1;
+        }
+    }
+
+        public int getRealPlayerNumber(@NotNull Player player) {
+        if (player.board == this) {
             return players.indexOf(player);
         } else {
             return -1;
@@ -388,6 +397,7 @@ public class Board extends Subject {
         }
         checkpoint += "\n";
 
+        
         DeckTranscoder deckTranscoder = new DeckTranscoder();
         String debug = "Debug: \n " 
             + deckTranscoder.encode(getCurrentPlayer().getDeck()) + " " + getCurrentPlayer().getDeck().size() +"\n " 
@@ -455,4 +465,20 @@ public class Board extends Subject {
         return output;
     }
 
+
+    public void setPlayerTurnOrder(int i, Player player){
+        playerTurnOrder.set(i, player);
+    }
+
+    public Player getPlayerTurn(int i) {
+        if (i >= 0 && i < playerTurnOrder.size()) {
+            return playerTurnOrder.get(i);
+        } else {
+            return null;
+        }
+    }
+    
+    public List<Player> getPlayerTurnList(){
+        return playerTurnOrder;
+    }
 }
