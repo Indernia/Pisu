@@ -360,6 +360,7 @@ public class Player extends Subject{
         }
         cards = list.toArray(new CommandCardField[NO_CARDS]);
     }
+
     public void setDeathSpace(Space deathSpace){
         this.deathSpace = deathSpace;
     }

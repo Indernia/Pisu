@@ -32,6 +32,7 @@ public class DeckTranscoder {
         encodingMap.put("Left OR Right", "C");
 
 
+
         decodingMap.put("F", Command.FORWARD);
         decodingMap.put("R", Command.RIGHT);
         decodingMap.put("L", Command.LEFT);
@@ -51,7 +52,8 @@ public class DeckTranscoder {
         }
         String string = deck.stream()
             .filter((CommandCard card) -> card != null)
-            .map((CommandCard card) -> this.getCardMap().get(card.getName().toString()))
+            .filter((CommandCard card) -> card.getName() != null)
+            .map((CommandCard card) -> this.getCardMap().getOrDefault(card.getName().toString(), "n"))
             .collect(Collectors.joining());
 
         return string;
@@ -59,21 +61,19 @@ public class DeckTranscoder {
 
 
    public List<CommandCardField> decodeAsField(String string, Player player){
-       if (string == ""){
+       if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCardField>();
        }
        List<String> list = new ArrayList<>(Arrays.asList(string.toUpperCase().split("")));
         return list.stream()
            .filter((String encodedCard) -> encodedCard != "")
-           .peek((String encodedCard) -> System.out.println("encoded card: " + encodedCard))
            .map((String encodedCard) -> new CommandCard(decodingMap.get(encodedCard)))
-           .peek((CommandCard card) -> System.out.println("decoded card: " + card.getName()))
            .map((CommandCard card) -> new CommandCardField(player, card))
            .toList();
    }
 
    public List<CommandCard> decode(String string){
-       if (string == ""){
+       if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCard>();
        }
        List<String> list = new ArrayList<>(Arrays.asList(string.split("")));
