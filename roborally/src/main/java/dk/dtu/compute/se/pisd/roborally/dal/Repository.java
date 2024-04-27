@@ -320,7 +320,6 @@ class Repository implements IRepository {
 		while (rs.next()) {
 			int playerId = rs.getInt(PLAYER_PLAYERID);
 			if (i++ == playerId) {
-                System.out.println("Player ID: " + playerId);
 				// TODO this should be more defensive
 				String name = rs.getString(PLAYER_NAME);
 				String colour = rs.getString(PLAYER_COLOUR);
@@ -332,15 +331,12 @@ class Repository implements IRepository {
 				player.setSpace(game.getSpace(x,y));
 				int heading = rs.getInt(PLAYER_HEADING);
 				player.setHeading(Heading.values()[heading]);
-                System.out.println("Before new setters");
                 player.setDeck(new ArrayList<CommandCard>(dt.decode(rs.getString(PLAYER_DECK))));
                 player.setDiscardDeck(new ArrayList<CommandCard> (dt.decode(rs.getString(PLAYER_DISCARD_DECK))));
                 player.setProgram(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_PROGRAM), player)));
                 player.setHand(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_HAND), player)));
-                System.out.println("After new setters");
 			} else {
 				// TODO error handling
-				System.err.println("Game in DB does not have a player with id " + i +"!");
 			}
 		}
 		rs.close();
