@@ -54,6 +54,8 @@ class Repository implements IRepository {
 	private static final String GAME_PHASE = "phase";
 
 	private static final String GAME_STEP = "step";
+
+    private static final String BOARD_NAME = "boardName";
 	
 	private static final String PLAYER_PLAYERID = "playerID";
 	
@@ -103,6 +105,7 @@ class Repository implements IRepository {
 				ps.setNull(2, Types.TINYINT); // game.getPlayerNumber(game.getCurrentPlayer())); is inserted after players!
 				ps.setInt(3, game.getPhase().ordinal());
 				ps.setInt(4, game.getStep());
+                ps.setString(5, game.boardName);
 
 				// If you have a foreign key constraint for current players,
 				// the check would need to be temporarily disabled, since
@@ -123,10 +126,6 @@ class Repository implements IRepository {
 				// statement.close();
 
 				createPlayersInDB(game);
-				/* TODO V4a: this method needs to be implemented first
-				createCardFieldsInDB(game);
-				 */
-
 				// since current player is a foreign key, it can only be
 				// inserted after the players are created, since MySQL does
 				// not have a per transaction validation, but validates on
@@ -181,6 +180,7 @@ class Repository implements IRepository {
 				rs.updateInt(GAME_CURRENTPLAYER, game.getPlayerNumber(game.getCurrentPlayer()));
 				rs.updateInt(GAME_PHASE, game.getPhase().ordinal());
 				rs.updateInt(GAME_STEP, game.getStep());
+                rs.updateString(BOARD_NAME, game.boardName);
 				rs.updateRow();
 			} else {
 				// TODO error handling
@@ -228,7 +228,7 @@ class Repository implements IRepository {
 				// TODO V4b: and we should also store the name of the used game board
 				//      in the database, and load the corresponding board from the
 				//      JSON file. For now, we use the default game board.
-				game = BoardFactory.getInstance().createBoard(null);
+				game = BoardFactory.getInstance().createBoard(rs.getString(BOARD_NAME));
 				if (game == null) {
 					return null;
 				}
@@ -374,7 +374,7 @@ class Repository implements IRepository {
 	}
 
 	private static final String SQL_INSERT_GAME =
-			"INSERT INTO Game(name, currentPlayer, phase, step) VALUES (?, ?, ?, ?)";
+			"INSERT INTO Game(name, currentPlayer, phase, step, boardName) VALUES (?, ?, ?, ?, ?)";
 
 	private PreparedStatement insert_game_stmt = null;
 
