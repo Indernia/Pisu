@@ -115,6 +115,12 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * sets the player spawn to a random space
+     * @param player player to be set
+     * @param board the board
+     * @param i index of player
+     */
     private void setPlayerSpawn(Player player, Board board, int i){
         int randomY = 0;
         int randomX = 0;

@@ -8,8 +8,14 @@ import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
+
 public class Antenna extends FieldAction {
 
+/**
+ * Calculates the distance plus angle between the antenna and all players and sets the turn order list in order of players from least distance to most distance
+ * @param gameController the gamecontroller of the game
+ * @param space the space on which the antenna is
+ */
 public static void makeTurnOrder(@NotNull GameController gameController,@NotNull Space space){
 Board board = gameController.board;
 int totPlayers = board.getPlayersNumber();
