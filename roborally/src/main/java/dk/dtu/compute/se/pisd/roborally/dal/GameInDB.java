@@ -32,12 +32,22 @@ public class GameInDB {
     public final int id;
     public final String name;
 
+    /**
+     * Constructor
+     * @param id the id of the game
+     * @param name the name of the game
+     */
     public GameInDB(int id, String name) {
+
         this.id = id;
         this.name = name;
     }
 
     @Override
+    /**
+     * Returns the id and name of the game
+     * @return the id and name of the game as a string
+     */
     public String toString() {
         return id + ": " + name;
     }

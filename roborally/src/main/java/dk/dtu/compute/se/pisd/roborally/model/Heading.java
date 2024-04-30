@@ -52,7 +52,7 @@ public enum Heading {
     /**
      *
      * @return returns the opposite direction it is given: North => South
-     *@author Alex Lundberg
+     *author Alex Lundberg
      */
     public Heading getOpposite() {
         switch (this) {
