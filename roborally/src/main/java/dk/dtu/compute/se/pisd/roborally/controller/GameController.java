@@ -239,7 +239,7 @@ public class GameController {
         checkForGameEnd();
     }
 
-
+    
     private void nextStep(){
         int step = board.getStep();
         step++;
