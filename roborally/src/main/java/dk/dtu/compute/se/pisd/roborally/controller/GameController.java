@@ -21,15 +21,21 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import dk.dtu.compute.se.pisd.roborally.model.*;
-
-
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
+
+import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Command;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
+import dk.dtu.compute.se.pisd.roborally.model.Heading;
+import dk.dtu.compute.se.pisd.roborally.model.Phase;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.model.Space;
 
 /**
  * ...
@@ -347,11 +353,16 @@ public class GameController {
      * @return true if there is a wall obstructing the player
      */
     private boolean wallObstructs(Space start, Heading heading) {
-        if (start.getWalls().contains(heading) || board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna) {
+        if (start.getWalls().contains(heading)) {
             return true;
         }
         if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
             return true;
+        }
+        if(board.getNeighbour(start, heading).getActions().size() > 0 ){
+            if(board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna){
+                return true;
+            }
         }
         return false;
     }
@@ -482,7 +493,6 @@ public class GameController {
         } catch (ImpossibleMoveException e) {
             e.printStackTrace();
         }
-        player.setDeathSpace(null);
     }
 
 
