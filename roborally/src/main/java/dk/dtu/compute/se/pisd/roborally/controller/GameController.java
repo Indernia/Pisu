@@ -222,15 +222,8 @@ public class GameController {
                 if (nextPlayerNumber < numberOfPlayers) {
                     if(board.getPlayerTurn(nextPlayerNumber).getSpace() != null){
                     board.setCurrentPlayer(board.getPlayerTurn(nextPlayerNumber));
-                    } else for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
-                        Player iPlayer = board.getPlayerTurn(i);
-                        int iPlayerNumber = board.getPlayerNumber(iPlayer);
-                        if(iPlayer.getSpace() != null){
-                            board.setCurrentPlayer(iPlayer);
-                            break;
-                        } else if(iPlayerNumber == numberOfPlayers-1){
-                            nextStep();
-                        }
+                    } else {
+                        skipPlayer(nextPlayerNumber, numberOfPlayers);
                     }
                 } else {
                     nextStep();
@@ -253,7 +246,11 @@ public class GameController {
         if (step < Player.NO_REGISTERS) {
             makeProgramFieldsVisible(step);
             board.setStep(step);
+            if(board.getPlayerTurn(0).getSpace() != null){
             board.setCurrentPlayer(board.getPlayerTurn(0));
+            } else{
+                skipPlayer(board.getPlayerNumber(board.getPlayerTurn(0))+1, board.getPlayersNumber());
+            }
         } else {
             for(int i = 0; i < board.getPlayersNumber(); i++){
                 Player player = board.getPlayerTurn(i);
@@ -263,6 +260,19 @@ public class GameController {
             }
             Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
             startProgrammingPhase();   
+        }
+    }
+
+    private void skipPlayer(int nextPlayerNumber, int numberOfPlayers){
+        for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
+            Player iPlayer = board.getPlayerTurn(i);
+            int iPlayerNumber = board.getPlayerNumber(iPlayer);
+            if(iPlayer.getSpace() != null){
+                board.setCurrentPlayer(iPlayer);
+                break;
+            } else if(iPlayerNumber == numberOfPlayers-1){
+                nextStep();
+            }
         }
     }
     /**
