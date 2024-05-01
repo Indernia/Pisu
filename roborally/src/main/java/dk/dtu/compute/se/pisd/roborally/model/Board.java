@@ -387,7 +387,7 @@ public class Board extends Subject {
      */
 
     public String getStatusMessage() {
-        String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
+        String baseMessage = "Phase = " + getPhase() + ", Player = " + getCurrentPlayer().getName()
                 + ", moves = " + getCounter();
 
         String checkpoint = "Players at checkpoints: \n";
