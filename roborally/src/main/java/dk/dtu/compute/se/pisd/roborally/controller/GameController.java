@@ -300,9 +300,10 @@ public class GameController {
     public void checkForGameEnd() {
         int lastCheckpoint = board.getMaxCheckpointNumber();
 
+
         for (Player player : board.getPlayers()) {
             if (player.getCurrentCheckpoint() == lastCheckpoint) {
-                board.setPhase(Phase.FINISHED);
+                endGame(player);
                 break;
             }
         }
@@ -610,5 +611,19 @@ public class GameController {
         }
         return true;
     }
+
+
+
+/**
+* Sets the game phase to FINISHED
+* Calls winner pop up message
+*
+* @author Julius Sondergaard, s234096
+*/
+public void endGame(Player winner) {
+   board.setPhase(Phase.FINISHED);
+   AppController.showWinnerPopup(winner.getName());
+}
+
 
 }

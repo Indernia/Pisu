@@ -123,6 +123,9 @@ public class AppController implements Observer {
             RepositoryAccess.getRepository().createGameInDB(board);
 
             roboRally.createBoardView(gameController);
+            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
+                Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            }
         }
     }
 
@@ -263,5 +266,19 @@ public class AppController implements Observer {
     public void update(Subject subject) {
         // XXX do nothing for now
     }
+
+    /**
+    * Announces winner
+    *
+    * @author Julius Sondergaard, s234096
+    */
+    static void showWinnerPopup(String winnerName) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        alert.setContentText("Congratulations! " + winnerName + " has won the game!");
+        alert.showAndWait();
+    }
+
 
 }
