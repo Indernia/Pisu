@@ -200,7 +200,6 @@ public class SpaceView extends StackPane implements ViewObserver {
      * draws a wall on the space
      *
      * @param heading the direction of the wall
-     * @return void
      * @author Alex Lundberg
      */
     public void drawWall(Heading heading) {
@@ -232,8 +231,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * draws a gear on the space
      *
-     * @return void
-     * @author Alex Lundberg
+     * author Alex Lundberg
      */
     public void drawGear() {
         TurnGear gear = (TurnGear) space.getActions().get(0);
@@ -262,7 +260,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *The visuals of a checkpoint on a space.
      * Draws a circle with the checkpoint number.
      *
-     * @author Julius Sondergaard, s234096
+     * author Julius Sondergaard, s234096
      */
     private void updateCheckpoint() {
         for (FieldAction action : space.getActions()) {
@@ -282,7 +280,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param gc GraphicsContext for drawing on the canvas.
      * @param checkpointNumber The checkpoint number to draw.
-     * @author Julius Sondergaard, s234096
+     * author Julius Sondergaard, s234096
      */
     private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
         double circleDiameter = Math.min(SPACE_WIDTH, SPACE_HEIGHT) * 0.8;

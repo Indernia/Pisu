@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * 
+ * This class is responsible for listing all the resource files in the classpath.
  * @author s235455
- * 
- * 
  */
 public class ResourceFileLister {
     public List<String> getFiles() {

@@ -13,18 +13,37 @@ public class Checkpoint extends FieldAction {
 
     public int checkpointNumber;
 
+    /**
+     * Constructor
+     * @param checkpointNumber the number of the checkpoint
+     */
     public Checkpoint(int checkpointNumber) {
         this.checkpointNumber = checkpointNumber;
     }
 
+    /**
+     * Default constructor
+     */
     public Checkpoint() {
 
     }
-
+    
+    /**
+     * Returns the checkpoint number
+     * @return the checkpoint number
+     */
     public int getCheckpointNumber() {
         return checkpointNumber;
     }
 
+    /**
+     * Implementation of the checkpoint
+     * determines if the player has landed on the correct checkpoint
+     *  @param gameController the given controller for the current instance
+     * @param space a given space that will have the belt action on it
+     * @return true if the player has landed on the correct checkpoint
+     * @return false if the player has not landed on the correct checkpoint
+     */
     @Override
     public boolean doAction(GameController gameController, Space space) {
         Player player = space.getPlayer();
@@ -37,11 +56,19 @@ public class Checkpoint extends FieldAction {
         return false;
     }
 
+    /**
+     *  gets the special space
+     *  @return type as String
+     */
     @Override
     public String getType() {
         return "Checkpoint";
     }
 
+    /**
+     * Sets the checkpoint number
+     * @param number the number of the checkpoint
+     */
     public void setCheckpointNumber(int number) {
         this.checkpointNumber = number;
     }

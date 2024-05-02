@@ -51,37 +51,6 @@ public class BoardFactory {
         } else {
             board = LoadBoard.loadBoard(name);
         }
-        /*
-         * // add some walls, actions and checkpoints to some spaces
-         * Space space = board.getSpace(0, 0);
-         * space.getWalls().add(Heading.SOUTH);
-         * ConveyorBelt action = new ConveyorBelt();
-         * action.setHeading(Heading.WEST);
-         * space.getActions().add(action);
-         * 
-         * space = board.getSpace(1, 0);
-         * space.getWalls().add(Heading.NORTH);
-         * action = new ConveyorBelt();
-         * action.setHeading(Heading.WEST);
-         * space.getActions().add(action);
-         * 
-         * space = board.getSpace(1, 1);
-         * space.getWalls().add(Heading.WEST);
-         * action = new ConveyorBelt();
-         * action.setHeading(Heading.NORTH);
-         * space.getActions().add(action);
-         * 
-         * space = board.getSpace(5, 5);
-         * space.getWalls().add(Heading.SOUTH);
-         * action = new ConveyorBelt();
-         * action.setHeading(Heading.WEST);
-         * space.getActions().add(action);
-         * 
-         * space = board.getSpace(6, 5);
-         * action = new ConveyorBelt();
-         * action.setHeading(Heading.WEST);
-         * space.getActions().add(action);
-         */
         return board;
     }
 

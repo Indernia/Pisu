@@ -63,10 +63,21 @@ public class AppController implements Observer {
 
     private GameController gameController;
 
+    /**
+     * Constructor for the AppController
+     *
+     * @param roboRally the RoboRally application
+     */
     public AppController(@NotNull RoboRally roboRally) {
         this.roboRally = roboRally;
     }
 
+    /**
+     * Start a new game with a given number of players. The user is asked
+     * to select the number of players and the board to play on. The game
+     * is then started with the selected number of players and the selected
+     * board.
+     */
     public void newGame() {
         ChoiceDialog<String> boardDialog = new ChoiceDialog<>(BOARD_CHOICES.get(0), BOARD_CHOICES);
         boardDialog.setTitle("Board selection");
@@ -165,6 +176,11 @@ public class AppController implements Observer {
 
     }
 
+    /**
+     * Load a game from the database. The user is asked to select the game
+     * to load from the database. The game is then loaded and the game
+     * controller is set up to continue the game.
+     */
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
@@ -209,6 +225,11 @@ public class AppController implements Observer {
         return false;
     }
 
+    /**
+     * Exit the RoboRally application. If there is a game running, the user
+     * is asked whether the game should be saved before exiting the
+     * application.
+     */
     public void exit() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -229,13 +250,16 @@ public class AppController implements Observer {
     }
 
     /**
+     * Returns whether a game is currently running or not.
      * @return boolean
      */
     public boolean isGameRunning() {
         return gameController != null;
     }
 
-    @Override
+    /**
+     * Update the observer, does nothing for now
+     */
     public void update(Subject subject) {
         // XXX do nothing for now
     }
