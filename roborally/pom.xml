@@ -142,6 +142,7 @@
                 <configuration>
                     <show>protected</show>
                     <overview>src/main/java/dk/dtu/compute/se/pisd/overview.html</overview>
+                    <quiet>true</quiet>
                 </configuration>
             </plugin>
         </plugins>

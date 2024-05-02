@@ -48,15 +48,11 @@ int totPlayers = board.getPlayersNumber();
         }
     }
 
-    public Antenna(){
-
-    }
     /**
      * Implementation of the antenna
      * determines the order in which the players play based on distance to the antenna at the start of the programming phase
      *  @param gameController the given controller for the current instance
      * @param space a given space that will have the belt action on it
-     * @author Noah Nissen
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {

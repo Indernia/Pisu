@@ -31,7 +31,6 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-// XXX A3
 public abstract class FieldAction {
 
     /**
@@ -43,6 +42,10 @@ public abstract class FieldAction {
      * @return whether the action was successfully executed
      */
     public abstract boolean doAction(GameController gameController, Space space);
+    /** 
+     * Returns the type of the field action
+     * @return the type of the field action
+     */
     public abstract String getType();
 
 }

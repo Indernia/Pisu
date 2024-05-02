@@ -4,8 +4,16 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
 
+/**
+ * Represents pit action on the board.
+ * When a player lands on a pit space, they die.
+ *  @author Noah Nissen
+ */
 public class Pit extends FieldAction {
 
+    /**
+     * Default constructor
+     */
     public Pit(){
 
     }
@@ -14,7 +22,6 @@ public class Pit extends FieldAction {
      * takes a player and "kills" them.
      *  @param gameController the given controller for the current instance
      * @param space a given space that will have the pit action on it
-     * @author Noah Nissen
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
