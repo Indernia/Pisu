@@ -8,24 +8,17 @@ import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
-/**
- * Represents antenna action on the board.
- * When a player lands on an antenna space, they are sorted based on distance to the antenna.
- * The player closest to the antenna will play first.
- *  @author Noah Nissen
- */
+
 public class Antenna extends FieldAction {
 
-
-    /**
-     * Implementation of the action of an antenna.
-     * determines the order in which the players play based on distance to the antenna at the start of the programming phase
-     *  @param gameController the given controller for the current instance
-     * @param space a given space that will have the belt action on it
-     */
-    public static void makeTurnOrder(@NotNull GameController gameController,@NotNull Space space){
-        Board board = gameController.board;
-        int totPlayers = board.getPlayersNumber();
+/**
+ * Calculates the distance plus angle between the antenna and all players and sets the turn order list in order of players from least distance to most distance
+ * @param gameController the gamecontroller of the game
+ * @param space the space on which the antenna is
+ */
+public static void makeTurnOrder(@NotNull GameController gameController,@NotNull Space space){
+Board board = gameController.board;
+int totPlayers = board.getPlayersNumber();
         for(int i = 0; i < totPlayers; i++){
             Space playerspace = board.getPlayerTurn(i).getSpace();
             if(playerspace == null){

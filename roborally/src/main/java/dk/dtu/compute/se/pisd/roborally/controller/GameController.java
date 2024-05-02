@@ -21,15 +21,21 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import dk.dtu.compute.se.pisd.roborally.model.*;
-
-
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.NORTH;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
+
+import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Command;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
+import dk.dtu.compute.se.pisd.roborally.model.Heading;
+import dk.dtu.compute.se.pisd.roborally.model.Phase;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.model.Space;
 
 /**
  * ...
@@ -229,15 +235,8 @@ public class GameController {
                 if (nextPlayerNumber < numberOfPlayers) {
                     if(board.getPlayerTurn(nextPlayerNumber).getSpace() != null){
                     board.setCurrentPlayer(board.getPlayerTurn(nextPlayerNumber));
-                    } else for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
-                        Player iPlayer = board.getPlayerTurn(i);
-                        int iPlayerNumber = board.getPlayerNumber(iPlayer);
-                        if(iPlayer.getSpace() != null){
-                            board.setCurrentPlayer(iPlayer);
-                            break;
-                        } else if(iPlayerNumber == numberOfPlayers-1){
-                            nextStep();
-                        }
+                    } else {
+                        skipPlayer(nextPlayerNumber, numberOfPlayers);
                     }
                 } else {
                     nextStep();
@@ -253,14 +252,18 @@ public class GameController {
         checkForGameEnd();
     }
 
-
+    
     private void nextStep(){
         int step = board.getStep();
         step++;
         if (step < Player.NO_REGISTERS) {
             makeProgramFieldsVisible(step);
             board.setStep(step);
+            if(board.getPlayerTurn(0).getSpace() != null){
             board.setCurrentPlayer(board.getPlayerTurn(0));
+            } else{
+                skipPlayer(board.getPlayerNumber(board.getPlayerTurn(0))+1, board.getPlayersNumber());
+            }
         } else {
             for(int i = 0; i < board.getPlayersNumber(); i++){
                 Player player = board.getPlayerTurn(i);
@@ -268,8 +271,23 @@ public class GameController {
                     reboot(player);
                 }
             }
+            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
             Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            }
             startProgrammingPhase();   
+        }
+    }
+
+    private void skipPlayer(int nextPlayerNumber, int numberOfPlayers){
+        for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
+            Player iPlayer = board.getPlayerTurn(i);
+            int iPlayerNumber = board.getPlayerNumber(iPlayer);
+            if(iPlayer.getSpace() != null){
+                board.setCurrentPlayer(iPlayer);
+                break;
+            } else if(iPlayerNumber == numberOfPlayers-1){
+                nextStep();
+            }
         }
     }
     /**
@@ -359,11 +377,16 @@ public class GameController {
      * @return true if there is a wall obstructing the player
      */
     private boolean wallObstructs(Space start, Heading heading) {
-        if (start.getWalls().contains(heading) || board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna) {
+        if (start.getWalls().contains(heading)) {
             return true;
         }
         if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
             return true;
+        }
+        if(board.getNeighbour(start, heading).getActions().size() > 0 ){
+            if(board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna){
+                return true;
+            }
         }
         return false;
     }
@@ -515,7 +538,6 @@ public class GameController {
         } catch (ImpossibleMoveException e) {
             e.printStackTrace();
         }
-        player.setDeathSpace(null);
     }
 
 

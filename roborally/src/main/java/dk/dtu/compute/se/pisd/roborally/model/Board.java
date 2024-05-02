@@ -399,8 +399,8 @@ public class Board extends Subject {
      * @return String the text to display
      */
     public String getStatusMessage() {
-        String baseMessage = "Phase = " + getPhase() + "Player = " + getCurrentPlayer().getName()
-                + ", moves = " + getCounter();
+        String baseMessage = "Phase = " + getPhase() + ",  Player = " + getCurrentPlayer().getName()
+                + ",  moves = " + getCounter() + ",  Turn order = " + getPlayerTurnOrderString();
 
         String checkpoint = "Players at checkpoints: \n";
 
@@ -418,6 +418,21 @@ public class Board extends Subject {
         return baseMessage + "\n" + checkpoint + debug;
     }
 
+    /**
+     * Makes a string corresponding to the order in which the players play their turn
+     * @return
+     */
+    public String getPlayerTurnOrderString(){
+        String turnOrder = "";
+        for(int i =0; i < playerTurnOrder.size(); i++){
+            if(i != playerTurnOrder.size() - 1){
+            turnOrder += " P" + (getRealPlayerNumber(playerTurnOrder.get(i)) + 1) + ",";
+            } else {
+                turnOrder += " P" + (getRealPlayerNumber(playerTurnOrder.get(i)) + 1);
+            }
+        }
+        return turnOrder;
+    }
 
     /**
     * Filters the actions in the board spaces by the specified subclass of {@link FieldAction}.

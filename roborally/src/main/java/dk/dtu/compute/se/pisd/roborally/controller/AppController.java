@@ -21,30 +21,27 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import dk.dtu.compute.se.pisd.roborally.fileaccess.ResourceFileLister;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.jetbrains.annotations.NotNull;
+
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
-
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.dal.GameInDB;
 import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
-
+import dk.dtu.compute.se.pisd.roborally.fileaccess.ResourceFileLister;
+import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.roborally.model.Space;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * ...
@@ -116,7 +113,7 @@ public class AppController implements Observer {
                 board.addPlayer(player);
                 // Initializing player deck
                 gameController.setPlayerDeck(player, 20);
-                player.setSpace(board.getSpace(i % board.width, i));
+                setPlayerSpawn(player, board, i);
             }
 
             // XXX: V2
@@ -130,11 +127,47 @@ public class AppController implements Observer {
     }
 
     /**
-     * Start a new game with a given number of players. The user is asked
-     * to select the number of players and the board to play on. The game
-     * is then started with the selected number of players and the selected
-     * board.
+     * sets the player spawn to a random space
+     * @param player player to be set
+     * @param board the board
+     * @param i index of player
      */
+    private void setPlayerSpawn(Player player, Board board, int i){
+        int randomY = 0;
+        int randomX = 0;
+        int count = 0;
+        Space randomSpace = board.getSpace(randomX, randomY);
+        boolean playerIsAssigned = false;
+        while(!playerIsAssigned){
+            randomY = (int) ((int) board.height*Math.random());
+            randomX = (int) ((int) board.width*Math.random());
+            randomSpace = board.getSpace(randomX, randomY);
+            count++;
+        if(count > 20){
+            Space defaultspace = board.getSpace(i % board.width, i);
+            if(defaultspace.getPlayer() != null){
+                player.setSpace(defaultspace);
+            } else{
+                throw new IllegalStateException();
+            }
+            playerIsAssigned = true;
+        }
+        if(randomSpace.getPlayer() != null){
+            continue;
+        }
+        if(board.getSpaceByActionSubClass(Antenna.class).contains(randomSpace)){
+            continue;
+        }
+        if(board.getSpaceByActionSubClass(Pit.class).contains(randomSpace)){
+            continue;
+        }
+        if(board.getSpaceByActionSubClass(Checkpoint.class).contains(randomSpace)){
+            continue;
+        }
+        player.setSpace(randomSpace);
+        playerIsAssigned = true;
+    }
+    }
     public void saveGame() {
 
         if (gameController != null && gameController.board.getGameId() != null) {
