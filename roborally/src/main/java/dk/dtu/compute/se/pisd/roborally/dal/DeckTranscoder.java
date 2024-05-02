@@ -39,6 +39,8 @@ public class DeckTranscoder {
         encodingMap.put("Fast Fwd", "D");
         // C for choice
         encodingMap.put("Left OR Right", "C");
+        //S for SPAM
+        encodingMap.put("SPAM", "S");
 
 
 
@@ -47,6 +49,7 @@ public class DeckTranscoder {
         decodingMap.put("L", Command.LEFT);
         decodingMap.put("D", Command.FAST_FORWARD);
         decodingMap.put("C", Command.OPTION_LEFT_RIGHT);
+        decodingMap.put("S", Command.SPAM);
     }
 
 
