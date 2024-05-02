@@ -269,7 +269,7 @@ public class AppController implements Observer {
     /**
     * Announces winner
     *
-    * 
+    * @param winnerName name of the winning player
     */
     static void showWinnerPopup(String winnerName) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -281,7 +281,7 @@ public class AppController implements Observer {
 
     /**
      * Makes a new alert that pops up on the players screen telling them to fill all registers with cards.
-     * @param player
+     * @param player the player that has empty registers
      */
     public static void missingCard(String player){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
