@@ -57,7 +57,7 @@ public class AppController implements Observer {
 
     final private List<String> BOARD_CHOICES = boardList;
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
-    final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
+    final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "purple", "magenta");
 
     final private RoboRally roboRally;
 
@@ -279,5 +279,12 @@ public class AppController implements Observer {
         alert.showAndWait();
     }
 
+    public static void missingCard(String player){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Fill all registers");
+        alert.setHeaderText(null);
+        alert.setContentText(player + " has empty registers fill all before continuing");
+        alert.showAndWait();
+    }
 
 }
