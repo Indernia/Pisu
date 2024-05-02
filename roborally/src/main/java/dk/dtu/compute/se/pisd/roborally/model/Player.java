@@ -59,6 +59,7 @@ public class Player extends Subject{
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
   
+    public int priority = 0;
     public double distanceToAntenna = 0;
 
     
@@ -412,6 +413,14 @@ public class Player extends Subject{
      */
     public double getDistanceToAntenna(){
         return distanceToAntenna;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+    
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
 
