@@ -119,13 +119,13 @@ public class AppController implements Observer {
             // XXX: V2
             board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
-
+            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
+            Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            }
+            
             RepositoryAccess.getRepository().createGameInDB(board);
 
             roboRally.createBoardView(gameController);
-            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
-                Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
-            }
         }
     }
 
@@ -202,7 +202,6 @@ public class AppController implements Observer {
         if (board != null) {
             gameController = new GameController(board);
             roboRally.createBoardView(gameController);
-            Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
         }
     }
 
