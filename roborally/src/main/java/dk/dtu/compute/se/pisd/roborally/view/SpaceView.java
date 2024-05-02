@@ -43,6 +43,8 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * ...
@@ -92,12 +94,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Belt")){
-                Polygon arrow = new Polygon(0.0, 0.0,
-                        15.0, 30.0,
-                        30.0, 0.0);
-                arrow.setFill(Color.DARKGREY);
-                arrow.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
-                this.getChildren().add(arrow);
+                ImageView belt = new ImageView(new Image(getClass().getResourceAsStream("/images/group1.png")));
+                belt.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
+                this.getChildren().add(belt);
             }
 
         }
@@ -166,11 +165,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
-        if (space.getWalls().size() != 0){
-            for(Heading wall: space.getWalls()){
-                drawWall(wall);
-            }
-        }
         if (space.getActions().size() != 0){
             switch (space.getActions().get(0).getType()){
                 case "gear":
@@ -191,6 +185,11 @@ public class SpaceView extends StackPane implements ViewObserver {
                 case "Antenna":
                     drawAntenna();
                     break;
+            }
+        }
+        if (space.getWalls().size() != 0){
+            for(Heading wall: space.getWalls()){
+                drawWall(wall);
             }
         }
         updatePlayer();
