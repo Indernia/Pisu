@@ -279,7 +279,7 @@ public class GameController {
     }
     /**
      * Checks if the game should end if a player reaches the last checkpoint.
-     * Sets the game phase to FINISHED if it's meets the above criteria.
+     * Sets the game phase to FINISHED if it's meets the above criteria by calling on endGame method
      * This method is called after executeNextStep
      *
      * @author Julius Sondergaard, s234096
@@ -289,10 +289,29 @@ public class GameController {
 
         for (Player player : board.getPlayers()) {
             if (player.getCurrentCheckpoint() == lastCheckpoint) {
-                board.setPhase(Phase.FINISHED);
+                endGame(player);
                 break;
             }
         }
+    }
+
+    /**
+     * Sets the game phase to FINISHED
+     * Calls winner pop up message splitting them up in 3 pieces to make them more testable
+     *
+     * @author Julius Sondergaard, s234096
+     */
+    public void endGame(Player winner) {
+        updateGameStateToFinished();
+        showWinnerPopup(winner);
+    }
+
+    public void updateGameStateToFinished() {
+        board.setPhase(Phase.FINISHED);
+    }
+
+    public void showWinnerPopup(Player winner) {
+        AppController.showWinnerPopup(winner.getName());
     }
 
 
