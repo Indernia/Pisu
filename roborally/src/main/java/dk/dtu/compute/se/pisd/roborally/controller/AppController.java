@@ -274,7 +274,7 @@ public class AppController implements Observer {
     */
     static void showWinnerPopup(String winnerName) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Game Over");
+        alert.setTitle("Game WINNER!!!!!");
         alert.setHeaderText(null);
         alert.setContentText("Congratulations! " + winnerName + " has won the game!");
         alert.showAndWait();
