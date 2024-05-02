@@ -258,7 +258,9 @@ public class GameController {
                     reboot(player);
                 }
             }
+            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
             Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            }
             startProgrammingPhase();   
         }
     }
