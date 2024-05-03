@@ -493,4 +493,29 @@ class GameControllerTest {
         assertEquals(board.getSpace(expectedX, expectedY), player.getSpace(), "Player should be at the correct final space.");
         assertEquals(expectedFinalHeading, player.getHeading(), "Player should have the correct final heading.");
     }
+
+    /**
+     * Test pit and reboot
+     *
+     */
+    @Test
+    void testPlayerRebootAfterPit() {
+        Board board = gameController.board;
+        Player player = board.getPlayer(0);
+        Space pitSpace = board.getSpace(1, 1);
+        pitSpace.getActions().add(new Pit());
+
+        Space rebootSpace = board.getSpace(2, 1);
+        rebootSpace.getActions().add(new Reboot());
+
+        player.setSpace(pitSpace);
+        player.setDeathSpace(rebootSpace);
+
+        pitSpace.getActions().get(0).doAction(gameController, pitSpace);
+        gameController.reboot(player);
+
+        assertEquals(rebootSpace, player.getSpace());
+        assertEquals(Heading.NORTH, player.getHeading());
+    }
+
 }
