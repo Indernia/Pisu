@@ -59,20 +59,26 @@ public class Player extends Subject{
     private List<CommandCard> deck;
     private List<CommandCard> discardDeck;
   
+    public int priority = 0;
     public double distanceToAntenna = 0;
 
     
-    /**
-     * ...
-     *
-     * @author Julius Sondergaard, s234096
-     *
-     */
     private int currentCheckpoint;
 
+    /**
+     * gets the current checkpoint of the player
+     *
+     * @return int of the current checkpoint
+     */
     public int getCurrentCheckpoint() {
         return currentCheckpoint;
     }
+
+    /**
+     * sets the current checkpoint of the player
+     *
+     * @param currentCheckpoint as int
+     */
     public void setCurrentCheckpoint(int currentCheckpoint) {
         this.currentCheckpoint = currentCheckpoint;
     }
@@ -80,9 +86,9 @@ public class Player extends Subject{
     /**
      * constructor for player, needs board, color and name
      * 
-     * @param board
-     * @param color
-     * @param name
+     * @param board board the player is on
+     * @param color color of the player 
+     * @param name  name of the player
      */
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
@@ -118,7 +124,7 @@ public class Player extends Subject{
     /**
      * Sets the name of the player
      * 
-     * @param name
+     * @param name the name of the player
      */
     public void setName(String name) {
         if (name != null && !name.equals(this.name)) {
@@ -143,7 +149,7 @@ public class Player extends Subject{
     /**
      * Sets the color of the player
      * 
-     * @param color
+     * @param color the color of the player
      */
     public void setColor(String color) {
         this.color = color;
@@ -165,7 +171,7 @@ public class Player extends Subject{
     /**
      * Sets the space the player is on
      * 
-     * @param space
+     * @param space the space the player is on
      */
     public void setSpace(Space space) {
         Space oldSpace = this.space;
@@ -194,7 +200,7 @@ public class Player extends Subject{
     /**
      * Sets the heading of the player
      * 
-     * @param heading
+     * @param heading the heading of the player
      */
     public void setHeading(@NotNull Heading heading) {
         if (heading != this.heading) {
@@ -207,30 +213,39 @@ public class Player extends Subject{
     }
 
     /**
-     * 
-     * @param i
-     * @return
+     * Returns the program of the player at a given index
+     *
+     * @param i index of the program field
+     * @return {@link CommandCardField} 
      */
     public CommandCardField getProgramField(int i) {
         return program[i];
     }
 
+    /**
+     * sets the program field to the given card
+     *
+     * @param i index of the program field
+     * @param card the card to be set
+     */
     public void setProgramField(int i,CommandCard card) {
         program[i].setCard(card);
     }
 
     /**
-     * @param i
-     * @return CommandCardField
+     * Returns the hand of the player at a given index
+     *
+     * @param i index of the hand field
+     * @return {@link CommandCardField}
      */
     public CommandCardField getCardField(int i) {
         return cards[i];
     }
 
     /**
-     * sets the deck for the player to the given {@link com.sun.tools.javac.util.List}
+     * sets the deck for the player to the given deck
      *
-     * @param deck a {@link com.sun.tools.javac.util.List} of {@link CommandCard}s to use as the player deck
+     * @param deck a list of {@link CommandCard}s to use as the player deck
      */
     public void setDeck (List<CommandCard> deck){
         this.deck = deck;
@@ -238,6 +253,7 @@ public class Player extends Subject{
 
 
     /**
+     * gets the deck of the player
      * @return the deck of the player
      */
     public List<CommandCard> getDeck(){
@@ -297,6 +313,7 @@ public class Player extends Subject{
     /**
      * setter for discard deck
      *
+     * @param deck a list of {@link CommandCard}
      */
     public void setDiscardDeck(List<CommandCard> deck){
         this.discardDeck = deck;
@@ -334,7 +351,7 @@ public class Player extends Subject{
     /**
      * sets the program of the player to the given array
      *
-     * @param array an array of {@link CommandCardField} to be used as the program
+     * @param list  list  of {@link CommandCardField} to be used as the program
      */
     public void setProgram(List<CommandCardField> list){
 
@@ -350,7 +367,7 @@ public class Player extends Subject{
     /**
      * sets the hand of the player to the given array
      *
-     * @param array an array of {@link CommandCardField} to be used as the hand
+     * @param list an array of {@link CommandCardField} to be used as the hand
      */
     public void setHand(List<CommandCardField> list){
         if (list.size() != NO_CARDS){
@@ -361,21 +378,49 @@ public class Player extends Subject{
         cards = list.toArray(new CommandCardField[NO_CARDS]);
     }
 
+    /**
+     * sets the space the player dies on
+     *
+     * @param deathSpace the space the player dies on
+     */
     public void setDeathSpace(Space deathSpace){
         this.deathSpace = deathSpace;
     }
 
+    /**
+     * gets the space the player dies on
+     *
+     * @return the space the player dies on
+     */
     public Space getDeathSpace(){
         return deathSpace;
 
     }
 
+    /**
+     * sets the distance to the antenna
+     *
+     * @param distanceToAntenna the distance to the antenna
+     */
     public void setDistanceToAntenna(double distanceToAntenna){
         this.distanceToAntenna = distanceToAntenna;
     }
 
+    /**
+     * gets the distance to the antenna
+     *
+     * @return the distance to the antenna
+     */
     public double getDistanceToAntenna(){
         return distanceToAntenna;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+    
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
 

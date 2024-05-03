@@ -51,11 +51,21 @@ public class RoboRally extends Application {
 
     // private AppController appController;
 
+    /**
+     * The main method to start the roborally application.
+     *
+     * @throws Exception
+     */
     @Override
     public void init() throws Exception {
         super.init();
     }
 
+    /**
+     * The start method to start the roborally application.
+     *
+     * @param primaryStage the primary stage for the application
+     */
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -83,6 +93,11 @@ public class RoboRally extends Application {
         stage.show();
     }
 
+    /**
+     * Create the view for the board of the given game controller.
+     *
+     * @param gameController the game controller for which the board view should be created
+     */
     public void createBoardView(GameController gameController) {
         // if present, remove old BoardView
         boardRoot.getChildren().clear();
@@ -96,6 +111,11 @@ public class RoboRally extends Application {
         stage.sizeToScene();
     }
 
+    /**
+     * The stop method to stop the roborally application.
+     *
+     * @throws Exception
+     */
     @Override
     public void stop() throws Exception {
         super.stop();
@@ -106,6 +126,11 @@ public class RoboRally extends Application {
         // so that the AppController can take care of that.
     }
 
+    /**
+     * The main method to start the roborally application.
+     *
+     * @param args the arguments for the application
+     */
     public static void main(String[] args) {
         launch(args);
     }

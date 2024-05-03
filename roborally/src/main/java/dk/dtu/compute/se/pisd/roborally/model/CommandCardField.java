@@ -37,12 +37,21 @@ public class CommandCardField extends Subject {
 
     private boolean visible;
 
+    /**
+     * Constructor
+     * @param player the player of the card
+     */
     public CommandCardField(Player player) {
         this.player = player;
         this.card = null;
         this.visible = true;
     }
 
+    /**
+     * Constructor
+     * @param player the player of the card
+     * @param card the card of the player
+     */
     public CommandCardField(Player player, CommandCard card) {
         this.player = player;
         this.card = card;
@@ -69,10 +78,18 @@ public class CommandCardField extends Subject {
         }
     }
 
+    /**
+     * checks if the card is visible
+     * @return true if the card is visible
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     * sets the card to be visible
+     * @param visible true if the card is visible false if the card is not visible
+     */
     public void setVisible(boolean visible) {
         if (visible != this.visible) {
             this.visible = visible;

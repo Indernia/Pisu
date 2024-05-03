@@ -53,6 +53,10 @@ public class BoardView extends VBox implements ViewObserver {
 
     private SpaceEventHandler spaceEventHandler;
 
+    /**
+     * Constructor
+     * @param gameController the game controller
+     */
     public BoardView(@NotNull GameController gameController) {
         board = gameController.board;
 

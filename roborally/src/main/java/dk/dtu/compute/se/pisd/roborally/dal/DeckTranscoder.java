@@ -13,11 +13,20 @@ import java.util.ArrayList;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
 
+/**
+ * This class is responsible for encoding and decoding the deck of command cards.
+ * It is used to convert the deck of command cards to a string and vice versa.
+ *
+ * @author Alex Lundberg, s235442
+ */
 public class DeckTranscoder {
 
     private Map<String, String> encodingMap = new HashMap<>();
     private Map<String, Command> decodingMap = new HashMap<>();
     
+    /**
+     * Default constructor
+     */
     public DeckTranscoder(){
         //String values are found in Command enum
         // F for forward
@@ -30,6 +39,8 @@ public class DeckTranscoder {
         encodingMap.put("Fast Fwd", "D");
         // C for choice
         encodingMap.put("Left OR Right", "C");
+        //S for SPAM
+        encodingMap.put("SPAM", "S");
 
 
 
@@ -38,14 +49,24 @@ public class DeckTranscoder {
         decodingMap.put("L", Command.LEFT);
         decodingMap.put("D", Command.FAST_FORWARD);
         decodingMap.put("C", Command.OPTION_LEFT_RIGHT);
+        decodingMap.put("S", Command.SPAM);
     }
 
 
 
+    /**
+     * Returns the encoding map
+     * @return encodingMap
+     */
     public Map<String, String> getCardMap(){
         return this.encodingMap;
     }
 
+    /**
+     * Encodes a list of command cards to a string
+     * @param deck   the list of command cards to encode
+     * @return the encoded string
+     */
     public String encode(List<CommandCard> deck) {
         if (deck.size() == 0){
             return ""; 
@@ -60,6 +81,12 @@ public class DeckTranscoder {
     }
 
 
+    /**
+     * Encodes a list of command cards to a string
+     * @param string the string to encode
+     * @param player the player to assign the command cards to
+     * @return a list of {@link CommandCardField}
+     */
    public List<CommandCardField> decodeAsField(String string, Player player){
        if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCardField>();
@@ -72,6 +99,11 @@ public class DeckTranscoder {
            .toList();
    }
 
+   /**
+    * Decodes a string to a list of command cards
+    * @param string the string to decode
+    * @return the list of {@link CommandCard}s
+    */
    public List<CommandCard> decode(String string){
        if (string == "" || string.isEmpty()){
            return new ArrayList<CommandCard>();

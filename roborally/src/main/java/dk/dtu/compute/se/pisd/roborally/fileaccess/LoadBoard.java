@@ -56,6 +56,13 @@ public class LoadBoard {
     private static final String DEFAULTBOARD = "defaultboard";
     private static final String JSON_EXT = "json";
 
+    /**
+     * Load a board from a JSON file with the given name. If the name is null, the
+     * default board is loaded.
+     *
+     * @param boardname the name of the board to be loaded
+     * @return the board loaded from the file
+     */
     public static Board loadBoard(String boardname) {
         if (boardname == null) {
             boardname = DEFAULTBOARD;
@@ -164,6 +171,12 @@ public class LoadBoard {
     // JSON file, if need should be. This might make it easier to
     // create a first version fof some JSON file of a board.
 
+    /**
+     * Save a board to a JSON file with the given name.
+     *
+     * @param board the board to be saved
+     * @param name  the name of the file to which the board should be saved
+     */
     public static void saveBoard(Board board, String name) {
         BoardTemplate template = convertToTemplate(board);
         template.width = board.width;

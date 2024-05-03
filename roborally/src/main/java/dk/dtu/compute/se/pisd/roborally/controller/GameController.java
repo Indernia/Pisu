@@ -47,6 +47,10 @@ public class GameController {
 
     final public Board board;
 
+    /**
+     * Constructor for the GameController
+     * @param board the board that the gamecontroller is controlling
+     */
     public GameController(@NotNull Board board) {
         this.board = board;
     }
@@ -119,8 +123,20 @@ public class GameController {
         return new CommandCard(commands[random]);
     }
 
-    /** Activated when everyone is done programming */
+    /**
+     * Is called at the end of the program
+     * Finishes the programming phase
+     */
     public void finishProgrammingPhase() {
+        for(int i = 0; i < board.getPlayersNumber(); i++){
+            Player iPlayer = board.getPlayer(i);
+            for(int j = 0; j < 5; j++){
+                if(iPlayer.getProgramField(j).getCard() == null){
+                    AppController.missingCard("Player " + (board.getRealPlayerNumber(iPlayer)+1));
+                    return;
+                }
+            }
+        }
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
         board.setPhase(Phase.ACTIVATION);
@@ -162,13 +178,17 @@ public class GameController {
         continuePrograms();
     }
 
-    /** Sets the mode of stepmode to true, and continues the program */
+    /**
+     * Sets stepmode true, and continues to do the whole program
+     */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    /** Continues the program */
+    /**
+     * Continues the program
+     */
     private void continuePrograms() {
         do {
             executeNextStep(null);
@@ -191,8 +211,10 @@ public class GameController {
     }
 
     /**
-     * 
-     * Executes the next step, activated by the press of a button in the gui and checks for special actions on current players space
+     * Executes the next step
+     * most of the program is executed here
+     *
+     * @param option
      */
     private void executeNextStep(Command option) {
         Player currentPlayer = board.getCurrentPlayer();
@@ -282,10 +304,11 @@ public class GameController {
      * Sets the game phase to FINISHED if it's meets the above criteria by calling on endGame method
      * This method is called after executeNextStep
      *
-     * @author Julius Sondergaard, s234096
+     * author Julius Sondergaard, s234096
      */
     public void checkForGameEnd() {
         int lastCheckpoint = board.getMaxCheckpointNumber();
+
 
         for (Player player : board.getPlayers()) {
             if (player.getCurrentCheckpoint() == lastCheckpoint) {
@@ -354,7 +377,6 @@ public class GameController {
      * 
      * @param player
      */
-
     public void moveForward(@NotNull Player player) {
         Space space = player.getSpace();
         if (space != null) {
@@ -398,6 +420,14 @@ public class GameController {
         return false;
     }
 
+    /**
+     * Moves the player to a new space
+     * 
+     * @param player player to move
+     * @param space space to move to
+     * @param heading heading to move in
+     * @throws ImpossibleMoveException
+     */
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
@@ -430,7 +460,7 @@ public class GameController {
     /**
      * Turns the heading towards the right from the perspective of the robot
      * 
-     * @param player
+     * @param player player to turn
      */
     public void turnRight(@NotNull Player player) {
         Heading heading = player.getHeading();
@@ -441,7 +471,7 @@ public class GameController {
     /**
      * Turns the heading towards the left from the perspective of the robot
      * 
-     * @param player
+     * @param player player to turn
      */
     public void turnLeft(@NotNull Player player) {
         Heading heading = player.getHeading();
@@ -449,9 +479,14 @@ public class GameController {
         player.setHeading(nextHeading);
     }
 
+    /**
+     * Spam damage card, making the player play the top card of their deck
+     * @param player player that is playing the spam card
+     */
     public void spamDamage(@NotNull Player player){
         int currentReg = board.getStep();
         CommandCard topCard = player.drawCard();
+        player.discardCard(player.getCardField(currentReg).getCard());
         player.setProgramField(currentReg, topCard);
         if(topCard.command != Command.OPTION_LEFT_RIGHT){
         executeCommand(player, topCard.command);
@@ -465,6 +500,14 @@ public class GameController {
         }
     }
 
+
+    /**
+     * Moves a card from one field to another
+     * 
+     * @param source source field
+     * @param target target field
+     * @return true if the move was successful
+     */
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
@@ -477,17 +520,13 @@ public class GameController {
         }
     }
 
+
     /**
-     * A method called when no corresponding controller operation is implemented
-     * yet. This
-     * should eventually be removed.
+     * Kills the player and moves them to the death space
+     * 
+     * @param player player to kill
+     * @param space space to move to
      */
-
-    public void notImplemented() {
-        // XXX just for now to indicate that the actual method is not yet implemented
-        assert false;
-    }
-
     public void die(Player player, Space space){
         for(int i = 0; i < Player.NO_CARDS; i++){
             player.discardCard(player.getCardField(i).getCard());
@@ -497,6 +536,11 @@ public class GameController {
         player.setSpace(null);
     }
 
+    /**
+     * Reboots the player and moves them to the nearest reboot space
+     * 
+     * @param player player to reboot
+     */
     public void reboot(Player player){
         Space playerspace = player.getDeathSpace();
         ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
@@ -531,6 +575,7 @@ public class GameController {
      * Method activates all fields with players on them, in the order given in the roborally rules.
      *
      * @return void
+     * author Alex Lundberg, s235442
      */
     public void ActivateFieldActions(){
         ArrayList<FieldAction> actions = new ArrayList<FieldAction> ();
@@ -559,6 +604,12 @@ public class GameController {
 
 
 
+    /**
+     * Sets the player deck
+     *
+     * @param player player to set the deck for
+     * @param size   size of the deck
+     */
     public void setPlayerDeck(Player player, int size){
         ArrayList<CommandCard> deck = new ArrayList<>();
         for (int i = 0; i < size;){
@@ -573,6 +624,12 @@ public class GameController {
     }
         
 
+    /**
+     * Checks if the players are sorted
+     * 
+     * @param list list of players
+     * @return true if the players are sorted
+     */
     public boolean isSorted(List<Player> list){
         for(int i = 0; i+1 < list.size(); i++){
             Player iPlayer = list.get(i);
@@ -583,5 +640,19 @@ public class GameController {
         }
         return true;
     }
+
+
+
+/**
+* Sets the game phase to FINISHED
+* Calls winner pop up message
+*
+* @author Julius Sondergaard, s234096
+*/
+public void endGame(Player winner) {
+   board.setPhase(Phase.FINISHED);
+   AppController.showWinnerPopup(winner.getName());
+}
+
 
 }

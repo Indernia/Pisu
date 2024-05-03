@@ -21,22 +21,23 @@
  */
 package dk.dtu.compute.se.pisd.roborally.dal;
 
-import dk.dtu.compute.se.pisd.roborally.controller.Antenna;
-import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Command;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
-import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
+import dk.dtu.compute.se.pisd.roborally.controller.BoardFactory;
+import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCard;
+import dk.dtu.compute.se.pisd.roborally.model.CommandCardField;
+import dk.dtu.compute.se.pisd.roborally.model.Heading;
+import dk.dtu.compute.se.pisd.roborally.model.Phase;
+import dk.dtu.compute.se.pisd.roborally.model.Player;
 /**
  * ...
  *
@@ -90,6 +91,11 @@ class Repository implements IRepository {
 		this.connector = connector;
 	}
 
+    /**
+     * Creates a game in the database
+     * @param game the game to be created
+     * @return true if the game was created, false if the game already has a game id
+     */
 	@Override
 	public boolean createGameInDB(Board game) {
 		if (game.getGameId() == null) {
@@ -164,6 +170,11 @@ class Repository implements IRepository {
 		return false;
 	}
 		
+    /**
+     * Updates a game in the database
+     * @param game the game to be updated
+     * @return true if the game was updated, false if the game does not have a game id
+     */
 	@Override
 	public boolean updateGameInDB(Board game) {
 		assert game.getGameId() != null;
@@ -212,6 +223,11 @@ class Repository implements IRepository {
 		return false;
 	}
 	
+    /**
+     * Loads a game from the database
+     * @param id the id of the game to be loaded
+     * @return the game loaded from the database
+     */
 	@Override
 	public Board loadGameFromDB(int id) {
 		Board game;
@@ -245,8 +261,15 @@ class Repository implements IRepository {
 			game.setGameId(id);			
 			loadPlayersFromDB(game);
 
+
+    		for(int i = 0; i < game.getPlayersNumber(); i++){
+				Player player = game.getPlayers().get(i);
+				int priority = player.getPriority();
+				game.setPlayerTurnOrder(priority,player);
+			}
+
 			if (playerNo >= 0 && playerNo < game.getPlayersNumber()) {
-				game.setCurrentPlayer(game.getPlayer(playerNo));
+				game.setCurrentPlayer(game.getPlayerTurn(playerNo));
 			} else {
 				// TODO  error handling
 				return null;
@@ -265,6 +288,10 @@ class Repository implements IRepository {
 		return null;
 	}
 	
+    /**
+     * Gets all games from the database
+     * @return a list of all {@link GameInDB}
+     */
 	@Override
 	public List<GameInDB> getGames() {
 		// TODO when there are many games in the DB, fetching all available games
@@ -327,6 +354,7 @@ class Repository implements IRepository {
 				// TODO this should be more defensive
 				String name = rs.getString(PLAYER_NAME);
 				String colour = rs.getString(PLAYER_COLOUR);
+				int priority = rs.getInt(PLAYER_PRIORITY);
 				Player player = new Player(game, colour ,name);
 				game.addPlayer(player);
 				
@@ -339,10 +367,12 @@ class Repository implements IRepository {
                 player.setDiscardDeck(new ArrayList<CommandCard> (dt.decode(rs.getString(PLAYER_DISCARD_DECK))));
                 player.setProgram(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_PROGRAM), player)));
                 player.setHand(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_HAND), player)));
+				player.setPriority(priority);
 			} else {
 				// TODO error handling
 			}
 		}
+
 		rs.close();
 	}
 	

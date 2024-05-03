@@ -69,9 +69,9 @@ public class Board extends Subject {
     /**
      * Constructor for board, requires all 3 inputs
      * 
-     * @param width
-     * @param height
-     * @param boardName
+     * @param width width of the board as int 
+     * @param height height of the board as int 
+     * @param boardName name of the board as string
      */
     public Board(int width, int height, @NotNull String boardName) {
         this.boardName = boardName;
@@ -93,8 +93,8 @@ public class Board extends Subject {
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board
      * 
-     * @param width
-     * @param height
+     * @param width width of the board in int 
+     * @param height height of the board in int
      */
     public Board(int width, int height) {
         this(width, height, "defaultboard");
@@ -105,7 +105,7 @@ public class Board extends Subject {
      * It goes through all spaces and their actions to find the maximum checkpoint number.
      *
      * @return Highest checkpoint number.
-     * @author Julius Sondergaard, s234096
+     * author Julius Sondergaard, s234096
      */
     public int getMaxCheckpointNumber() {
         int maxCheckpoint = 0;
@@ -128,7 +128,7 @@ public class Board extends Subject {
      * Get the list of players on the board.
      *
      * @return A list of players.
-     * @author Julius Sondergaard, s234096
+     * author Julius Sondergaard, s234096
      */
     public List<Player> getPlayers() {
         return players;
@@ -241,7 +241,7 @@ public class Board extends Subject {
     /**
      * Sets the current player to be the player given
      * 
-     * @param player
+     * @param player the player to be set as current
      */
     public void setCurrentPlayer(Player player) {
         if (player != this.current && players.contains(player)) {
@@ -262,7 +262,7 @@ public class Board extends Subject {
     /**
      * Sets the phase
      * 
-     * @param phase
+     * @param phase the phase to be set
      */
     public void setPhase(Phase phase) {
         if (phase != this.phase) {
@@ -283,7 +283,7 @@ public class Board extends Subject {
     /**
      * Sets the step counter to the specified value
      * 
-     * @param step
+     * @param step the step to be set
      */
     public void setStep(int step) {
         if (step != this.step) {
@@ -300,6 +300,11 @@ public class Board extends Subject {
         this.checkpointAmount = getSpaceByActionSubClass(Checkpoint.class).size();
     }
 
+    /**
+     * Returns the amount of checkpoints on the board
+     * 
+     * @return checkpointAmount
+     */
     public int getCheckpointAmount() {
         return checkpointAmount;
     }
@@ -342,7 +347,14 @@ public class Board extends Subject {
         }
     }
 
-        public int getRealPlayerNumber(@NotNull Player player) {
+
+    /**
+     * Returns the index of the player given
+     * 
+     * @param player the player's index that is sought after
+     * @return the index of the player given
+     */
+    public int getRealPlayerNumber(@NotNull Player player) {
         if (player.board == this) {
             return players.indexOf(player);
         } else {
@@ -383,9 +395,9 @@ public class Board extends Subject {
     }
 
     /**
-     * @return String
+     * the message field at the bottom og the board 
+     * @return String the text to display
      */
-
     public String getStatusMessage() {
         String baseMessage = "Phase = " + getPhase() + ",  Player = " + getCurrentPlayer().getName()
                 + ",  moves = " + getCounter() + ",  Turn order = " + getPlayerTurnOrderString();
@@ -430,9 +442,8 @@ public class Board extends Subject {
     * @return a list of {@link FieldAction} objects that are instances of the specified subclass
     * @see FieldAction
     *
-    * @Author Alex Lundberg, s235442
+    * Author Alex Lundberg, s235442
     */
-    //TODO remove if not used by the time of submission
     public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
         ArrayList<T> output = new ArrayList<>();
         for(Space[] spaceList : spaces){
@@ -460,7 +471,7 @@ public class Board extends Subject {
     * @return a list of {@link Space} objects that have an action that is an instance of the specified subclass
     * @see FieldAction
     *
-    * @Author Alex Lundberg, s235442
+    * Author Alex Lundberg, s235442
     */
     public <T extends FieldAction> ArrayList<Space> getSpaceByActionSubClass(Class<T> filter){
         ArrayList<Space> output = new ArrayList<>();
@@ -481,10 +492,16 @@ public class Board extends Subject {
     }
 
 
+    /**
+     * Sets the player turn order
+     */
     public void setPlayerTurnOrder(int i, Player player){
         playerTurnOrder.set(i, player);
     }
 
+    /**
+     * Returns the player turn order
+     */
     public Player getPlayerTurn(int i) {
         if (i >= 0 && i < playerTurnOrder.size()) {
             return playerTurnOrder.get(i);
@@ -493,6 +510,9 @@ public class Board extends Subject {
         }
     }
     
+    /**
+     * Returns the player turn order
+     */
     public List<Player> getPlayerTurnList(){
         return playerTurnOrder;
     }

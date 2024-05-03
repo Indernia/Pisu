@@ -50,6 +50,13 @@ public class Space extends Subject {
     private List<FieldAction> actions = new ArrayList<>();
 
 
+    /**
+     * Constructor for a space on a board at a given position.
+     * 
+     * @param board the board on which the space is located
+     * @param x the x-coordinate of the space
+     * @param y the y-coordinate of the space
+     */
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
@@ -98,7 +105,6 @@ public class Space extends Subject {
      *
      * @return the list of walls on this space
      */
-    // XXX A3
     public List<Heading> getWalls() {
         return walls;
     }
@@ -111,7 +117,6 @@ public class Space extends Subject {
      *
      * @return the list of field actions on this space
      */
-    // XXX A3
     public List<FieldAction> getActions() {
         return actions;
     }

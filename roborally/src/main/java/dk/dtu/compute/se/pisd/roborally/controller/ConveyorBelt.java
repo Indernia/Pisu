@@ -32,33 +32,48 @@ import org.jetbrains.annotations.NotNull;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-// XXX A3
 public class ConveyorBelt extends FieldAction {
 
     private Heading heading;
 
 
+    /**
+     * Returns the heading of the conveyor belt
+     * @return the heading of the conveyor belt
+     */
     public Heading getHeading() {
         return heading;
     }
 
+    /**
+     * Sets the heading of the conveyor belt
+     * @param heading the heading of the conveyor belt
+     */
     public void setHeading(Heading heading) {
         this.heading = heading;
     }
 
+    /**
+     * Constructor
+     * @param heading the heading of the conveyor belt
+     */
     public ConveyorBelt(Heading heading){
         setHeading(Heading.SOUTH);
         setHeading(heading);
     }
+    /**
+     * Default constructor
+     */
     public ConveyorBelt(){
 
     }
+
+
     /**
      * Implementation of the action of a conveyor belt.
      * takes a player and moves them to the space in the direction of the heading of the belt
      *  @param gameController the given controller for the current instance
      * @param space a given space that will have the belt action on it
-     * @author Noah Nissen
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
