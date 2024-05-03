@@ -260,8 +260,7 @@ public class GameController {
         }
         checkForGameEnd();
     }
-
-    
+ 
     private void nextStep(){
         int step = board.getStep();
         step++;
@@ -322,7 +321,6 @@ public class GameController {
      * Sets the game phase to FINISHED
      * Calls winner pop up message splitting them up in 3 pieces to make them more testable
      *
-     * @author Julius Sondergaard, s234096
      */
     public void endGame(Player winner) {
         updateGameStateToFinished();
@@ -526,6 +524,11 @@ public class GameController {
         }
     }
 
+    /**
+     * executes the previous command card is recursive in case previous is the same command
+     * @param player the player to move
+     * @param step current register
+     */
     public void playAgain(Player player, int step){
         if(step > 0){
         CommandCard previousCard = player.getProgramField(step-1).getCard();
@@ -537,6 +540,10 @@ public class GameController {
         }
     }
 
+    /**
+     * performs a 180 degree turn
+     * @param player the player to turn
+     */
     public void uturn(Player player){
         turnRight(player);
         turnRight(player);

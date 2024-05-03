@@ -32,7 +32,7 @@ public class Antenna extends FieldAction {
             double ay = (double) space.y;
             double ax = (double) space.x;
             double distance = Math.abs(py - ay) + Math.abs(px - ax);
-            distance += (Math.atan2(py - ay, px - ax)) / (Math.PI * 2) + 0.5;
+            distance += (Math.atan2(py - ay, px - ax)) / (Math.PI * 2)+ 0.5;
 
             board.getPlayerTurn(i).setDistanceToAntenna(distance);
         }
