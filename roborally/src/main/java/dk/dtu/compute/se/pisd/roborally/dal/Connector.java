@@ -37,20 +37,21 @@ import dk.dtu.compute.se.pisd.roborally.dal.DBAcces;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
+@SuppressWarnings("unused")
 class Connector {
-	
-    private static final String HOST     = DBAcces.Host;
-    private static final int    PORT     = DBAcces.Port;
-    private static final String DATABASE = DBAcces.dbName;
-    private static final String USERNAME = DBAcces.USER;
-    private static final String PASSWORD = DBAcces.PASSWORD;
 
-    private static final String DELIMITER = ";;";
-    
-    private Connection connection;
-        
-    Connector() {
-        try {
+	private static final String HOST = DBAcces.Host;
+	private static final int PORT = DBAcces.Port;
+	private static final String DATABASE = DBAcces.dbName;
+	private static final String USERNAME = DBAcces.USER;
+	private static final String PASSWORD = DBAcces.PASSWORD;
+
+	private static final String DELIMITER = ";;";
+
+	private Connection connection;
+
+	Connector() {
+		try {
 			// String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
 			String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?serverTimezone=UTC";
 			connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -58,43 +59,44 @@ class Connector {
 			createDatabaseSchema();
 		} catch (SQLException e) {
 			// TODO we should try to diagnose and fix some problems here and
-			//      exit in a more graceful way
+			// exit in a more graceful way
 			e.printStackTrace();
 			// Platform.exit();
 		}
-    }
-    
-    private void createDatabaseSchema() {
+	}
 
-    	String createTablesStatement =
-				IOUtil.readResource("schemas/createschema.sql");
+	private void createDatabaseSchema() {
 
-    	try {
-    		connection.setAutoCommit(false);
-    		Statement statement = connection.createStatement();
-    		for (String sql : createTablesStatement.split(DELIMITER)) {
-    			if (!StringUtils.isEmptyOrWhitespaceOnly(sql)) {
-    				statement.executeUpdate(sql);
-    			}
-    		}
+		String createTablesStatement = IOUtil.readResource("schemas/createschema.sql");
 
-    		statement.close();
-    		connection.commit();
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    		// TODO error handling
-    		try {
+		try {
+			connection.setAutoCommit(false);
+			Statement statement = connection.createStatement();
+			for (String sql : createTablesStatement.split(DELIMITER)) {
+				if (!StringUtils.isEmptyOrWhitespaceOnly(sql)) {
+					statement.executeUpdate(sql);
+				}
+			}
+
+			statement.close();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// TODO error handling
+			try {
 				connection.rollback();
-			} catch (SQLException e1) {}
-    	} finally {
+			} catch (SQLException e1) {
+			}
+		} finally {
 			try {
 				connection.setAutoCommit(true);
-			} catch (SQLException e) {}
+			} catch (SQLException e) {
+			}
 		}
-    }
-    
-    Connection getConnection() {
-    	return connection; 
-    }
-    
+	}
+
+	Connection getConnection() {
+		return connection;
+	}
+
 }
