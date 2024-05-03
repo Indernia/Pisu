@@ -1,7 +1,5 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import java.util.Arrays;
-
 import org.jetbrains.annotations.NotNull;
 
 import dk.dtu.compute.se.pisd.roborally.model.Board;
@@ -32,9 +30,9 @@ public class Antenna extends FieldAction {
             double ay = (double) space.y;
             double ax = (double) space.x;
             double distance = Math.abs(py - ay) + Math.abs(px - ax);
-            distance += (Math.atan2(py - ay, px - ax)) / (Math.PI * 2)+ 0.5;
-
+            distance += ((1.0 + (Math.atan2(py - ay, px - ax) / (2 * Math.PI) + 0.25)) % 1.0);            
             board.getPlayerTurn(i).setDistanceToAntenna(distance);
+            
         }
 
         while (!gameController.isSorted(board.getPlayerTurnList())) {
