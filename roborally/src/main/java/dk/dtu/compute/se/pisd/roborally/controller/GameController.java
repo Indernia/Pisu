@@ -646,8 +646,6 @@ public class GameController {
 /**
 * Sets the game phase to FINISHED
 * Calls winner pop up message
-*
-* @author Julius Sondergaard, s234096
 */
 public void endGame(Player winner) {
    board.setPhase(Phase.FINISHED);
