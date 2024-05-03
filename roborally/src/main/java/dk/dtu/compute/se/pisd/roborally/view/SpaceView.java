@@ -94,7 +94,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Belt")){
-                ImageView belt = new ImageView(new Image(getClass().getResourceAsStream("/images/group1.png")));
+                ImageView belt = new ImageView(new Image(getClass().getResourceAsStream("/images/belt.png")));
                 belt.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
                 this.getChildren().add(belt);
             }
@@ -106,8 +106,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Pit")){
-                Circle circle = new Circle(20);
-                circle.setFill(Color.DARKGREY);
+                ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/pit.png")));
                 this.getChildren().add(circle);
             }
 
@@ -117,8 +116,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Reboot")){
-                Circle circle = new Circle(20);
-                circle.setFill(Color.LIGHTGREEN);
+                ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/reboot.png")));
                 this.getChildren().add(circle);
             }
 
@@ -129,15 +127,17 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (space.getActions().size() != 0){
             FieldAction action = space.getActions().get(0);
             if (action.getType().equals("Antenna")){
-                Circle circle = new Circle(20);
-                circle.setFill(Color.DARKGREEN);
+                ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/antenna.png")));
                 this.getChildren().add(circle);
-                Circle circle2 = new Circle(5);
-                circle2.setFill(Color.BLACK);
-                this.getChildren().add(circle2);
             }
 
         }
+    }
+
+
+    private void drawSpace(){
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/images/space.png")));
+        this.getChildren().add(image);
     }
 
     private void updatePlayer() {
@@ -185,8 +185,11 @@ public class SpaceView extends StackPane implements ViewObserver {
                 case "Antenna":
                     drawAntenna();
                     break;
-            }
+            } 
+        } else{
+            drawSpace();
         }
+
         if (space.getWalls().size() != 0){
             for(Heading wall: space.getWalls()){
                 drawWall(wall);
@@ -202,29 +205,10 @@ public class SpaceView extends StackPane implements ViewObserver {
      * @author Alex Lundberg
      */
     public void drawWall(Heading heading) {
-    Canvas canvas = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
-    GraphicsContext gc =
-    canvas.getGraphicsContext2D();
-    gc.setStroke(Color.RED);
-    gc.setLineWidth(5);
-    gc.setLineCap(StrokeLineCap.ROUND);
+        ImageView wall = new ImageView(new Image(getClass().getResourceAsStream("/images/wall.png")));
+        wall.setRotate(90 * (heading.ordinal()) % 360);
+        this.getChildren().add(wall);
 
-    switch (heading) {
-        case SOUTH:
-            gc.strokeLine(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-            break;
-        case NORTH:
-            gc.strokeLine(2, 2, SPACE_WIDTH - 2, 2);
-            break;
-        case WEST:
-            gc.strokeLine(2, 2, 2, SPACE_HEIGHT - 2);
-            break;
-        case EAST:
-            gc.strokeLine(SPACE_WIDTH - 2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-            break;
-    }
-            
-    this.getChildren().add(canvas);
 
     }
     /**
@@ -282,28 +266,21 @@ public class SpaceView extends StackPane implements ViewObserver {
      * author Julius Sondergaard, s234096
      */
     private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
-        double circleDiameter = Math.min(SPACE_WIDTH, SPACE_HEIGHT) * 0.8;
-        double circleX = (SPACE_WIDTH - circleDiameter) / 2;
-        double circleY = (SPACE_HEIGHT - circleDiameter) / 2;
-
-        gc.setFill(Color.LIGHTGREEN);
-        gc.fillOval(circleX, circleY, circleDiameter, circleDiameter);
+        ImageView star = new ImageView(new Image(getClass().getResourceAsStream("/images/checkpoint.png")));
 
         gc.setFill(Color.BLACK);
 
-        gc.setFont(new Font("Arial", 20));
+        gc.setFont(new Font("Arial", 15));
 
         String text = String.valueOf(checkpointNumber);
 
         Text tempText = new Text(text);
         tempText.setFont(gc.getFont());
-        double textWidth = tempText.getBoundsInLocal().getWidth();
-        double textHeight = tempText.getBoundsInLocal().getHeight();
+        double textWidth = tempText.getLayoutBounds().getWidth();
+        double textHeight = tempText.getLayoutBounds().getHeight();
 
-        double textX = circleX + (circleDiameter - textWidth) / 2;
-        double textY = circleY + (circleDiameter + textHeight) / 2;
-
-        gc.fillText(text, textX, textY);
+        gc.fillText(text, 20 - textWidth/2, 20 + textHeight/3);
+        this.getChildren().add(star);
     }
 
     }
