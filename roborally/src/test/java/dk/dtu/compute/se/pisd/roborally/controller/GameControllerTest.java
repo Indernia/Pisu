@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Julius Sondergaard, s234096
+ */
 class GameControllerTest {
 
     private final int TEST_WIDTH = 8;
@@ -380,6 +383,29 @@ class GameControllerTest {
     }
 
     /**
+     * Players are same distance away from Antenna in a 2 player scenario
+     *
+     *
+     */
+    @Test
+    void testAntennaIfPlayersAreSameDistanceAway() {
+        Board board = gameController.board;
+        Player player1 = board.getPlayer(0);
+        Player player2 = board.getPlayer(1);
+
+        player1.setSpace(board.getSpace(1, 0));
+        player2.setSpace(board.getSpace(0, 1));
+
+        Space antennaSpace = board.getSpace(0, 0);
+        Antenna antenna = new Antenna();
+        antennaSpace.getActions().add(antenna);
+
+        Antenna.makeTurnOrder(gameController, antennaSpace);
+
+        assertTrue(board.getPlayerTurn(0) == player1, "Player 1 should be first due to being closest to the antenna.");
+        assertTrue(board.getPlayerTurn(1) == player2, "Player 2 should be second.");
+    }
+    /**
      * Test conveyor belt if it moves the player
      *
      *
@@ -401,5 +427,70 @@ class GameControllerTest {
 
         assertNull(board.getSpace(1, 1).getPlayer(), "Original space should now be empty.");
         assertEquals(player, board.getSpace(2, 1).getPlayer(), "Player should be moved to the east by the conveyor belt.");
+    }
+
+    /**
+     * Test conveyor belt if it moves the player to another conveyorbelt - it should only be moved once
+     *
+     *
+     */
+    @Test
+    void testConveyorBeltPushToAnotherConveyor() {
+        Board board = gameController.board;
+        Player player = board.getPlayer(0);
+
+        player.setSpace(board.getSpace(1, 1));
+        player.setHeading(Heading.NORTH);
+
+        ConveyorBelt conveyorBelt1 = new ConveyorBelt(Heading.EAST);
+        board.getSpace(1, 1).getActions().add(conveyorBelt1);
+        ConveyorBelt conveyorBelt2 = new ConveyorBelt(Heading.NORTH);
+        board.getSpace(2,1).getActions().add(conveyorBelt2);
+
+        boolean actionResult = conveyorBelt1.doAction(gameController, board.getSpace(1, 1));
+
+        assertTrue(actionResult, "Conveyor belt action should successfully move the player.");
+
+        assertNull(board.getSpace(1, 1).getPlayer(), "Original space should now be empty.");
+        assertEquals(player, board.getSpace(2, 1).getPlayer(), "Player should be moved to the east by the conveyor belt.");
+    }
+
+
+    /**
+     * Test to check if deck works assuming no actions fields on the board purely checking if logic is valid in
+     * 1 specific scenario
+     *
+     */
+    @Test
+    void testDeckMove() {
+        Board board = gameController.board;
+        Player player = board.getPlayer(0);
+
+        //We define players position
+        player.setSpace(board.getSpace(1,1));
+        player.setHeading(Heading.SOUTH);
+
+        //Define cards on hand
+        player.getProgramField(0).setCard(new CommandCard(Command.FORWARD));
+        player.getProgramField(1).setCard(new CommandCard(Command.FAST_FORWARD));
+        player.getProgramField(2).setCard(new CommandCard(Command.LEFT));
+        player.getProgramField(3).setCard(new CommandCard(Command.RIGHT));
+        player.getProgramField(4).setCard(new CommandCard(Command.FORWARD));
+
+        //We iterate until all cards have been executed
+        for (int i = 0; i < 5; i++) {
+            CommandCard card = player.getProgramField(i).getCard();
+            if (card != null) {
+                gameController.executeCommand(player, card.command);
+            }
+        }
+        //We define final position
+        int expectedX = 1;
+        int expectedY = 5;
+        Heading expectedFinalHeading = Heading.SOUTH;
+
+        //Field should be (1,5) with a SOUTH heading
+        assertEquals(board.getSpace(expectedX, expectedY), player.getSpace(), "Player should be at the correct final space.");
+        assertEquals(expectedFinalHeading, player.getHeading(), "Player should have the correct final heading.");
     }
 }
