@@ -350,61 +350,36 @@ class GameControllerTest {
         assertEquals(Heading.NORTH, player.getHeading(), "After turning right from WEST, player should be facing NORTH again.");
     }
 
+
     /**
-     * Test Antenna function if it's determining correct players to start and if distances are correctly calculated
+     * Test Antenna function to see if it determines the correct order on a board with 6 players
      *
      *
      */
     @Test
     void testAntennaAdjustsPlayerTurnOrder() {
         Board board = gameController.board;
-        Player player1 = board.getPlayer(0); // Closest to the antenna
-        Player player2 = board.getPlayer(1); // Second closest
-        Player player3 = board.getPlayer(2); // Most far away
+        board.getPlayer(0).setSpace(board.getSpace(6, 2));  // Close but not closest
+        board.getPlayer(1).setSpace(board.getSpace(5, 2));  // Closest to the antenna
+        board.getPlayer(2).setSpace(board.getSpace(4, 2));  // Further than player 1 and 2
+        board.getPlayer(3).setSpace(board.getSpace(6, 3));  // Closer than player 0 but further than player 1
+        board.getPlayer(4).setSpace(board.getSpace(4, 3));  // Further than all above
+        board.getPlayer(5).setSpace(board.getSpace(5, 4));  // Furthest of all
 
-        player1.setSpace(board.getSpace(0, 0));
-        player2.setSpace(board.getSpace(1, 1));
-        player3.setSpace(board.getSpace(2, 2));
-
-        //We put the antenna at the board at (0,0) thus player1 is closest followed by player2 and player3
-        Space antennaSpace = board.getSpace(0, 0);
+        Space antennaSpace = board.getSpace(5, 3);
         Antenna antenna = new Antenna();
         antennaSpace.getActions().add(antenna);
 
         Antenna.makeTurnOrder(gameController, antennaSpace);
 
-        assertTrue(board.getPlayerTurn(0) == player1, "Player 1 should be first due to being closest to the antenna.");
-        assertTrue(board.getPlayerTurn(1) == player2, "Player 2 should be second.");
-        assertTrue(board.getPlayerTurn(2) == player3, "Player 3 should be last.");
-
-        //Check if distances are calculated correctly
-        assertTrue(player1.getDistanceToAntenna() < player2.getDistanceToAntenna() && player2.getDistanceToAntenna() < player3.getDistanceToAntenna(),
-                "Player distances to antenna should increase from player1 to player3.");
+        assertEquals(board.getPlayer(1), board.getPlayerTurn(0), "Player 2 should be first due to being closest to the antenna.");
+        assertEquals(board.getPlayer(3), board.getPlayerTurn(1), "Player 4 should be second.");
+        assertEquals(board.getPlayer(5), board.getPlayerTurn(2), "Player 6 should be third.");
+        assertEquals(board.getPlayer(4), board.getPlayerTurn(3), "Player 5 should be fourth.");
+        assertEquals(board.getPlayer(0), board.getPlayerTurn(4), "Player 1 should be fifth.");
+        assertEquals(board.getPlayer(2), board.getPlayerTurn(5), "Player 4 should be last, being the furthest.");
     }
 
-    /**
-     * Players are same distance away from Antenna in a 2 player scenario
-     *
-     *
-     */
-    @Test
-    void testAntennaIfPlayersAreSameDistanceAway() {
-        Board board = gameController.board;
-        Player player1 = board.getPlayer(0);
-        Player player2 = board.getPlayer(1);
-
-        player1.setSpace(board.getSpace(1, 0));
-        player2.setSpace(board.getSpace(0, 1));
-
-        Space antennaSpace = board.getSpace(0, 0);
-        Antenna antenna = new Antenna();
-        antennaSpace.getActions().add(antenna);
-
-        Antenna.makeTurnOrder(gameController, antennaSpace);
-
-        assertTrue(board.getPlayerTurn(0) == player1, "Player 1 should be first due to being closest to the antenna.");
-        assertTrue(board.getPlayerTurn(1) == player2, "Player 2 should be second.");
-    }
     /**
      * Test conveyor belt if it moves the player
      *
