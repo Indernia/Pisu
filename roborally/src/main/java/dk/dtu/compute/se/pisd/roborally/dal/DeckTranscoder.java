@@ -41,6 +41,10 @@ public class DeckTranscoder {
         encodingMap.put("Left OR Right", "C");
         //S for SPAM
         encodingMap.put("SPAM", "S");
+        //A for Again
+        encodingMap.put("Again", "A");
+        //U for U-Turn
+        encodingMap.put("U-Turn", "U");
 
 
 
@@ -50,6 +54,8 @@ public class DeckTranscoder {
         decodingMap.put("D", Command.FAST_FORWARD);
         decodingMap.put("C", Command.OPTION_LEFT_RIGHT);
         decodingMap.put("S", Command.SPAM);
+        decodingMap.put("A", Command.AGAIN);
+        decodingMap.put("U", Command.UTURN);
     }
 
 
