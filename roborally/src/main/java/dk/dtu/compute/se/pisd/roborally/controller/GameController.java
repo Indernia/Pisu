@@ -365,6 +365,12 @@ public class GameController {
                 case SPAM:
                     spamDamage(player);
                     break;
+                case AGAIN:
+                    playAgain(player);
+                    break;
+                case UTURN:
+                    uturn(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -518,6 +524,19 @@ public class GameController {
         } else {
             return false;
         }
+    }
+
+    public void playAgain(Player player){
+        int step = board.getStep();
+        if(step > 0){
+        CommandCard previousCard = player.getProgramField(step-1).getCard();
+        executeCommand(player, previousCard.command);
+        }
+    }
+
+    public void uturn(Player player){
+        turnRight(player);
+        turnRight(player);
     }
 
 
