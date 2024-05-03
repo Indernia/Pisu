@@ -116,7 +116,7 @@ class GameControllerTest {
     /**
      * Verifies that landing on a checkpoint correctly updates the player's checkpoint counter.
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testPlayerReachesCheckpoint() {
@@ -141,7 +141,7 @@ class GameControllerTest {
     /**
      * Negative test with player trying to skip to a non-sequential checkpoint
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testPlayerDoesNotSkipCheckpoints() {
@@ -167,7 +167,7 @@ class GameControllerTest {
     /**
      * Negative test moving player to a checkpoint the player already owns / revisiting checkpoint
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testPlayerRevisitsCheckpoint() {
@@ -193,7 +193,7 @@ class GameControllerTest {
     /**
      * Test for game ends overriding showWinnerPopup to avoid testing GUI
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testEndGame() {
@@ -226,7 +226,7 @@ class GameControllerTest {
     /**
      * Secure player is moved with 1 on Forward card assuming no walls or obstacles
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testPlayerCollisionForward() {
@@ -248,7 +248,7 @@ class GameControllerTest {
     /**
      * Secure player is moved with 2 on fast forward assuming no walls or obstacles
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
         void testPlayerCollisionFastForward() {
@@ -269,7 +269,7 @@ class GameControllerTest {
     /**
      * Test player movement through wall
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testMovementBlockedByWall() {
@@ -291,7 +291,7 @@ class GameControllerTest {
     /**
      * Test player can't push another player through wall
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testPlayerCantPushPlayerThroughWall() {
@@ -316,7 +316,7 @@ class GameControllerTest {
     /**
      * Test that the gear function works
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testTurnGearAction() {
@@ -350,7 +350,7 @@ class GameControllerTest {
     /**
      * Test Antenna function if it's determining correct players to start and if distances are correctly calculated
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testAntennaAdjustsPlayerTurnOrder() {
@@ -382,7 +382,7 @@ class GameControllerTest {
     /**
      * Test conveyor belt if it moves the player
      *
-     * @author Julius Sondergaard, s234096
+     *
      */
     @Test
     void testConveyorBeltMovesPlayer() {
