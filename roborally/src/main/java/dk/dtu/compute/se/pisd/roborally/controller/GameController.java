@@ -128,7 +128,6 @@ public class GameController {
      * Finishes the programming phase
      */
     public void finishProgrammingPhase() {
-        /* 
         for(int i = 0; i < board.getPlayersNumber(); i++){
             Player iPlayer = board.getPlayer(i);
             for(int j = 0; j < 5; j++){
@@ -138,7 +137,6 @@ public class GameController {
                 }
             }
         }
-        */
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
         board.setPhase(Phase.ACTIVATION);
