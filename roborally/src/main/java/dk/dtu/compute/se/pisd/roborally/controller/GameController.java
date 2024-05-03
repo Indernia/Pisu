@@ -641,16 +641,4 @@ public class GameController {
         return true;
     }
 
-
-
-/**
-* Sets the game phase to FINISHED
-* Calls winner pop up message
-*/
-public void endGame(Player winner) {
-   board.setPhase(Phase.FINISHED);
-   AppController.showWinnerPopup(winner.getName());
-}
-
-
 }

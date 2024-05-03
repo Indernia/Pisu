@@ -130,19 +130,6 @@ public class AppController implements Observer {
     }
 
     /**
-     * Announces winner
-     *
-     * @author Julius Sondergaard, s234096
-     */
-    static void showWinnerPopup(String winnerName) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Game Over");
-        alert.setHeaderText(null);
-        alert.setContentText("Congratulations! " + winnerName + " has won the game!");
-        alert.showAndWait();
-    }
-
-    /**
      * sets the player spawn to a random space
      * @param player player to be set
      * @param board the board
