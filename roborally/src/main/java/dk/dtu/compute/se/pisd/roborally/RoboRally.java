@@ -96,7 +96,8 @@ public class RoboRally extends Application {
     /**
      * Create the view for the board of the given game controller.
      *
-     * @param gameController the game controller for which the board view should be created
+     * @param gameController the game controller for which the board view should be
+     *                       created
      */
     public void createBoardView(GameController gameController) {
         // if present, remove old BoardView
@@ -120,10 +121,6 @@ public class RoboRally extends Application {
     public void stop() throws Exception {
         super.stop();
 
-        // XXX just in case we need to do something here eventually;
-        // but right now the only way for the user to exit the app
-        // is delegated to the exit() method in the AppController,
-        // so that the AppController can take care of that.
     }
 
     /**

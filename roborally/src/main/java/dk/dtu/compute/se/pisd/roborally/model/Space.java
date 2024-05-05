@@ -27,7 +27,6 @@ import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * ...
  *
@@ -43,19 +42,16 @@ public class Space extends Subject {
 
     private Player player;
 
-    // XXX A3
     private List<Heading> walls = new ArrayList<>();
 
-    // XXX A3
     private List<FieldAction> actions = new ArrayList<>();
-
 
     /**
      * Constructor for a space on a board at a given position.
      * 
      * @param board the board on which the space is located
-     * @param x the x-coordinate of the space
-     * @param y the y-coordinate of the space
+     * @param x     the x-coordinate of the space
+     * @param y     the y-coordinate of the space
      */
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -64,7 +60,6 @@ public class Space extends Subject {
         player = null;
     }
 
-    
     /**
      * Returns the player on this space. If there is no player on the space, null is
      * returned.
@@ -74,7 +69,6 @@ public class Space extends Subject {
     public Player getPlayer() {
         return player;
     }
-    
 
     /**
      * Sets the player on the space
@@ -97,7 +91,7 @@ public class Space extends Subject {
         }
     }
 
-        /**
+    /**
      * Returns the walls (actually their direction) on this space.
      * Note that clients may change this list; this should, however,
      * be done only during the setup of the game (not while the game
@@ -120,8 +114,6 @@ public class Space extends Subject {
     public List<FieldAction> getActions() {
         return actions;
     }
-
-
 
     void playerChanged() {
         // This is a minor hack; since some views that are registered with the space

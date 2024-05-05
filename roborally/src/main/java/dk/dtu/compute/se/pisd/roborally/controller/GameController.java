@@ -72,15 +72,6 @@ public class GameController {
         board.setCounter(board.getCounter() + 1);
         board.setCurrentPlayer(board.getPlayerTurn((board.getPlayerNumber(current) + 1) % board.getPlayersNumber()));
 
-        // TODO Assignment V1: method should be implemented by the students:
-        // - the current player should be moved to the given space
-        // (if it is free()
-        // - and the current player should be set to the player
-        // following the current player
-        // - the counter of moves in the game should be increased by one
-        // if and when the player is moved (the counter and the status line
-        // message needs to be implemented at another place)
-
     }
 
     /**
@@ -102,7 +93,6 @@ public class GameController {
                 }
                 for (int j = 0; j < Player.NO_CARDS; j++) {
                     CommandCardField field = player.getCardField(j);
-                    // TODO change here to use the player deck.
                     if (field.getCard() == null) {
                         field.setCard(player.drawCard());
                         field.setVisible(true);
@@ -344,10 +334,6 @@ public class GameController {
      */
     public void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
-            // XXX This is a very simplistic way of dealing with some basic cards and
-            // their execution. This should eventually be done in a more elegant way
-            // (this concerns the way cards are modelled as well as the way they are
-            // executed).
 
             switch (command) {
                 case FORWARD:

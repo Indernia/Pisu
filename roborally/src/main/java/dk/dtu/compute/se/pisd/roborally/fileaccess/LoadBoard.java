@@ -158,12 +158,6 @@ public class LoadBoard {
         } else if (actionTemplate instanceof AntennaTemplate) {
             return new Antenna();
         }
-        // else if ...
-        // XXX if new field actions are added, the corresponding templates
-        // need to be added to the model subpackage of fileaccess and
-        // the else statement must be extended for converting the
-        // action template to the corresponding field action.
-
         return null;
     }
 
@@ -184,43 +178,45 @@ public class LoadBoard {
         template.height = board.height;
 
         ClassLoader classLoader = AppController.class.getClassLoader();
-        // FIXME: this is not very defensive and will result in a NullPointerException
-        // when the folder BOARDSFOLDER does not exist! But, the file does not
-        // need to exist at this point!
-        String filename = classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
-
-        // In simple cases, we can create a Gson object with new:
-        //
-        // Gson gson = new Gson();
-        //
-        // But, if you need to configure it, it is better to create it from
-        // a builder (here, we want to configure the JSON serialisation with
-        // a pretty printer):
-        GsonBuilder simpleBuilder = new GsonBuilder()
-                .registerTypeAdapter(ActionTemplate.class, new Adapter<ActionTemplate>()).setPrettyPrinting();
-        Gson gson = simpleBuilder.create();
-
-        FileWriter fileWriter = null;
-        JsonWriter writer = null;
         try {
-            fileWriter = new FileWriter(filename);
-            writer = gson.newJsonWriter(fileWriter);
-            gson.toJson(template, template.getClass(), writer);
-            writer.close();
-        } catch (IOException e1) {
-            if (writer != null) {
-                try {
-                    writer.close();
-                    fileWriter = null;
-                } catch (IOException e2) {
+            String filename = classLoader.getResource(BOARDSFOLDER).getPath() + "/" + name + "." + JSON_EXT;
+
+            // In simple cases, we can create a Gson object with new:
+            //
+            // Gson gson = new Gson();
+            //
+            // But, if you need to configure it, it is better to create it from
+            // a builder (here, we want to configure the JSON serialisation with
+            // a pretty printer):
+            GsonBuilder simpleBuilder = new GsonBuilder()
+                    .registerTypeAdapter(ActionTemplate.class, new Adapter<ActionTemplate>()).setPrettyPrinting();
+            Gson gson = simpleBuilder.create();
+
+            FileWriter fileWriter = null;
+            JsonWriter writer = null;
+            try {
+                fileWriter = new FileWriter(filename);
+                writer = gson.newJsonWriter(fileWriter);
+                gson.toJson(template, template.getClass(), writer);
+                writer.close();
+            } catch (IOException e1) {
+                if (writer != null) {
+                    try {
+                        writer.close();
+                        fileWriter = null;
+                    } catch (IOException e2) {
+                    }
+                }
+                if (fileWriter != null) {
+                    try {
+                        fileWriter.close();
+                    } catch (IOException e2) {
+                    }
                 }
             }
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e2) {
-                }
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Boards folder does not exist in the correct diretory");
         }
     }
 
@@ -281,12 +277,6 @@ public class LoadBoard {
         } else if (action instanceof Antenna) {
             return new AntennaTemplate();
         }
-        // else if ...
-        // XXX if new field actions are added, the corresponding templates
-        // need to be added to the model subpackage of fileaccess and
-        // the else statement must be extended for converting the
-        // field action to the corresponding action template.
-
         return null;
     }
 

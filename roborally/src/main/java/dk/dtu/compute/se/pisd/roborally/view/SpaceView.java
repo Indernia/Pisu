@@ -54,15 +54,14 @@ import javafx.scene.image.ImageView;
  */
 public class SpaceView extends StackPane implements ViewObserver {
 
-    final public static int SPACE_HEIGHT = 40; // 60; // 75; changing the height and width are not currently copatible with the current images used, and may cause issues
+    final public static int SPACE_HEIGHT = 40; // 60; // 75; changing the height and width are not currently copatible
+                                               // with the current images used, and may cause issues
     final public static int SPACE_WIDTH = 40; // 60; // 75;
 
     public final Space space;
 
     public SpaceView(@NotNull Space space) {
         this.space = space;
-
-        // XXX the following styling should better be done with styles
         this.setPrefWidth(SPACE_WIDTH);
         this.setMinWidth(SPACE_WIDTH);
         this.setMaxWidth(SPACE_WIDTH);
@@ -71,14 +70,15 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
 
-        //though this is overridden by the drawing of space and fieldActions, if something becomes strange this is still here to make sure the spaces can be differentiated
+        // though this is overridden by the drawing of space and fieldActions, if
+        // something becomes strange this is still here to make sure the spaces can be
+        // differentiated
 
         if ((space.x + space.y) % 2 == 0) {
             this.setStyle("-fx-background-color: white;");
         } else {
             this.setStyle("-fx-background-color: black;");
         }
-
 
         // updatePlayer();
 
@@ -91,32 +91,33 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the belt polygon on any action field that is a belt
      *
      */
-    private void drawBelt(){
-        if (space.getActions().size() != 0){
+    private void drawBelt() {
+        if (space.getActions().size() != 0) {
             FieldAction action = space.getActions().get(0);
-            if (action.getType().equals("Belt")){
+            if (action.getType().equals("Belt")) {
                 ImageView belt = new ImageView(new Image(getClass().getResourceAsStream("/images/belt.png")));
-                belt.setRotate((90 * ((ConveyorBelt)action).getHeading().ordinal()) % 360);
+                belt.setRotate((90 * ((ConveyorBelt) action).getHeading().ordinal()) % 360);
                 this.getChildren().add(belt);
             }
 
         }
     }
 
-    private void drawPit(){
-        if (space.getActions().size() != 0){
+    private void drawPit() {
+        if (space.getActions().size() != 0) {
             FieldAction action = space.getActions().get(0);
-            if (action.getType().equals("Pit")){
+            if (action.getType().equals("Pit")) {
                 ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/pit.png")));
                 this.getChildren().add(circle);
             }
 
         }
     }
-    private void drawReboot(){
-        if (space.getActions().size() != 0){
+
+    private void drawReboot() {
+        if (space.getActions().size() != 0) {
             FieldAction action = space.getActions().get(0);
-            if (action.getType().equals("Reboot")){
+            if (action.getType().equals("Reboot")) {
                 ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/reboot.png")));
                 this.getChildren().add(circle);
             }
@@ -124,10 +125,10 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
-    private void drawAntenna(){
-        if (space.getActions().size() != 0){
+    private void drawAntenna() {
+        if (space.getActions().size() != 0) {
             FieldAction action = space.getActions().get(0);
-            if (action.getType().equals("Antenna")){
+            if (action.getType().equals("Antenna")) {
                 ImageView circle = new ImageView(new Image(getClass().getResourceAsStream("/images/antenna.png")));
                 this.getChildren().add(circle);
             }
@@ -135,8 +136,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
-
-    private void drawSpace(){
+    private void drawSpace() {
         ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/images/space.png")));
         this.getChildren().add(image);
     }
@@ -166,8 +166,8 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         this.getChildren().clear();
-        if (space.getActions().size() != 0){
-            switch (space.getActions().get(0).getType()){
+        if (space.getActions().size() != 0) {
+            switch (space.getActions().get(0).getType()) {
                 case "gear":
                     drawGear();
                     break;
@@ -186,19 +186,19 @@ public class SpaceView extends StackPane implements ViewObserver {
                 case "Antenna":
                     drawAntenna();
                     break;
-            } 
-        } else{
+            }
+        } else {
             drawSpace();
         }
 
-        if (space.getWalls().size() != 0){
-            for(Heading wall: space.getWalls()){
+        if (space.getWalls().size() != 0) {
+            for (Heading wall : space.getWalls()) {
                 drawWall(wall);
             }
         }
         updatePlayer();
     }
-    
+
     /**
      * draws a wall on the space
      *
@@ -210,8 +210,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         wall.setRotate(90 * (heading.ordinal()) % 360);
         this.getChildren().add(wall);
 
-
     }
+
     /**
      * draws a gear on the space
      *
@@ -221,17 +221,17 @@ public class SpaceView extends StackPane implements ViewObserver {
         TurnGear gear = (TurnGear) space.getActions().get(0);
         ImageView gearImage;
 
-        if (gear.getDirection().equals("left")){
+        if (gear.getDirection().equals("left")) {
             gearImage = new ImageView(new Image(getClass().getResourceAsStream("/images/gearleft.png")));
-        } else{
+        } else {
             gearImage = new ImageView(new Image(getClass().getResourceAsStream("/images/gearright.png")));
         }
 
-        this.getChildren().add(gearImage); 
+        this.getChildren().add(gearImage);
     }
 
     /**
-     *The visuals of a checkpoint on a space.
+     * The visuals of a checkpoint on a space.
      * Draws a circle with the checkpoint number.
      *
      * author Julius Sondergaard, s234096
@@ -252,9 +252,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Draws circle with the checkpoint number.
      *
-     * @param gc GraphicsContext for drawing on the canvas.
+     * @param gc               GraphicsContext for drawing on the canvas.
      * @param checkpointNumber The checkpoint number to draw.
-     * author Julius Sondergaard, s234096
+     *                         author Julius Sondergaard, s234096
      */
     private void drawCheckpointCircleAndNumber(GraphicsContext gc, int checkpointNumber) {
         ImageView star = new ImageView(new Image(getClass().getResourceAsStream("/images/checkpoint.png")));
@@ -270,10 +270,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         double textWidth = tempText.getLayoutBounds().getWidth();
         double textHeight = tempText.getLayoutBounds().getHeight();
 
-        gc.fillText(text, 20 - textWidth/2, 20 + textHeight/3);
+        gc.fillText(text, 20 - textWidth / 2, 20 + textHeight / 3);
         this.getChildren().add(star);
     }
 
-    }
-
-
+}

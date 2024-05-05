@@ -101,11 +101,6 @@ public class AppController implements Observer {
                     return;
                 }
             }
-
-            // XXX the board should eventually be created programmatically or loaded from a
-            // file
-            // here we just create an empty board with the required number of players.
-            // Board board = new Board(8, 8);
             Board board = BoardFactory.getInstance().createBoard(boardChoice.get());
 
             gameController = new GameController(board);
@@ -117,8 +112,6 @@ public class AppController implements Observer {
                 gameController.setPlayerDeck(player, 20);
                 setPlayerSpawn(player, board, i);
             }
-
-            // XXX: V2
             board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
             if (board.getSpaceByActionSubClass(Antenna.class).size() > 0) {
@@ -189,8 +182,6 @@ public class AppController implements Observer {
      * controller is set up to continue the game.
      */
     public void loadGame() {
-        // XXX needs to be implememted eventually
-        // for now, we just create a new game
 
         List<GameInDB> gameIds = RepositoryAccess.getRepository().getGames();
         List<String> games = new ArrayList<>();
@@ -274,7 +265,6 @@ public class AppController implements Observer {
      * Update the observer, does nothing for now
      */
     public void update(Subject subject) {
-        // XXX do nothing for now
     }
 
     /**
