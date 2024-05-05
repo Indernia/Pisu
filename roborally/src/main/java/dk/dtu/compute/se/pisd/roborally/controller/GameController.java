@@ -47,7 +47,6 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 public class GameController {
 
     final public Board board;
-    private int counter;
 
     /**
      * Constructor for the GameController
