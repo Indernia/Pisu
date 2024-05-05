@@ -24,8 +24,6 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
-
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 
@@ -36,7 +34,7 @@ import java.util.Collections;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (s235442)
  *
  */
 public class Player extends Subject{
@@ -107,8 +105,6 @@ public class Player extends Subject{
         for (int i = 0; i < cards.length; i++) {
             cards[i] = new CommandCardField(this);
         }
-
-
         this.discardDeck = new ArrayList<CommandCard>();
     }
 

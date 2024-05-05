@@ -49,7 +49,7 @@ import javafx.scene.image.ImageView;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (235442)
  *
  */
 public class SpaceView extends StackPane implements ViewObserver {
@@ -90,7 +90,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * Draws the belt polygon on any action field that is a belt
      *
-     * @author Noah Nissen
      */
     private void drawBelt(){
         if (space.getActions().size() != 0){

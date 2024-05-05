@@ -35,7 +35,7 @@ import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 
 /* ...
 *
-* @author Ekkart Kindler, ekki@dtu.dk, Andreas (s235455)
+* @author Ekkart Kindler, ekki@dtu.dk, Andreas (s235455), Alex Lundberg (s235442)
 *
 */
 public class Board extends Subject {
