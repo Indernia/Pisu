@@ -40,8 +40,9 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
- *
+ * @author Ekkart Kindler, ekki@dtu.dk, Andreas s235455, Noah s235441, Alex
+ *         s235442, Julius 234096
+ * 
  */
 public class GameController {
 
@@ -49,11 +50,11 @@ public class GameController {
 
     /**
      * Constructor for the GameController
+     * 
      * @param board the board that the gamecontroller is controlling
      */
     public GameController(@NotNull Board board) {
         this.board = board;
-
     }
 
     /**
@@ -101,8 +102,8 @@ public class GameController {
                 }
                 for (int j = 0; j < Player.NO_CARDS; j++) {
                     CommandCardField field = player.getCardField(j);
-                    //TODO change here to use the player deck.
-                    if(field.getCard() == null){
+                    // TODO change here to use the player deck.
+                    if (field.getCard() == null) {
                         field.setCard(player.drawCard());
                         field.setVisible(true);
 
@@ -129,11 +130,11 @@ public class GameController {
      * Finishes the programming phase
      */
     public void finishProgrammingPhase() {
-        for(int i = 0; i < board.getPlayersNumber(); i++){
+        for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player iPlayer = board.getPlayer(i);
-            for(int j = 0; j < 5; j++){
-                if(iPlayer.getProgramField(j).getCard() == null){
-                    AppController.missingCard("Player " + (board.getRealPlayerNumber(iPlayer)+1));
+            for (int j = 0; j < 5; j++) {
+                if (iPlayer.getProgramField(j).getCard() == null) {
+                    AppController.missingCard("Player " + (board.getRealPlayerNumber(iPlayer) + 1));
                     return;
                 }
             }
@@ -229,8 +230,7 @@ public class GameController {
                         if (!command.isInteractive()) {
                             executeCommand(currentPlayer, command);
                             currentPlayer.discardCard(card);
-                        }
-                        else {
+                        } else {
                             board.setPhase(Phase.PLAYER_INTERACTION);
                             return;
                         }
@@ -243,8 +243,8 @@ public class GameController {
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 int numberOfPlayers = board.getPlayersNumber();
                 if (nextPlayerNumber < numberOfPlayers) {
-                    if(board.getPlayerTurn(nextPlayerNumber).getSpace() != null){
-                    board.setCurrentPlayer(board.getPlayerTurn(nextPlayerNumber));
+                    if (board.getPlayerTurn(nextPlayerNumber).getSpace() != null) {
+                        board.setCurrentPlayer(board.getPlayerTurn(nextPlayerNumber));
                     } else {
                         skipPlayer(nextPlayerNumber, numberOfPlayers);
                     }
@@ -261,54 +261,55 @@ public class GameController {
         }
         checkForGameEnd();
     }
- 
-    private void nextStep(){
+
+    private void nextStep() {
         int step = board.getStep();
         step++;
         if (step < Player.NO_REGISTERS) {
             makeProgramFieldsVisible(step);
             board.setStep(step);
-            if(board.getPlayerTurn(0).getSpace() != null){
-            board.setCurrentPlayer(board.getPlayerTurn(0));
-            } else{
-                skipPlayer(board.getPlayerNumber(board.getPlayerTurn(0))+1, board.getPlayersNumber());
+            if (board.getPlayerTurn(0).getSpace() != null) {
+                board.setCurrentPlayer(board.getPlayerTurn(0));
+            } else {
+                skipPlayer(board.getPlayerNumber(board.getPlayerTurn(0)) + 1, board.getPlayersNumber());
             }
         } else {
-            for(int i = 0; i < board.getPlayersNumber(); i++){
+            for (int i = 0; i < board.getPlayersNumber(); i++) {
                 Player player = board.getPlayerTurn(i);
-                if(player.getSpace() == null){
+                if (player.getSpace() == null) {
                     reboot(player);
                 }
             }
-            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
-            Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            if (board.getSpaceByActionSubClass(Antenna.class).size() > 0) {
+                Antenna.makeTurnOrder(this, board.getSpaceByActionSubClass(Antenna.class).get(0));
             }
-            startProgrammingPhase();   
+            startProgrammingPhase();
         }
     }
 
-    private void skipPlayer(int nextPlayerNumber, int numberOfPlayers){
-        for(int i = nextPlayerNumber; i < board.getPlayersNumber(); i++){
+    private void skipPlayer(int nextPlayerNumber, int numberOfPlayers) {
+        for (int i = nextPlayerNumber; i < board.getPlayersNumber(); i++) {
             Player iPlayer = board.getPlayerTurn(i);
             int iPlayerNumber = board.getPlayerNumber(iPlayer);
-            if(iPlayer.getSpace() != null){
+            if (iPlayer.getSpace() != null) {
                 board.setCurrentPlayer(iPlayer);
                 break;
-            } else if(iPlayerNumber == numberOfPlayers-1){
+            } else if (iPlayerNumber == numberOfPlayers - 1) {
                 nextStep();
             }
         }
     }
+
     /**
      * Checks if the game should end if a player reaches the last checkpoint.
-     * Sets the game phase to FINISHED if it's meets the above criteria by calling on endGame method
+     * Sets the game phase to FINISHED if it's meets the above criteria by calling
+     * on endGame method
      * This method is called after executeNextStep
      *
      * author Julius Sondergaard, s234096
      */
     public void checkForGameEnd() {
         int lastCheckpoint = board.getMaxCheckpointNumber();
-
 
         for (Player player : board.getPlayers()) {
             if (player.getCurrentCheckpoint() == lastCheckpoint) {
@@ -320,7 +321,8 @@ public class GameController {
 
     /**
      * Sets the game phase to FINISHED
-     * Calls winner pop up message splitting them up in 3 pieces to make them more testable
+     * Calls winner pop up message splitting them up in 3 pieces to make them more
+     * testable
      *
      */
     public void endGame(Player winner) {
@@ -335,7 +337,6 @@ public class GameController {
     public void showWinnerPopup(Player winner) {
         AppController.showWinnerPopup(winner.getName());
     }
-
 
     /**
      * @param player
@@ -402,7 +403,6 @@ public class GameController {
 
     }
 
-
     /**
      * Checks if there is a wall obstructing the player
      * 
@@ -417,8 +417,8 @@ public class GameController {
         if (board.getNeighbour(start, heading).getWalls().contains(heading.getOpposite())) {
             return true;
         }
-        if(board.getNeighbour(start, heading).getActions().size() > 0 ){
-            if(board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna){
+        if (board.getNeighbour(start, heading).getActions().size() > 0) {
+            if (board.getNeighbour(start, heading).getActions().get(0) instanceof Antenna) {
                 return true;
             }
         }
@@ -428,8 +428,8 @@ public class GameController {
     /**
      * Moves the player to a new space
      * 
-     * @param player player to move
-     * @param space space to move to
+     * @param player  player to move
+     * @param space   space to move to
      * @param heading heading to move in
      * @throws ImpossibleMoveException
      */
@@ -486,25 +486,25 @@ public class GameController {
 
     /**
      * Spam damage card, making the player play the top card of their deck
+     * 
      * @param player player that is playing the spam card
      */
-    public void spamDamage(@NotNull Player player){
+    public void spamDamage(@NotNull Player player) {
         int currentReg = board.getStep();
         CommandCard topCard = player.drawCard();
         player.discardCard(player.getCardField(currentReg).getCard());
         player.setProgramField(currentReg, topCard);
-        if(topCard.command != Command.OPTION_LEFT_RIGHT){
-        executeCommand(player, topCard.command);
+        if (topCard.command != Command.OPTION_LEFT_RIGHT) {
+            executeCommand(player, topCard.command);
         } else {
             double random = Math.random();
-            if(random < 0.5){
-                executeCommand(player,Command.RIGHT);
+            if (random < 0.5) {
+                executeCommand(player, Command.RIGHT);
             } else {
                 executeCommand(player, Command.LEFT);
             }
         }
     }
-
 
     /**
      * Moves a card from one field to another
@@ -526,39 +526,41 @@ public class GameController {
     }
 
     /**
-     * executes the previous command card is recursive in case previous is the same command
+     * executes the previous command card is recursive in case previous is the same
+     * command
+     * 
      * @param player the player to move
-     * @param step current register
+     * @param step   current register
      */
-    public void playAgain(Player player, int step){
-        if(step > 0){
-        CommandCard previousCard = player.getProgramField(step-1).getCard();
-        if(previousCard.command != Command.AGAIN){
-        executeCommand(player, previousCard.command);
-        } else if(previousCard.command == Command.AGAIN) {
-            playAgain(player, step-1);
-        }
+    public void playAgain(Player player, int step) {
+        if (step > 0) {
+            CommandCard previousCard = player.getProgramField(step - 1).getCard();
+            if (previousCard.command != Command.AGAIN) {
+                executeCommand(player, previousCard.command);
+            } else if (previousCard.command == Command.AGAIN) {
+                playAgain(player, step - 1);
+            }
         }
     }
 
     /**
      * performs a 180 degree turn
+     * 
      * @param player the player to turn
      */
-    public void uturn(Player player){
+    public void uturn(Player player) {
         turnRight(player);
         turnRight(player);
     }
-
 
     /**
      * Kills the player and moves them to the death space
      * 
      * @param player player to kill
-     * @param space space to move to
+     * @param space  space to move to
      */
-    public void die(Player player, Space space){
-        for(int i = 0; i < Player.NO_CARDS; i++){
+    public void die(Player player, Space space) {
+        for (int i = 0; i < Player.NO_CARDS; i++) {
             player.discardCard(player.getCardField(i).getCard());
             player.getCardField(i).setCard(null);
         }
@@ -571,25 +573,24 @@ public class GameController {
      * 
      * @param player player to reboot
      */
-    public void reboot(Player player){
+    public void reboot(Player player) {
         Space playerspace = player.getDeathSpace();
         ArrayList<Space> actionSpaces = board.getSpaceByActionSubClass(Reboot.class);
         Space rebootSpace = actionSpaces.get(0);
         double prevdistance = 99999.99999;
-            for(Space actionSpace : actionSpaces){
-                double py = (double) playerspace.y;
-                double px = (double) playerspace.x;
-                double ay = (double) actionSpace.y;
-                double ax = (double) actionSpace.x;
-                double distance = Math.sqrt((Math.pow(py-ay,2)) + (Math.pow(px-ax,2)));
+        for (Space actionSpace : actionSpaces) {
+            double py = (double) playerspace.y;
+            double px = (double) playerspace.x;
+            double ay = (double) actionSpace.y;
+            double ax = (double) actionSpace.x;
+            double distance = Math.sqrt((Math.pow(py - ay, 2)) + (Math.pow(px - ax, 2)));
 
-
-                if(distance < prevdistance){
+            if (distance < prevdistance) {
                 rebootSpace = board.getSpace(actionSpace.x, actionSpace.y);
                 prevdistance = distance;
-                }
-
             }
+
+        }
         player.setHeading(NORTH);
         player.getCardField(0).setCard(new CommandCard(Command.SPAM));
         player.getCardField(1).setCard(new CommandCard(Command.SPAM));
@@ -600,28 +601,28 @@ public class GameController {
         }
     }
 
-
     /**
-     * Method activates all fields with players on them, in the order given in the roborally rules.
+     * Method activates all fields with players on them, in the order given in the
+     * roborally rules.
      *
      * @return void
-     * author Alex Lundberg, s235442
+     *         author Alex Lundberg, s235442
      */
-    public void ActivateFieldActions(){
-        ArrayList<FieldAction> actions = new ArrayList<FieldAction> ();
-        //Adding all fieldactions in the order of activation.
+    public void ActivateFieldActions() {
+        ArrayList<FieldAction> actions = new ArrayList<FieldAction>();
+        // Adding all fieldactions in the order of activation.
         actions.add(new ConveyorBelt());
         actions.add(new TurnGear());
         actions.add(new Checkpoint());
         actions.add(new Pit());
 
         Player player;
-        for (FieldAction action : actions){
-            for (int j = 0; j< board.getPlayersNumber(); j++){
+        for (FieldAction action : actions) {
+            for (int j = 0; j < board.getPlayersNumber(); j++) {
                 player = board.getPlayerTurn(j);
-                if(player.getSpace() != null){
-                    for (FieldAction PAction : player.getSpace().getActions()){
-                        if (action.getClass().isInstance(PAction)){
+                if (player.getSpace() != null) {
+                    for (FieldAction PAction : player.getSpace().getActions()) {
+                        if (action.getClass().isInstance(PAction)) {
                             PAction.doAction(this, player.getSpace());
                         }
                     }
@@ -631,28 +632,24 @@ public class GameController {
         }
     }
 
-
-
-
     /**
      * Sets the player deck
      *
      * @param player player to set the deck for
      * @param size   size of the deck
      */
-    public void setPlayerDeck(Player player, int size){
+    public void setPlayerDeck(Player player, int size) {
         ArrayList<CommandCard> deck = new ArrayList<>();
-        for (int i = 0; i < size;){
+        for (int i = 0; i < size;) {
             CommandCard randomCard = generateRandomCommandCard();
-            if(randomCard.command != Command.SPAM){
-            deck.add(randomCard);
-            i++;
-            } 
+            if (randomCard.command != Command.SPAM) {
+                deck.add(randomCard);
+                i++;
+            }
         }
         player.setDeck(deck);
 
     }
-        
 
     /**
      * Checks if the players are sorted
@@ -660,11 +657,11 @@ public class GameController {
      * @param list list of players
      * @return true if the players are sorted
      */
-    public boolean isSorted(List<Player> list){
-        for(int i = 0; i+1 < list.size(); i++){
+    public boolean isSorted(List<Player> list) {
+        for (int i = 0; i + 1 < list.size(); i++) {
             Player iPlayer = list.get(i);
-            Player nextPlayer = list.get(i+1);
-            if(iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()){
+            Player nextPlayer = list.get(i + 1);
+            if (iPlayer.getDistanceToAntenna() > nextPlayer.getDistanceToAntenna()) {
                 return false;
             }
         }
