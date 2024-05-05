@@ -222,7 +222,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         TurnGear gear = (TurnGear) space.getActions().get(0);
         ImageView gearImage;
 
-        if (gear.getDirection() == "left"){
+        if (gear.getDirection().equals("left")){
             gearImage = new ImageView(new Image(getClass().getResourceAsStream("/images/gearleft.png")));
         } else{
             gearImage = new ImageView(new Image(getClass().getResourceAsStream("/images/gearright.png")));

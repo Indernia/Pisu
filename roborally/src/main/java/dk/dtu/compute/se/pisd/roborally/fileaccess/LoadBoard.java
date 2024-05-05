@@ -64,6 +64,7 @@ public class LoadBoard {
      * @return the board loaded from the file
      */
     public static Board loadBoard(String boardname) {
+        // Very defensive, should never happen
         if (boardname == null) {
             boardname = DEFAULTBOARD;
         }

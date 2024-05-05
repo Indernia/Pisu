@@ -33,8 +33,8 @@ public class TurnGear extends FieldAction {
      * @param direction the direction to turn
      */
     public void setDirection(String direction) {
-        if (direction.toLowerCase() == "left" || direction.toLowerCase() == "right") {
-            this.direction = direction.toLowerCase();
+        if (direction.equalsIgnoreCase("left") || direction.equalsIgnoreCase("right")) {
+            this.direction = direction;
         } else {
             this.direction = "left";
         }
@@ -57,10 +57,10 @@ public class TurnGear extends FieldAction {
             player = gameController.board.getCurrentPlayer();
         }
 
-        if (this.direction == "left") {
+        if (this.direction.equals("left")) {
             gameController.turnLeft(player);
             return true;
-        } else if (this.direction == "right") {
+        } else if (this.direction.equals("right")) {
             gameController.turnRight(player);
             return true;
         } else {

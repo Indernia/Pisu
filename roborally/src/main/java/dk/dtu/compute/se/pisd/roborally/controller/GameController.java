@@ -261,8 +261,7 @@ public class GameController {
         }
         checkForGameEnd();
     }
-
-    
+ 
     private void nextStep(){
         int step = board.getStep();
         step++;
@@ -323,7 +322,6 @@ public class GameController {
      * Sets the game phase to FINISHED
      * Calls winner pop up message splitting them up in 3 pieces to make them more testable
      *
-     * @author Julius Sondergaard, s234096
      */
     public void endGame(Player winner) {
         updateGameStateToFinished();
@@ -343,7 +341,7 @@ public class GameController {
      * @param player
      * @param command
      */
-    private void executeCommand(@NotNull Player player, Command command) {
+    public void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
             // their execution. This should eventually be done in a more elegant way
@@ -365,6 +363,12 @@ public class GameController {
                     break;
                 case SPAM:
                     spamDamage(player);
+                    break;
+                case AGAIN:
+                    playAgain(player, board.getStep());
+                    break;
+                case UTURN:
+                    uturn(player);
                     break;
                 default:
                     // DO NOTHING (for now)
@@ -519,6 +523,31 @@ public class GameController {
         } else {
             return false;
         }
+    }
+
+    /**
+     * executes the previous command card is recursive in case previous is the same command
+     * @param player the player to move
+     * @param step current register
+     */
+    public void playAgain(Player player, int step){
+        if(step > 0){
+        CommandCard previousCard = player.getProgramField(step-1).getCard();
+        if(previousCard.command != Command.AGAIN){
+        executeCommand(player, previousCard.command);
+        } else if(previousCard.command == Command.AGAIN) {
+            playAgain(player, step-1);
+        }
+        }
+    }
+
+    /**
+     * performs a 180 degree turn
+     * @param player the player to turn
+     */
+    public void uturn(Player player){
+        turnRight(player);
+        turnRight(player);
     }
 
 

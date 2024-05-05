@@ -40,7 +40,9 @@ public enum Command {
     LEFT("Turn Left"),
     FAST_FORWARD("Fast Fwd"),
     OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
-    SPAM("SPAM");
+    SPAM("SPAM"),
+    AGAIN("Again"),
+    UTURN("U-Turn");
 
     final public String displayName;
 
