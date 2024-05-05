@@ -265,6 +265,48 @@
       ],
       "x": 5,
       "y": 3
+    },
+    {
+      "walls": [],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+          "INSTANCE": {
+          }
+        }
+      ],
+      "x": 3,
+      "y": 6
+    },
+    {
+      "walls": [
+
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+          "INSTANCE": {
+          "direction" : "right"
+          }
+        }
+      ],
+      "x": 6,
+      "y": 0
+    },
+    {
+      "walls": [
+
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+          "INSTANCE": {
+          "direction" : "left"
+          }
+        }
+      ],
+      "x": 7,
+      "y": 1
     }
   ]
 }

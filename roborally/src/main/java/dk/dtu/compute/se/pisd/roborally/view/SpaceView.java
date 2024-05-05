@@ -228,6 +228,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             gearImage = new ImageView(new Image(getClass().getResourceAsStream("/images/gearright.png")));
         }
 
+        System.out.println(gear.getDirection());
         this.getChildren().add(gearImage); 
     }
 
