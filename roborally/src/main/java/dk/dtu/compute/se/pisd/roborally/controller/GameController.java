@@ -437,7 +437,8 @@ public class GameController {
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
-            @NotNull Heading heading, @NotNull int depth) throws ImpossibleMoveException {
+            @NotNull Heading heading,
+            @NotNull int depth) throws ImpossibleMoveException {
         if (depth > board.getPlayersNumber()) {
             throw new ImpossibleMoveException(player, space, heading);
         }
