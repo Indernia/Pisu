@@ -42,7 +42,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  *
  * @author Ekkart Kindler, ekki@dtu.dk, Andreas s235455, Noah s235441, Alex
  *         s235442, Julius 234096
- *
+ * 
  */
 public class GameController {
 
@@ -55,7 +55,6 @@ public class GameController {
      */
     public GameController(@NotNull Board board) {
         this.board = board;
-
     }
 
     /**

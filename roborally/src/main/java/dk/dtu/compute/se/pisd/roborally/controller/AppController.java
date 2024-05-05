@@ -57,7 +57,8 @@ public class AppController implements Observer {
 
     final private List<String> BOARD_CHOICES = boardList;
     final private List<Integer> PLAYER_NUMBER_OPTIONS = Arrays.asList(2, 3, 4, 5, 6);
-    final private List<String> PLAYER_COLORS = Arrays.asList("crimson", "chocolate", "royalblue", "brown", "purple", "magenta");
+    final private List<String> PLAYER_COLORS = Arrays.asList("crimson", "chocolate", "royalblue", "brown", "purple",
+            "magenta");
 
     final private RoboRally roboRally;
 
@@ -83,7 +84,7 @@ public class AppController implements Observer {
         boardDialog.setTitle("Board selection");
         boardDialog.setHeaderText("Select the board the game should be played on");
         Optional<String> boardChoice = boardDialog.showAndWait();
-        if(!boardChoice.isPresent()){
+        if (!boardChoice.isPresent()) {
             return;
         }
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
@@ -119,10 +120,10 @@ public class AppController implements Observer {
             // XXX: V2
             board.setCurrentPlayer(board.getPlayer(0));
             gameController.startProgrammingPhase();
-            if(board.getSpaceByActionSubClass(Antenna.class).size() > 0){
-            Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
+            if (board.getSpaceByActionSubClass(Antenna.class).size() > 0) {
+                Antenna.makeTurnOrder(gameController, board.getSpaceByActionSubClass(Antenna.class).get(0));
             }
-            
+
             RepositoryAccess.getRepository().createGameInDB(board);
 
             roboRally.createBoardView(gameController);
@@ -131,46 +132,48 @@ public class AppController implements Observer {
 
     /**
      * sets the player spawn to a random space
+     * 
      * @param player player to be set
-     * @param board the board
-     * @param i index of player
+     * @param board  the board
+     * @param i      index of player
      */
-    private void setPlayerSpawn(Player player, Board board, int i){
+    private void setPlayerSpawn(Player player, Board board, int i) {
         int randomY = 0;
         int randomX = 0;
         int count = 0;
         Space randomSpace = board.getSpace(randomX, randomY);
         boolean playerIsAssigned = false;
-        while(!playerIsAssigned){
-            randomY = (int) ((int) board.height*Math.random());
-            randomX = (int) ((int) board.width*Math.random());
+        while (!playerIsAssigned) {
+            randomY = (int) ((int) board.height * Math.random());
+            randomX = (int) ((int) board.width * Math.random());
             randomSpace = board.getSpace(randomX, randomY);
             count++;
-        if(count > 20){
-            Space defaultspace = board.getSpace(i % board.width, i);
-            if(defaultspace.getPlayer() != null){
-                player.setSpace(defaultspace);
-            } else{
-                throw new IllegalStateException();
+            if (count > 20) {
+                Space defaultspace = board.getSpace(i % board.width, i);
+                if (defaultspace.getPlayer() != null) {
+                    player.setSpace(defaultspace);
+                } else {
+                    throw new IllegalStateException();
+                }
+                playerIsAssigned = true;
             }
+            if (randomSpace.getPlayer() != null) {
+                continue;
+            }
+            if (board.getSpaceByActionSubClass(Antenna.class).contains(randomSpace)) {
+                continue;
+            }
+            if (board.getSpaceByActionSubClass(Pit.class).contains(randomSpace)) {
+                continue;
+            }
+            if (board.getSpaceByActionSubClass(Checkpoint.class).contains(randomSpace)) {
+                continue;
+            }
+            player.setSpace(randomSpace);
             playerIsAssigned = true;
         }
-        if(randomSpace.getPlayer() != null){
-            continue;
-        }
-        if(board.getSpaceByActionSubClass(Antenna.class).contains(randomSpace)){
-            continue;
-        }
-        if(board.getSpaceByActionSubClass(Pit.class).contains(randomSpace)){
-            continue;
-        }
-        if(board.getSpaceByActionSubClass(Checkpoint.class).contains(randomSpace)){
-            continue;
-        }
-        player.setSpace(randomSpace);
-        playerIsAssigned = true;
     }
-    }
+
     public void saveGame() {
 
         if (gameController != null && gameController.board.getGameId() != null) {
@@ -198,8 +201,8 @@ public class AppController implements Observer {
         dialog.setTitle("Game");
         dialog.setHeaderText("Select game to load");
         Optional<String> result = dialog.showAndWait();
-        for(GameInDB game : gameIds){
-            if(game.name.equals(result.get())){
+        for (GameInDB game : gameIds) {
+            if (game.name.equals(result.get())) {
                 gameID = game.id;
             }
         }
@@ -259,6 +262,7 @@ public class AppController implements Observer {
 
     /**
      * Returns whether a game is currently running or not.
+     * 
      * @return boolean
      */
     public boolean isGameRunning() {
@@ -273,10 +277,10 @@ public class AppController implements Observer {
     }
 
     /**
-    * Announces winner
-    *
-    * @param winnerName name of the winning player
-    */
+     * Announces winner
+     *
+     * @param winnerName name of the winning player
+     */
     static void showWinnerPopup(String winnerName) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game WINNER!!!!!");
@@ -286,10 +290,12 @@ public class AppController implements Observer {
     }
 
     /**
-     * Makes a new alert that pops up on the players screen telling them to fill all registers with cards.
+     * Makes a new alert that pops up on the players screen telling them to fill all
+     * registers with cards.
+     * 
      * @param player the player that has empty registers
      */
-    public static void missingCard(String player){
+    public static void missingCard(String player) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Fill all registers");
         alert.setHeaderText(null);
