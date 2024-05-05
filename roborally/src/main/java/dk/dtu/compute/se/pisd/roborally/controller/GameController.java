@@ -47,6 +47,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 public class GameController {
 
     final public Board board;
+    private int counter;
 
     /**
      * Constructor for the GameController
@@ -391,7 +392,7 @@ public class GameController {
             if (!wallObstructs(player.getSpace(), player.getHeading())) {
                 if (newSpace != null) {
                     try {
-                        moveToSpace(player, newSpace, heading);
+                        moveToSpace(player, newSpace, heading, 0);
                         player.setSpace(newSpace);
                     } catch (ImpossibleMoveException e) {
                     }
@@ -436,13 +437,16 @@ public class GameController {
     public void moveToSpace(
             @NotNull Player player,
             @NotNull Space space,
-            @NotNull Heading heading) throws ImpossibleMoveException {
+            @NotNull Heading heading, @NotNull int depth) throws ImpossibleMoveException {
+        if (depth > board.getPlayersNumber()) {
+            throw new ImpossibleMoveException(player, space, heading);
+        }
         Player other = space.getPlayer();
         if (other != null) {
             Space newspace = board.getNeighbour(space, heading);
 
             if (newspace != null && !wallObstructs(other.getSpace(), player.getHeading())) {
-                moveToSpace(other, newspace, heading);
+                moveToSpace(other, newspace, heading, depth++);
             } else
                 throw new ImpossibleMoveException(player, newspace, heading);
         }
@@ -595,7 +599,7 @@ public class GameController {
         player.getCardField(0).setCard(new CommandCard(Command.SPAM));
         player.getCardField(1).setCard(new CommandCard(Command.SPAM));
         try {
-            moveToSpace(player, rebootSpace, player.getHeading());
+            moveToSpace(player, rebootSpace, player.getHeading(), 0);
         } catch (ImpossibleMoveException e) {
             e.printStackTrace();
         }

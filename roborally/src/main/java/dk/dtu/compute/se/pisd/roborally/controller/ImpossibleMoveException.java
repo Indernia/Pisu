@@ -8,13 +8,12 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  * This class represents an impossible move exception.
  * This exception is thrown when a player tries to move to a space that is not
  * possible to move to.
+ * 
+ * @author Andreas (s235455)
  */
 public class ImpossibleMoveException extends Exception {
-  @SuppressWarnings("unused")
   private Player player;
-  @SuppressWarnings("unused")
   private Space space;
-  @SuppressWarnings("unused")
   private Heading heading;
 
   /**

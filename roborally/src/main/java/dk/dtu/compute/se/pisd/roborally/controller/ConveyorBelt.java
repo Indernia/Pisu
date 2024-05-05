@@ -36,9 +36,9 @@ public class ConveyorBelt extends FieldAction {
 
     private Heading heading;
 
-
     /**
      * Returns the heading of the conveyor belt
+     * 
      * @return the heading of the conveyor belt
      */
     public Heading getHeading() {
@@ -47,6 +47,7 @@ public class ConveyorBelt extends FieldAction {
 
     /**
      * Sets the heading of the conveyor belt
+     * 
      * @param heading the heading of the conveyor belt
      */
     public void setHeading(Heading heading) {
@@ -55,32 +56,35 @@ public class ConveyorBelt extends FieldAction {
 
     /**
      * Constructor
+     * 
      * @param heading the heading of the conveyor belt
      */
-    public ConveyorBelt(Heading heading){
+    public ConveyorBelt(Heading heading) {
         setHeading(Heading.SOUTH);
         setHeading(heading);
     }
+
     /**
      * Default constructor
      */
-    public ConveyorBelt(){
+    public ConveyorBelt() {
 
     }
 
-
     /**
      * Implementation of the action of a conveyor belt.
-     * takes a player and moves them to the space in the direction of the heading of the belt
-     *  @param gameController the given controller for the current instance
-     * @param space a given space that will have the belt action on it
+     * takes a player and moves them to the space in the direction of the heading of
+     * the belt
+     * 
+     * @param gameController the given controller for the current instance
+     * @param space          a given space that will have the belt action on it
      */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Board board = gameController.board;
         Space newspace = board.getNeighbour(space, heading);
         try {
-            gameController.moveToSpace(space.getPlayer(), newspace, heading);
+            gameController.moveToSpace(space.getPlayer(), newspace, heading, 0);
             return true;
         } catch (ImpossibleMoveException e) {
         }
@@ -88,11 +92,12 @@ public class ConveyorBelt extends FieldAction {
     }
 
     /**
-     *  gets the special space
-     *  @return type as String
+     * gets the special space
+     * 
+     * @return type as String
      */
     @Override
-    public String getType(){
+    public String getType() {
         return "Belt";
     }
 
