@@ -1,0 +1,1738 @@
+{
+    "width": 15,
+    "height": 10,
+    "spaces": [
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 0
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 1,
+            "y": 0
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 2,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 3,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 4,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 5,
+            "y": 0
+        },       
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 6,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 7,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 8,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 9,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 10,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 11,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 12,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 13,
+            "y": 0
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 0
+        },             
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 2
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 3
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 4
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 5
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 6
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 7
+        },       
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 8
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 0,
+            "y": 9
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 1,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 2,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 3,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 4,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 5,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 6,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 7,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 8,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 9,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 10,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 11,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 12,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 13,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 5
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 4
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.PitTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 14,
+            "y": 1
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 1
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 2,
+            "y": 1
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 4,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 5,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 6,
+            "y": 1
+        },       
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 7,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 8,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 9,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 10,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "EAST"
+                }
+              }
+            ],
+            "x": 12,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 1
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 2
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 2
+        },             
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 3
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 4
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 5
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 6
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "SOUTH"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 7
+        },          
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 13,
+            "y": 8
+        },       
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 12,
+            "y": 8
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 8
+        },        
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 10,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 9,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 8,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 7,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 6,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 5,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 4,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "WEST"
+                }
+              }
+            ],
+            "x": 2,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 9
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 8
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 5
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 4
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.ConveyorBeltTemplate",
+                "INSTANCE": {
+                "heading" : "NORTH"
+                }
+              }
+            ],
+            "x": 1,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.RebootTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 2,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.RebootTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 2,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.RebootTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 12,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.RebootTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 12,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.AntennaTemplate",
+                "INSTANCE": {
+                }
+              }
+            ],
+            "x": 7,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 2,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 12,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 3
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 2
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 7
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 3,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "right"
+                }
+              }
+            ],
+            "x": 2,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 12,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 6
+        },
+        {
+            "walls": [
+      
+            ],
+            "actions": [
+              {
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.TurnGearTemplate",
+                "INSTANCE": {
+                "direction" : "left"
+                }
+              }
+            ],
+            "x": 11,
+            "y": 7
+        },
+        {
+            "walls": [
+              "EAST",
+              "WEST"
+            ],
+            "actions": [],
+            "x": 7,
+            "y": 6
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 6,
+            "y": 5
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 5,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 4,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 3,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 2,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 8,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 10,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 11,
+            "y": 5
+        },
+        {
+            "walls": [
+            "SOUTH",
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 12,
+            "y": 5
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 9,
+            "y": 5
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 6,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 5,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 3,
+            "y": 4
+        },
+        {
+            "walls": [
+
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 2,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 8,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 11,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 12,
+            "y": 4
+        },
+        {
+            "walls": [
+            "NORTH"
+            ],
+            "actions": [],
+            "x": 9,
+            "y": 4
+        },
+        {
+            "walls": [
+            "EAST",
+            "WEST"
+            ],
+            "actions": [{
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+                "INSTANCE": {
+                "number" : 5,
+                "last" : true
+                }
+            }],
+            "x": 7,
+            "y": 2
+        },
+        {
+            "walls": [
+            "EAST",
+            "WEST"
+            ],
+            "actions": [],
+            "x": 7,
+            "y": 3
+        },
+        {
+            "walls": [
+            ],
+            "actions": [{
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+                "INSTANCE": {
+                "number" : 3,
+                "last" : false
+                }
+            }],
+            "x": 6,
+            "y": 6
+        },
+        {
+            "walls": [
+            ],
+            "actions": [{
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+                "INSTANCE": {
+                "number" : 1,
+                "last" : false
+                }
+            }],
+            "x": 8,
+            "y": 6
+        },
+        {
+            "walls": [
+            ],
+            "actions": [{
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+                "INSTANCE": {
+                "number" : 2,
+                "last" : false
+                }
+            }],
+            "x": 6,
+            "y": 3
+        },
+        {
+            "walls": [
+            ],
+            "actions": [{
+                "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
+                "INSTANCE": {
+                "number" : 4,
+                "last" : false
+                }
+            }],
+            "x": 8,
+            "y": 3
+        }
+    ]
+}
