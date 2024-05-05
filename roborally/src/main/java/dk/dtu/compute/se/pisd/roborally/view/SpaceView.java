@@ -49,7 +49,7 @@ import javafx.scene.image.ImageView;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (235442)
+ * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (235442), Julius (s234096)
  *
  */
 public class SpaceView extends StackPane implements ViewObserver {
