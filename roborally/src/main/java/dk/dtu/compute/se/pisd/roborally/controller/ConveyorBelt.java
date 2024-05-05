@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This class represents a conveyor belt on a space.
  *
- * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Ekkart Kindler, ekki@dtu.dk , Noah (s235441)
  *
  */
 public class ConveyorBelt extends FieldAction {

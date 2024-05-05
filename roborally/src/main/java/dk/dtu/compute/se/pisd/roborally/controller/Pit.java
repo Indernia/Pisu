@@ -8,7 +8,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
  * Represents pit action on the board.
  * When a player lands on a pit space, they die.
  * 
- * @author Noah Nissen
+ * @author Noah Nissen (s235441)
  */
 public class Pit extends FieldAction {
 

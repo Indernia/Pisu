@@ -6,7 +6,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 /**
  * Represents reboot action on the board.
  * When a player lands on a reboot space, they are rebooted.
- *  @author Noah Nissen
+ *  @author Noah Nissen (s235441)
  */
 public class Reboot extends FieldAction {
 
