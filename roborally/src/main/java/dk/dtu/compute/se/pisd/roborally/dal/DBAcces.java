@@ -10,9 +10,9 @@ package dk.dtu.compute.se.pisd.roborally.dal;
  */
 public class DBAcces {
 
-    public static final String USER = "root";
-    public static final String PASSWORD = "password";
-    public static final String dbName = "PISU";
+    public static final String USER = "";
+    public static final String PASSWORD = "";
+    public static final String dbName = "";
     public static final int Port = 3306;
     public static final String Host = "localhost";
 }
