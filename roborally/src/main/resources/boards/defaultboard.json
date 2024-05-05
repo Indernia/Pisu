@@ -223,7 +223,7 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
           "INSTANCE": {
             "number": 2,
-            "last" : true
+            "last" :false
           }
         }
       ],
@@ -272,6 +272,8 @@
         {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
           "INSTANCE": {
+            "number" : 3,
+            "last" : true
           }
         }
       ],
