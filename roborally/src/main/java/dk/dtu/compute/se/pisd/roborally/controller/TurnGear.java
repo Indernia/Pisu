@@ -7,7 +7,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
  * Represents the turn gear action on the board.
  * When a player lands on a turn gear space, they are turned left or right.
  *
- * @author Alex Lundberg
+ * @author Alex Lundberg (235442)
  */
 public class TurnGear extends FieldAction {
 

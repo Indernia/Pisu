@@ -41,7 +41,7 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (235442)
  *
  */
 class Repository implements IRepository {
