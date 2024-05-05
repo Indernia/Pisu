@@ -48,7 +48,7 @@ import java.util.List;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
+ * @author Ekkart Kindler, ekki@dtu.dk, Andreas (s235455)
  */
 public class LoadBoard {
 

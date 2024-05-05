@@ -35,7 +35,7 @@ import dk.dtu.compute.se.pisd.roborally.dal.DeckTranscoder;
 
 /* ...
 *
-* @author Ekkart Kindler, ekki@dtu.dk
+* @author Ekkart Kindler, ekki@dtu.dk, Andreas (s235455)
 *
 */
 public class Board extends Subject {
@@ -69,8 +69,8 @@ public class Board extends Subject {
     /**
      * Constructor for board, requires all 3 inputs
      * 
-     * @param width width of the board as int 
-     * @param height height of the board as int 
+     * @param width     width of the board as int
+     * @param height    height of the board as int
      * @param boardName name of the board as string
      */
     public Board(int width, int height, @NotNull String boardName) {
@@ -88,12 +88,11 @@ public class Board extends Subject {
 
     }
 
-    
     /**
      * Constructor for board, to change its width and height, its an overflow
      * constructor, in case a name is not given for the board
      * 
-     * @param width width of the board in int 
+     * @param width  width of the board in int
      * @param height height of the board in int
      */
     public Board(int width, int height) {
@@ -102,10 +101,11 @@ public class Board extends Subject {
 
     /**
      * Returns the highest checkpoint number that exists on the particular board.
-     * It goes through all spaces and their actions to find the maximum checkpoint number.
+     * It goes through all spaces and their actions to find the maximum checkpoint
+     * number.
      *
      * @return Highest checkpoint number.
-     * author Julius Sondergaard, s234096
+     *         author Julius Sondergaard, s234096
      */
     public int getMaxCheckpointNumber() {
         int maxCheckpoint = 0;
@@ -128,7 +128,7 @@ public class Board extends Subject {
      * Get the list of players on the board.
      *
      * @return A list of players.
-     * author Julius Sondergaard, s234096
+     *         author Julius Sondergaard, s234096
      */
     public List<Player> getPlayers() {
         return players;
@@ -156,7 +156,7 @@ public class Board extends Subject {
                 throw new IllegalStateException("A game with a set id may not be assigned a new id!");
             }
         }
-   }
+    }
 
     /**
      * Returns the space from two coordinates
@@ -292,7 +292,6 @@ public class Board extends Subject {
         }
     }
 
-
     /**
      * Sets the checkpoint counter from the board, not from the caller.
      */
@@ -308,8 +307,6 @@ public class Board extends Subject {
     public int getCheckpointAmount() {
         return checkpointAmount;
     }
-
-
 
     /**
      * Returns the current stepmode, if that value is true or false
@@ -346,7 +343,6 @@ public class Board extends Subject {
             return -1;
         }
     }
-
 
     /**
      * Returns the index of the player given
@@ -395,7 +391,8 @@ public class Board extends Subject {
     }
 
     /**
-     * the message field at the bottom og the board 
+     * the message field at the bottom og the board
+     * 
      * @return String the text to display
      */
     public String getStatusMessage() {
@@ -404,25 +401,25 @@ public class Board extends Subject {
 
         String checkpoint = "Players at checkpoints: \n";
 
-        for(int i = 0; i <players.size(); i++){
+        for (int i = 0; i < players.size(); i++) {
             checkpoint += players.get(i).getName() + ": " + players.get(i).getCurrentCheckpoint() + " ";
         }
         checkpoint += "\n";
-
-        
 
         return baseMessage + "\n" + checkpoint;
     }
 
     /**
-     * Makes a string corresponding to the order in which the players play their turn
+     * Makes a string corresponding to the order in which the players play their
+     * turn
+     * 
      * @return
      */
-    public String getPlayerTurnOrderString(){
+    public String getPlayerTurnOrderString() {
         String turnOrder = "";
-        for(int i =0; i < playerTurnOrder.size(); i++){
-            if(i != playerTurnOrder.size() - 1){
-            turnOrder += " P" + (getRealPlayerNumber(playerTurnOrder.get(i)) + 1) + ",";
+        for (int i = 0; i < playerTurnOrder.size(); i++) {
+            if (i != playerTurnOrder.size() - 1) {
+                turnOrder += " P" + (getRealPlayerNumber(playerTurnOrder.get(i)) + 1) + ",";
             } else {
                 turnOrder += " P" + (getRealPlayerNumber(playerTurnOrder.get(i)) + 1);
             }
@@ -431,29 +428,32 @@ public class Board extends Subject {
     }
 
     /**
-    * Filters the actions in the board spaces by the specified subclass of {@link FieldAction}.
-    *
-    * @param <T> the type of {@link FieldAction} subclass to filter for
-    * @param filter the class object of the {@link FieldAction} subclass to filter for
-    * @return a list of {@link FieldAction} objects that are instances of the specified subclass
-    * @see FieldAction
-    *
-    * Author Alex Lundberg, s235442
-    */
-    public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter){
+     * Filters the actions in the board spaces by the specified subclass of
+     * {@link FieldAction}.
+     *
+     * @param <T>    the type of {@link FieldAction} subclass to filter for
+     * @param filter the class object of the {@link FieldAction} subclass to filter
+     *               for
+     * @return a list of {@link FieldAction} objects that are instances of the
+     *         specified subclass
+     * @see FieldAction
+     *
+     *      Author Alex Lundberg, s235442
+     */
+    public <T extends FieldAction> List<T> filterActionsBySubclass(Class<T> filter) {
         ArrayList<T> output = new ArrayList<>();
-        for(Space[] spaceList : spaces){
-            for(Space space : spaceList){
-                if (space.getActions().size() == 0){
+        for (Space[] spaceList : spaces) {
+            for (Space space : spaceList) {
+                if (space.getActions().size() == 0) {
                     continue;
                 }
-                for(FieldAction fieldaction : space.getActions()){ 
-                    if (filter.isInstance(fieldaction) == true){
+                for (FieldAction fieldaction : space.getActions()) {
+                    if (filter.isInstance(fieldaction) == true) {
                         T action = filter.cast(space.getActions().get(0));
                         output.add(action);
                     }
                 }
-                
+
             }
         }
         return output;
@@ -461,37 +461,38 @@ public class Board extends Subject {
 
     /**
      * Gets the spaces of a specific action subclass
-    *
-    * @param <T> the type of {@link FieldAction} subclass to filter for
-    * @param filter the class object of the {@link FieldAction} subclass to filter for
-    * @return a list of {@link Space} objects that have an action that is an instance of the specified subclass
-    * @see FieldAction
-    *
-    * Author Alex Lundberg, s235442
-    */
-    public <T extends FieldAction> ArrayList<Space> getSpaceByActionSubClass(Class<T> filter){
+     *
+     * @param <T>    the type of {@link FieldAction} subclass to filter for
+     * @param filter the class object of the {@link FieldAction} subclass to filter
+     *               for
+     * @return a list of {@link Space} objects that have an action that is an
+     *         instance of the specified subclass
+     * @see FieldAction
+     *
+     *      Author Alex Lundberg, s235442
+     */
+    public <T extends FieldAction> ArrayList<Space> getSpaceByActionSubClass(Class<T> filter) {
         ArrayList<Space> output = new ArrayList<>();
-        for(Space[] spaceList : spaces){
-            for(Space space : spaceList){
-                if (space.getActions().size() == 0){
+        for (Space[] spaceList : spaces) {
+            for (Space space : spaceList) {
+                if (space.getActions().size() == 0) {
                     continue;
                 }
-                for(FieldAction fieldaction : space.getActions()){ 
-                    if (filter.isInstance(fieldaction) == true){
+                for (FieldAction fieldaction : space.getActions()) {
+                    if (filter.isInstance(fieldaction) == true) {
                         output.add(space);
                     }
                 }
-                
+
             }
         }
         return output;
     }
 
-
     /**
      * Sets the player turn order
      */
-    public void setPlayerTurnOrder(int i, Player player){
+    public void setPlayerTurnOrder(int i, Player player) {
         playerTurnOrder.set(i, player);
     }
 
@@ -505,11 +506,11 @@ public class Board extends Subject {
             return null;
         }
     }
-    
+
     /**
      * Returns the player turn order
      */
-    public List<Player> getPlayerTurnList(){
+    public List<Player> getPlayerTurnList() {
         return playerTurnOrder;
     }
 }

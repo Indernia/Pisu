@@ -46,8 +46,9 @@ import javafx.scene.control.ChoiceDialog;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (s235442)
- * @author s235455,
+ * @author Ekkart Kindler, ekki@dtu.dk, Alex Lundberg (s235442), Andreas
+ *         (s235455)
+ *
  */
 public class AppController implements Observer {
 

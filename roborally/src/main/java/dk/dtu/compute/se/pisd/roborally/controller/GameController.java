@@ -40,8 +40,8 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk, Andreas s235455, Noah s235441, Alex
- *         s235442, Julius 234096
+ * @author Ekkart Kindler, ekki@dtu.dk, Andreas (s235455), Noah (s235441), Alex
+ *         (s235442), Julius (s234096)
  * 
  */
 public class GameController {
