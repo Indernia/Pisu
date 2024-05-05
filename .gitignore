@@ -51,5 +51,4 @@ buildNumber.properties
 .settings
 
 # DBAccess information
-roborally/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/DBAcces.java
 
