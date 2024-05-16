@@ -1666,8 +1666,7 @@
             "actions": [{
                 "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
                 "INSTANCE": {
-                "number" : 5,
-                "last" : true
+                "number" : 5
                 }
             }],
             "x": 7,
@@ -1688,8 +1687,7 @@
             "actions": [{
                 "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
                 "INSTANCE": {
-                "number" : 3,
-                "last" : false
+                "number" : 3
                 }
             }],
             "x": 6,
@@ -1701,8 +1699,7 @@
             "actions": [{
                 "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
                 "INSTANCE": {
-                "number" : 1,
-                "last" : false
+                "number" : 1
                 }
             }],
             "x": 8,
@@ -1714,8 +1711,7 @@
             "actions": [{
                 "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
                 "INSTANCE": {
-                "number" : 2,
-                "last" : false
+                "number" : 2
                 }
             }],
             "x": 6,
@@ -1727,8 +1723,7 @@
             "actions": [{
                 "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.fileaccess.model.CheckPointTemplate",
                 "INSTANCE": {
-                "number" : 4,
-                "last" : false
+                "number" : 4
                 }
             }],
             "x": 8,

@@ -481,9 +481,10 @@ public class GameController {
      */
     public void spamDamage(@NotNull Player player) {
         int currentReg = board.getStep();
-        CommandCard topCard = player.drawCard();
-        player.discardCard(player.getCardField(currentReg).getCard());
-        player.setProgramField(currentReg, topCard);
+        player.setProgramField(currentReg, player.drawCard());
+        CommandCard topCard = player.getCardField(currentReg).getCard();
+        if(topCard != null){
+        player.discardCard(topCard);
         if (topCard.command != Command.OPTION_LEFT_RIGHT) {
             executeCommand(player, topCard.command);
         } else {
@@ -493,6 +494,7 @@ public class GameController {
             } else {
                 executeCommand(player, Command.LEFT);
             }
+        }
         }
     }
 
@@ -551,8 +553,10 @@ public class GameController {
      */
     public void die(Player player, Space space) {
         for (int i = 0; i < Player.NO_CARDS; i++) {
+            if(player.getCardField(i).getCard() != null){
             player.discardCard(player.getCardField(i).getCard());
             player.getCardField(i).setCard(null);
+            }
         }
         player.setDeathSpace(space);
         player.setSpace(null);
