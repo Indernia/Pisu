@@ -481,10 +481,10 @@ public class GameController {
      */
     public void spamDamage(@NotNull Player player) {
         int currentReg = board.getStep();
+        player.discardCard(player.getProgramField(currentReg).getCard());
         player.setProgramField(currentReg, player.drawCard());
         CommandCard topCard = player.getProgramField(currentReg).getCard();
         if(topCard != null){
-        player.discardCard(topCard);
         if (topCard.command != Command.OPTION_LEFT_RIGHT) {
             executeCommand(player, topCard.command);
         } else {
