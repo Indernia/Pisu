@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS Player (
   discardDeck varchar(255),
   playerHand varchar(255),
   playerProgram varchar(255),
+  checkpoints int,
   
   PRIMARY KEY (gameID, playerID),
   FOREIGN KEY (gameID) REFERENCES Game(gameID)

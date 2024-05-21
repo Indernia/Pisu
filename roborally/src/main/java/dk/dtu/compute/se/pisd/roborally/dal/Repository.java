@@ -76,8 +76,9 @@ class Repository implements IRepository {
 
     private static final String PLAYER_DISCARD_DECK = "discardDeck";
 
-    private static final String PLAYER_PRIORITY = "priority";	
+    private static final String PLAYER_PRIORITY = "priority";
 
+	private static final String PLAYER_CHECKPOINTS = "checkpoints";
 
     private static final String PLAYER_HAND = "playerHand";
 
@@ -336,6 +337,7 @@ class Repository implements IRepository {
             rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
             rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
             rs.updateInt(PLAYER_PRIORITY, game.getPlayerNumber(player));
+			rs.updateInt(PLAYER_CHECKPOINTS, player.getCurrentCheckpoint());
 			rs.insertRow();
 		}
 
@@ -368,6 +370,7 @@ class Repository implements IRepository {
                 player.setProgram(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_PROGRAM), player)));
                 player.setHand(new ArrayList<CommandCardField> (dt.decodeAsField(rs.getString(PLAYER_HAND), player)));
 				player.setPriority(priority);
+				player.setCurrentCheckpoint(rs.getInt(PLAYER_CHECKPOINTS));
 			} else {
 				// TODO error handling
 			}
@@ -394,6 +397,7 @@ class Repository implements IRepository {
             rs.updateString(PLAYER_HAND, dt.encode(player.getHandAsCommandCards()));
             rs.updateString(PLAYER_PROGRAM, dt.encode(player.getProgramAsCommandCards()));
             rs.updateInt(PLAYER_PRIORITY, game.getPlayerNumber(player));
+			rs.updateInt(PLAYER_CHECKPOINTS, player.getCurrentCheckpoint());
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();
